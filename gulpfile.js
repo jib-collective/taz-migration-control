@@ -52,6 +52,6 @@ gulp.task('styles', () => {
 });
 
 gulp.task('watch', () => {
-  gulp.watch('./scripts/**/*', ['scripts']);
-  gulp.watch('./styles/**/*', ['styles']);
+  gulp.watch('./assets/scripts/**/*', ['scripts']);
+  gulp.watch('./assets/styles/**/*', ['styles']);
 });

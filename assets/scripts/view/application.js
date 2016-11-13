@@ -1,5 +1,6 @@
 import _ from 'lodash';
 
+import ApplicationModel from 'model/application';
 import BackgroundView from 'view/background';
 import CountriesView from 'view/countries';
 import HeaderView from 'view/header';
@@ -9,10 +10,13 @@ import ThesisView from 'view/thesis';
 
 export default Backbone.View.extend({
   initialize() {
+    this.model = new ApplicationModel();
+
     this.views = {
       _header: new HeaderView(),
       _navigation: new NavigationView({
         attributes: {
+          language: this.model.get('language'),
           _router: this.attributes._router,
         },
       }),
@@ -34,7 +38,7 @@ export default Backbone.View.extend({
 
     /* update navigation */
     this.views._navigation.collection.forEach(item => {
-      item.set('active', item.get('endpoint') === `/${section}`);
+      item.set('active', item.get('endpoint') === section);
     });
 
     /* build requested view */

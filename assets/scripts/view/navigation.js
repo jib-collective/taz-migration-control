@@ -8,17 +8,19 @@ export default Backbone.View.extend({
     this.collection = new NavigationCollection([
       {
         label: 'Countries',
-        endpoint: '/countries',
+        endpoint: `countries`,
+        language: this.attributes.language,
       },
 
       {
         label: 'Thesis',
-        endpoint: '/',
+        language: this.attributes.language,
       },
 
       {
         label: 'Background',
-        endpoint: '/background',
+        endpoint: 'background',
+        language: this.attributes.language,
       },
     ]);
   },

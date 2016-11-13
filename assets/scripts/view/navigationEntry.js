@@ -16,7 +16,14 @@ export default Backbone.View.extend({
   },
 
   render() {
-    this.$el.html(this.template(this.attrs));
+    let url = `/${this.model.get('language')}`;
+
+    if (this.model.get('endpoint')) {
+      url += `/${this.model.get('endpoint')}`;
+    }
+
+    let attrs = Object.assign({url}, this.attrs);
+    this.$el.html(this.template(attrs));
     return this;
   },
 
@@ -26,7 +33,7 @@ export default Backbone.View.extend({
         <%= i18n( this.model.get('label') ) %>
       </span>
     <% } else { %>
-      <a href="<%= this.model.get('endpoint') %>"
+      <a href="<%= url %>"
          class="navigation__item">
         <%= i18n( this.model.get('label') ) %>
       </a>

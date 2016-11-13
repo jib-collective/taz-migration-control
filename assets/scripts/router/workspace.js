@@ -11,16 +11,23 @@ export default Backbone.Router.extend({
   },
 
   routes: {
-    '': 'renderIndex',
-    ':slug': 'renderView',
-    ':slug/:type': 'renderView',
+    '': 'redirectToLocale',
+    ':language': 'renderIndex',
+    ':language/:slug': 'renderView',
+  },
+
+  redirectToLocale() {
+    const userLanguage = navigator.language || navigator.userLanguage;
+    const languagePart = userLanguage.split('-');
+    this.app.model.set('language', languagePart[0]);
+    this.navigate(languagePart[0], {trigger: true});
   },
 
   renderIndex() {
     return this.app.view('');
   },
 
-  renderView(slug) {
+  renderView(language, slug) {
     return this.app.view(slug);
   },
 });

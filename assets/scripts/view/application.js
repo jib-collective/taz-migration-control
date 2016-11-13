@@ -9,25 +9,13 @@ import NavigationView from 'view/navigation';
 import ThesisView from 'view/thesis';
 
 export default Backbone.View.extend({
+  className: 'app',
+
   initialize() {
     this.model = new ApplicationModel();
 
-    this.views = {
-      _header: new HeaderView(),
-      _navigation: new NavigationView({
-        attributes: {
-          language: this.model.get('language'),
-          _router: this.attributes._router,
-        },
-      }),
-      _map: new MapView(),
-
-      index: ThesisView,
-      background: BackgroundView,
-      countries: CountriesView,
-    };
-
-    this.activeView = undefined;
+    /* on language change */
+    this.listenTo(this.model, 'change:language', this.render);
   },
 
   view(section, slug) {
@@ -51,7 +39,26 @@ export default Backbone.View.extend({
   },
 
   render() {
-    this.setElement(this.template());
+    const ctx = {
+      attributes: {
+        application: this.model,
+        _router: this.attributes._router,
+      },
+    };
+
+    this.views = {
+      _header: new HeaderView(ctx),
+      _navigation: new NavigationView(ctx),
+      _map: new MapView(ctx),
+
+      index: ThesisView,
+      background: BackgroundView,
+      countries: CountriesView,
+    };
+
+    this.activeView = undefined;
+
+    this.$el.html(this.template());
 
     this.views._navigation.render().$el.prependTo(this.$el);
     this.views._map.render().$el.prependTo(this.$el);
@@ -61,8 +68,6 @@ export default Backbone.View.extend({
   },
 
   template: _.template(`
-    <div class="app">
-      <main class="app__main"></main>
-    </div>
+    <main class="app__main"></main>
   `),
 });

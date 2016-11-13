@@ -4,25 +4,33 @@ import NavigationEntry from 'view/NavigationEntry';
 import NavigationCollection from 'collection/navigation';
 
 export default Backbone.View.extend({
+  tagName: 'nav',
+
+  className: 'navigation',
+
   initialize() {
+    const language = this.attributes.application.get('language');
+
     this.collection = new NavigationCollection([
       {
         label: 'Countries',
         endpoint: `countries`,
-        language: this.attributes.language,
+        language,
       },
 
       {
         label: 'Thesis',
-        language: this.attributes.language,
+        language,
       },
 
       {
         label: 'Background',
         endpoint: 'background',
-        language: this.attributes.language,
+        language,
       },
     ]);
+
+    this.listenTo(this.attributes.app, 'change:language', this.render);
   },
 
   events: {
@@ -36,20 +44,21 @@ export default Backbone.View.extend({
   },
 
   render() {
-    this.setElement(this.template());
+    this.$el.html(this.template());
 
     this.collection.forEach(item => {
       const view = new NavigationEntry({
+        attributes: this.attributes,
         model: item,
-      }).$el.appendTo(this.$el.find('.navigation__list'));
+      });
+
+      view.render().$el.appendTo(this.$el.find('.navigation__list'));
     });
 
     return this;
   },
 
   template: _.template(`
-    <nav class="navigation">
-      <ul class="navigation__list"></ul>
-    </nav>
+    <ul class="navigation__list"></ul>
   `),
 });

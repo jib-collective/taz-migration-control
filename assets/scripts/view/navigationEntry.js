@@ -7,23 +7,22 @@ export default Backbone.View.extend({
   className: 'navigation__list-item',
 
   initialize() {
-    this.attrs = {
-      i18n,
-      model: this.model,
-    };
     this.listenTo(this.model, 'change', this.render);
-    return this.render();
+    return this;
   },
 
   render() {
-    let url = `/${this.model.get('language')}`;
+    const attrs = {
+      i18n,
+      model: this.model,
+    };
+    let url = `/${this.attributes.application.get('language')}`;
 
     if (this.model.get('endpoint')) {
       url += `/${this.model.get('endpoint')}`;
     }
 
-    let attrs = Object.assign({url}, this.attrs);
-    this.$el.html(this.template(attrs));
+    this.$el.html(this.template(Object.assign({url}, attrs)));
     return this;
   },
 

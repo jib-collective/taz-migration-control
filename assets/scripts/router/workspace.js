@@ -19,15 +19,16 @@ export default Backbone.Router.extend({
   redirectToLocale() {
     const userLanguage = navigator.language || navigator.userLanguage;
     const languagePart = userLanguage.split('-');
-    this.app.model.set('language', languagePart[0]);
     this.navigate(languagePart[0], {trigger: true});
   },
 
-  renderIndex() {
+  renderIndex(language) {
+    this.app.model.set('language', language);
     return this.app.view('');
   },
 
   renderView(language, slug) {
+    this.app.model.set('language', language);
     return this.app.view(slug);
   },
 });

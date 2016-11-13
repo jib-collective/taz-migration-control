@@ -1,6 +1,8 @@
 const autoprefixer = require('gulp-autoprefixer');
+const concat = require('gulp-concat');
 const cssnano = require('gulp-cssnano');
 const gulp = require('gulp');
+const merge = require('merge-stream');
 const path = require('path');
 const sass = require('gulp-sass');
 const uglify = require('gulp-uglify');
@@ -44,10 +46,19 @@ gulp.task('scripts', () => {
 });
 
 gulp.task('styles', () => {
-  return gulp.src('./assets/styles/common.scss')
-    .pipe(sass().on('error', sass.logError))
+  const staticAssets = gulp.src([
+    './node_modules/sanitize.css/sanitize.css',
+  ]);
+
+  const sassAssets = gulp.src([
+    './assets/styles/common.scss',
+  ])
+    .pipe(sass().on('error', sass.logError));
+
+  merge(staticAssets, sassAssets)
     .pipe(autoprefixer())
     .pipe(cssnano())
+    .pipe(concat('common.css'))
     .pipe(gulp.dest('./dist/styles/'));
 });
 

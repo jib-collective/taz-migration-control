@@ -1,0 +1,26 @@
+.language {
+  line-height: 1;
+
+  &__item {
+    $size: 2rem;
+
+    background-color: $color-app-bright;
+    color: $text-color-inverse;
+
+    border-radius: 50%;
+    display: block;
+    line-height: $size;
+    text-align: center;
+    text-decoration: none;
+    width: $size;
+
+    &--active {
+      background-color: $color-attention;
+      color: $text-color-inverse;
+    }
+  }
+
+  & + & {
+    margin-left: .5rem;
+  }
+}

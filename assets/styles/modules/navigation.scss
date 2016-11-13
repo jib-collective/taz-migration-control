@@ -1,0 +1,30 @@
+.navigation {
+  background-color: $color-app-dark;
+  margin: 0;
+  padding: 0;
+
+  &__list {
+    display: flex;
+    justify-content: center;
+    list-style: none;
+
+    > * {
+      display: flex;
+    }
+  }
+
+  &__list-item + &__list-item {
+    margin-left: 1rem;
+  }
+
+  &__item {
+    color: $text-color;
+    padding: 1rem 1.5rem;
+    text-decoration: none;
+
+    &--active {
+      background-color: $color-attention;
+      color: $text-color-inverse;
+    }
+  }
+}

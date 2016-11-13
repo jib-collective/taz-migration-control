@@ -5,5 +5,5 @@ import Workspace from 'router/workspace';
 
 $(function() {
   let workspace = new Workspace();
-  Backbone.history.start({pushState: true});
+  Backbone.history.start(/*{pushState: true}*/);
 });

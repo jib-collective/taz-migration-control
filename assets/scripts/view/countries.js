@@ -7,6 +7,8 @@ export default Backbone.View.extend({
   },
 
   template: _.template(`
-      <div class="map"></div>
+    <div class="countries">
+      <p>Country view</p>
+    </div>
   `),
 });

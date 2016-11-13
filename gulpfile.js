@@ -66,3 +66,8 @@ gulp.task('watch', () => {
   gulp.watch('./assets/scripts/**/*', ['scripts']);
   gulp.watch('./assets/styles/**/*', ['styles']);
 });
+
+gulp.task('default', [
+  'scripts',
+  'styles',
+]);

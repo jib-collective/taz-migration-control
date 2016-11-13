@@ -1,6 +1,6 @@
 import _ from 'underscore';
 import $ from 'jquery';
-import NavigationEntry from 'view/NavigationEntry';
+import NavigationEntry from 'view/navigationEntry';
 import NavigationCollection from 'collection/navigation';
 
 export default Backbone.View.extend({

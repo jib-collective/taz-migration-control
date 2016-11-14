@@ -1,4 +1,5 @@
 import _ from 'underscore';
+import $ from 'jquery';
 
 export default Backbone.View.extend({
   tagName: 'li',
@@ -7,6 +8,7 @@ export default Backbone.View.extend({
 
   initialize() {
     this.listenTo(this.model, 'change', this.render);
+    this.listenTo(this.attributes.application, 'change:slug', this.render);
     return this.render();
   },
 
@@ -16,12 +18,21 @@ export default Backbone.View.extend({
 
   navigateTo(event) {
     event.preventDefault();
-    this.attributes._router.navigate(this.model.get('endpoint'), {trigger: true});
+    const target = $(event.target).attr('href');
+    this.attributes._router.navigate(target, {trigger: true});
   },
 
   render() {
+    let url = this.model.get('endpoint');
+    const slug = this.attributes.application.get('slug');
+
+    if (slug) {
+      url += `/${slug}`;
+    }
+
     this.$el.html(this.template({
       model: this.model,
+      url,
     }));
     return this;
   },
@@ -32,7 +43,7 @@ export default Backbone.View.extend({
         <%= this.model.get('label') %>
       </span>
     <% } else { %>
-      <a href="<%= this.model.get('endpoint') %>"
+      <a href="<%= url %>"
          class="language__item">
         <%= this.model.get('label') %>
       </a>

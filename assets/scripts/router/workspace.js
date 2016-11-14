@@ -28,7 +28,10 @@ export default Backbone.Router.extend({
   },
 
   renderView(language, slug) {
-    this.app.model.set('language', language);
+    this.app.model.set({
+      language,
+      slug,
+    });
     return this.app.view(slug);
   },
 });

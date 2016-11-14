@@ -10,7 +10,6 @@ export default Backbone.View.extend({
 
   initialize() {
     this.collection = new NavigationCollection(NAVIGATION_ENTRIES);
-    this.listenTo(this.attributes.app, 'change:language', this.render);
   },
 
   render() {

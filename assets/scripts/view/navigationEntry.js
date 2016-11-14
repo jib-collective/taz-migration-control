@@ -8,8 +8,22 @@ export default Backbone.View.extend({
   className: 'navigation__list-item',
 
   initialize() {
-    this.listenTo(this.model, 'change', this.render);
+    this.setInitialState();
+    this.addListeners();
+
     return this;
+  },
+
+  addListeners() {
+    this.listenTo(this.model, 'change', this.render);
+    this.listenTo(this.attributes.application, 'change:slug', (model, value) => {
+      this.model.set('active', this.model.getSlug() === value);
+    });
+  },
+
+  setInitialState() {
+    const appSlug = this.attributes.application.get('slug');
+    this.model.set('active', this.model.getSlug() === appSlug);
   },
 
   events: {
@@ -29,8 +43,8 @@ export default Backbone.View.extend({
       url: `/${this.attributes.application.get('language')}`,
     };
 
-    if (this.model.get('endpoint')) {
-      attrs.url += `/${this.model.get('endpoint')}`;
+    if (this.model.getSlug()) {
+      attrs.url += `/${this.model.getSlug()}`;
     }
 
     this.$el.html(this.template(attrs));
@@ -38,15 +52,9 @@ export default Backbone.View.extend({
   },
 
   template: _.template(`
-    <% if (this.model.get('active')) { %>
-      <span class="navigation__item navigation__item--active">
-        <%= i18n( this.model.get('label') ) %>
-      </span>
-    <% } else { %>
-      <a href="<%= url %>"
-         class="navigation__item">
-        <%= i18n( this.model.get('label') ) %>
-      </a>
-    <% } %>
+    <a href="<%= url %>"
+       class="navigation__item <% if (this.model.get('active')) { %> navigation__item--active <% } %> ">
+      <%= i18n( this.model.get('label') ) %>
+    </a>
   `),
 });

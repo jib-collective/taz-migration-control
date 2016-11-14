@@ -1,7 +1,6 @@
 export default [
   {
     label: 'Countries',
-    endpoint: `countries`,
   },
 
   {
@@ -10,6 +9,5 @@ export default [
 
   {
     label: 'Background',
-    endpoint: 'background',
   },
 ];

@@ -2,6 +2,7 @@ import _ from 'underscore';
 import ApplicationModel from 'model/application';
 import BackgroundView from 'view/background';
 import CountriesView from 'view/countries';
+import CountriesEntryView from 'view/countries-entry';
 import HeaderView from 'view/header';
 import MapView from 'view/map';
 import NavigationView from 'view/navigation';
@@ -13,7 +14,7 @@ export default Backbone.View.extend({
   initialize() {
     this.model = new ApplicationModel();
 
-    const ctx = {
+    this._globalCtx = {
       attributes: {
         application: this.model,
         _router: this.attributes._router,
@@ -21,35 +22,44 @@ export default Backbone.View.extend({
     };
 
     this.views = {
-      _header: new HeaderView(ctx),
-      _navigation: new NavigationView(ctx),
-      _map: new MapView(ctx),
+      _header: new HeaderView(this._globalCtx),
+      _navigation: new NavigationView(this._globalCtx),
+      _map: new MapView(this._globalCtx),
 
       index: ThesisView,
       background: BackgroundView,
       countries: CountriesView,
+      countries_entry: CountriesEntryView,
     };
-
-    this.activeView = undefined;
 
     /* on language change, re-render the whole application */
     this.listenTo(this.model, 'change:language', this.render);
   },
 
-  view(section, slug) {
+  view(section, entry) {
     /* destroy all dynamic views */
-    if (this.activeView) {
-      this.activeView.remove();
+    if (this.model.get('activeView')) {
+      const activeView = this.model.get('activeView');
+
+      activeView.remove();
+      this.model.set('activeView', undefined);
     }
 
-    /* update navigation */
-    this.views._navigation.collection.forEach(item => {
-      item.set('active', item.get('endpoint') === section);
-    });
-
     /* build requested view */
-    this.activeView = new this.views[section || 'index'];
-    this.activeView.render().$el.appendTo(this.$el.find('.app__main'));
+    let viewName = section;
+
+    if (!viewName) {
+      viewName = 'index';
+    }
+
+    if (entry) {
+      viewName += '_entry';
+    }
+
+    console.log(viewName);
+
+    this.model.set('activeView', new this.views[viewName](this._globalCtx));
+    this.model.get('activeView').render().$el.appendTo(this.$el.find('.app__main'));
   },
 
   append() {

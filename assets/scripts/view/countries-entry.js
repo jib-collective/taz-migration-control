@@ -10,21 +10,23 @@ export default Backbone.View.extend({
       url: '/data/countries.json',
     });
 
-    this.subnavView = new SubNavigationView({
-      attributes: this.attributes,
-      collection: this.collection,
-    });
-
     return this;
   },
 
   render() {
     this.$el.html(this.template());
-    this.subnavView.render().$el.prependTo(this.$el);
+
+    const subNavigationView = new SubNavigationView({
+      attributes: this.attributes,
+      collection: this.collection,
+    });
+
+    subNavigationView.render().$el.prependTo(this.$el);
+
     return this;
   },
 
   template: _.template(`
-    <p>Country view</p>
+    <p>Single country view</p>
   `),
 });

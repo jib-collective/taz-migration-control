@@ -8,6 +8,7 @@ export default Backbone.View.extend({
   initialize() {
     this.collection = new ThesisCollection();
     this.listenTo(this.collection, 'sync', this.render);
+    return this;
   },
 
   render() {

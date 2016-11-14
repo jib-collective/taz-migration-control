@@ -8,8 +8,13 @@ export default Backbone.View.extend({
 
   initialize() {
     this.listenTo(this.model, 'change', this.render);
-    this.listenTo(this.attributes.application, 'change:slug', this.render);
-    return this.render();
+    this.setInitialState();
+    return this;
+  },
+
+  setInitialState() {
+    const appLanguage = this.attributes.application.get('language');
+    this.model.set('active', this.model.getSlug() === appLanguage);
   },
 
   events: {
@@ -18,22 +23,14 @@ export default Backbone.View.extend({
 
   navigateTo(event) {
     event.preventDefault();
-    const target = $(event.target).attr('href');
-    this.attributes._router.navigate(target, {trigger: true});
+    this.attributes._router.navigate(this.model.getSlug(), {trigger: true});
   },
 
   render() {
-    let url = this.model.get('endpoint');
-    const slug = this.attributes.application.get('slug');
-
-    if (slug) {
-      url += `/${slug}`;
-    }
-
     this.$el.html(this.template({
       model: this.model,
-      url,
     }));
+
     return this;
   },
 
@@ -43,7 +40,7 @@ export default Backbone.View.extend({
         <%= this.model.get('label') %>
       </span>
     <% } else { %>
-      <a href="<%= url %>"
+      <a href="/<%= this.model.getSlug() %>"
          class="language__item">
         <%= this.model.get('label') %>
       </a>

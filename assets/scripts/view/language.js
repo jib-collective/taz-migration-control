@@ -17,9 +17,6 @@ export default Backbone.View.extend({
     this.$el.html(this.template());
 
     this.collection.forEach(model => {
-      const active = this.attributes.application.get('language') === model.get('endpoint');
-      model.set('active', active);
-
       const view = new LanguageEntry({
         attributes: this.attributes,
         model

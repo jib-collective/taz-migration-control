@@ -14,6 +14,7 @@ export default Backbone.Router.extend({
     '': 'redirectToLocale',
     ':language': 'renderIndex',
     ':language/:slug': 'renderView',
+    ':language/:slug/:entry': 'renderView',
   },
 
   redirectToLocale() {
@@ -24,14 +25,16 @@ export default Backbone.Router.extend({
 
   renderIndex(language) {
     this.app.model.set('language', language);
+    this.app.model.set('slug', '');
     return this.app.view('');
   },
 
-  renderView(language, slug) {
+  renderView(language, slug, entry) {
     this.app.model.set({
       language,
       slug,
+      entry,
     });
-    return this.app.view(slug);
+    return this.app.view(slug, entry);
   },
 });

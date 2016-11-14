@@ -24,7 +24,7 @@ export default Backbone.View.extend({
     this.views = {
       _header: new HeaderView(this._globalCtx),
       _navigation: new NavigationView(this._globalCtx),
-      _map: new MapView(this._globalCtx),
+      _map: undefined,
 
       index: ThesisView,
       background: BackgroundView,
@@ -56,8 +56,6 @@ export default Backbone.View.extend({
       viewName += '_entry';
     }
 
-    console.log(viewName);
-
     this.model.set('activeView', new this.views[viewName](this._globalCtx));
     this.model.get('activeView').render().$el.appendTo(this.$el.find('.app__main'));
   },
@@ -68,6 +66,13 @@ export default Backbone.View.extend({
 
   render() {
     this.$el.html(this.template());
+
+    // re-build map view
+    if (this.views._map) {
+      this.views._map.remove();
+    }
+
+    this.views._map = new MapView(this._globalCtx);
 
     ['navigation', 'map', 'header',].forEach(item => {
       this.views[`_${item}`].render().$el.prependTo(this.$el);

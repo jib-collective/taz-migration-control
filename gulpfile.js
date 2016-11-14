@@ -48,6 +48,7 @@ gulp.task('scripts', () => {
 gulp.task('styles', () => {
   const staticAssets = gulp.src([
     './node_modules/sanitize.css/sanitize.css',
+    './node_modules/leaflet/dist/leaflet.css',
   ]);
 
   const sassAssets = gulp.src([
@@ -57,7 +58,9 @@ gulp.task('styles', () => {
 
   merge(staticAssets, sassAssets)
     .pipe(autoprefixer())
-    .pipe(cssnano())
+    .pipe(cssnano({
+      zindex: false,
+    }))
     .pipe(concat('common.css'))
     .pipe(gulp.dest('./dist/styles/'));
 });

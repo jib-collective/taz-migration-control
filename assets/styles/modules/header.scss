@@ -5,6 +5,7 @@
   justify-content: center;
   padding-bottom: 1rem;
   padding-top: 1rem;
+  position: relative;
 
   > * {
     display: flex;
@@ -19,9 +20,11 @@
   }
 
   &__languages {
-    align-self: flex-end;
     list-style: none;
     margin: 0 0 0 auto;
     padding: 0;
+    position: absolute;
+    right: 1.5rem;
+    top: .75rem;
   }
 }

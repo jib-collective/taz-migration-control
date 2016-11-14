@@ -1,3 +1,24 @@
 .map {
   height: 80vh;
+  position: relative;
+
+  &__title {
+    color: red;
+    left: 0;
+    margin-bottom: 0;
+    margin-top: 0;
+    position: absolute;
+    text-align: center;
+    top: .5rem;
+    width: 100%;
+    z-index: 500;
+  }
+
+  &__container {
+    height: 100%;
+    left: 0;
+    position: absolute;
+    top: 0;
+    width: 100%;
+  }
 }

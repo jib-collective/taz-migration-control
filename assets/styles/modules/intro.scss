@@ -1,0 +1,30 @@
+.intro {
+  background-color: $color-app-dark;
+  height: 100%;
+  left: 0;
+  position: absolute;
+  top: 0;
+  transition: opacity .5s ease;
+  width: 100%;
+  z-index: 800;
+
+  &--hide {
+    opacity: 0;
+  }
+
+  &__close {
+    border-bottom: 2px solid transparent;
+    bottom: 1.5rem;
+    cursor: pointer;
+    font-size: .8rem;
+    left: 50%;
+    padding-bottom: .3rem;
+    position: absolute;
+    transform: translateX(-50%);
+
+    &:hover,
+    &:focus {
+      border-color: $color-attention;
+    }
+  }
+}

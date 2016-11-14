@@ -4,6 +4,7 @@ import BackgroundView from 'view/background';
 import CountriesView from 'view/countries';
 import CountriesEntryView from 'view/countries-entry';
 import HeaderView from 'view/header';
+import IntroView from 'view/intro';
 import MapView from 'view/map';
 import NavigationView from 'view/navigation';
 import ThesisView from 'view/thesis';
@@ -23,6 +24,7 @@ export default Backbone.View.extend({
 
     this.views = {
       _header: new HeaderView(this._globalCtx),
+      _intro: new IntroView(this._globalCtx),
       _navigation: new NavigationView(this._globalCtx),
       _map: undefined,
 
@@ -34,6 +36,10 @@ export default Backbone.View.extend({
 
     /* on language change, re-render the whole application */
     this.listenTo(this.model, 'change:language', this.render);
+  },
+
+  introIsVisible() {
+    return this.views._intro.model.get('visible') === true;
   },
 
   view(section, entry) {
@@ -73,8 +79,9 @@ export default Backbone.View.extend({
     }
 
     this.views._map = new MapView(this._globalCtx);
+    this.views._map.render().$el.prependTo(this.$el);
 
-    ['navigation', 'map', 'header',].forEach(item => {
+    ['intro', 'navigation', 'map', 'header',].forEach(item => {
       this.views[`_${item}`].render().$el.prependTo(this.$el);
     });
 

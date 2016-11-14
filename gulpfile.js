@@ -41,7 +41,7 @@ gulp.task('scripts', () => {
         ]
       }
     }))
-    .pipe(uglify())
+    //.pipe(uglify())
     .pipe(gulp.dest('dist/scripts'));
 });
 

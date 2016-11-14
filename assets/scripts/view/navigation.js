@@ -1,7 +1,7 @@
 import _ from 'underscore';
-import $ from 'jquery';
 import NavigationEntry from 'view/navigationEntry';
 import NavigationCollection from 'collection/navigation';
+import NAVIGATION_ENTRIES from 'fixtures/navigation-entries';
 
 export default Backbone.View.extend({
   tagName: 'nav',
@@ -9,47 +9,18 @@ export default Backbone.View.extend({
   className: 'navigation',
 
   initialize() {
-    const language = this.attributes.application.get('language');
-
-    this.collection = new NavigationCollection([
-      {
-        label: 'Countries',
-        endpoint: `countries`,
-        language,
-      },
-
-      {
-        label: 'Thesis',
-        language,
-      },
-
-      {
-        label: 'Background',
-        endpoint: 'background',
-        language,
-      },
-    ]);
-
+    this.collection = new NavigationCollection(NAVIGATION_ENTRIES);
     this.listenTo(this.attributes.app, 'change:language', this.render);
-  },
-
-  events: {
-    'click .navigation__item': 'navigateTo',
-  },
-
-  navigateTo(event) {
-    event.preventDefault();
-    let target = $(event.target).attr('href');
-    this.attributes._router.navigate(target, {trigger: true});
   },
 
   render() {
     this.$el.html(this.template());
 
-    this.collection.forEach(item => {
+    /* render each entry */
+    this.collection.forEach(model => {
       const view = new NavigationEntry({
         attributes: this.attributes,
-        model: item,
+        model,
       });
 
       view.render().$el.appendTo(this.$el.find('.navigation__list'));

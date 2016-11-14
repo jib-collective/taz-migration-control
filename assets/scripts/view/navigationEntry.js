@@ -1,4 +1,5 @@
 import _ from 'underscore';
+import $ from 'jquery';
 import i18n from 'lib/i18n';
 
 export default Backbone.View.extend({
@@ -11,18 +12,28 @@ export default Backbone.View.extend({
     return this;
   },
 
+  events: {
+    'click .navigation__item': 'navigateTo',
+  },
+
+  navigateTo(event) {
+    event.preventDefault();
+    let target = $(event.target).attr('href');
+    this.attributes._router.navigate(target, {trigger: true});
+  },
+
   render() {
     const attrs = {
       i18n,
       model: this.model,
+      url: `/${this.attributes.application.get('language')}`,
     };
-    let url = `/${this.attributes.application.get('language')}`;
 
     if (this.model.get('endpoint')) {
-      url += `/${this.model.get('endpoint')}`;
+      attrs.url += `/${this.model.get('endpoint')}`;
     }
 
-    this.$el.html(this.template(Object.assign({url}, attrs)));
+    this.$el.html(this.template(attrs));
     return this;
   },
 

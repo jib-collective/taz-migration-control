@@ -1,5 +1,4 @@
-import _ from 'lodash';
-
+import _ from 'underscore';
 import ApplicationModel from 'model/application';
 import BackgroundView from 'view/background';
 import CountriesView from 'view/countries';
@@ -14,7 +13,26 @@ export default Backbone.View.extend({
   initialize() {
     this.model = new ApplicationModel();
 
-    /* on language change */
+    const ctx = {
+      attributes: {
+        application: this.model,
+        _router: this.attributes._router,
+      },
+    };
+
+    this.views = {
+      _header: new HeaderView(ctx),
+      _navigation: new NavigationView(ctx),
+      _map: new MapView(ctx),
+
+      index: ThesisView,
+      background: BackgroundView,
+      countries: CountriesView,
+    };
+
+    this.activeView = undefined;
+
+    /* on language change, re-render the whole application */
     this.listenTo(this.model, 'change:language', this.render);
   },
 
@@ -39,30 +57,11 @@ export default Backbone.View.extend({
   },
 
   render() {
-    const ctx = {
-      attributes: {
-        application: this.model,
-        _router: this.attributes._router,
-      },
-    };
-
-    this.views = {
-      _header: new HeaderView(ctx),
-      _navigation: new NavigationView(ctx),
-      _map: new MapView(ctx),
-
-      index: ThesisView,
-      background: BackgroundView,
-      countries: CountriesView,
-    };
-
-    this.activeView = undefined;
-
     this.$el.html(this.template());
 
-    this.views._navigation.render().$el.prependTo(this.$el);
-    this.views._map.render().$el.prependTo(this.$el);
-    this.views._header.render().$el.prependTo(this.$el);
+    ['navigation', 'map', 'header',].forEach(item => {
+      this.views[`_${item}`].render().$el.prependTo(this.$el);
+    });
 
     return this;
   },

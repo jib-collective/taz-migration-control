@@ -3,7 +3,6 @@
   position: relative;
 
   &__title {
-    color: red;
     left: 0;
     margin-bottom: 0;
     margin-top: 0;
@@ -20,5 +19,18 @@
     position: absolute;
     top: 0;
     width: 100%;
+  }
+
+  &__slider {
+    bottom: .5rem;
+    left: 50%;
+    position: absolute;
+    transform: translateX(-50%);
+    z-index: 1000;
+  }
+
+  // map styles
+  path {
+    transition: all .3s ease;
   }
 }

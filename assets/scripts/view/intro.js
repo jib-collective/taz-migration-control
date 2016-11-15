@@ -3,39 +3,46 @@ import $ from 'jquery';
 import Intro from 'model/intro';
 
 export default Backbone.View.extend({
-  tagName: 'div',
-
   className: 'intro',
 
   events: {
-    'click .intro__close': 'close',
+    'click .intro__close': '_close',
   },
 
   initialize() {
     this.model = new Intro();
 
     this.listenTo(this.model, 'change:visible', (model, value) => {
+      const $body = $('body');
+
       if (value === false) {
         this.$el.addClass('intro--hide');
+
+        $body.css({
+          overflow: 'auto',
+        });
+
         setTimeout(() => {
           this.remove();
         }, 500);
       }
     });
+
     $('body').css({
       overflow: 'hidden',
     });
+
   },
 
-  close() {
+  _close() {
     this.model.set('visible', false);
-    $('body').css({
-      overflow: 'auto',
-    });
   },
 
   render() {
     this.$el.html(this.template());
+
+    /* no idea why this is necessary here ... */
+    this.delegateEvents();
     return this;
   },
 

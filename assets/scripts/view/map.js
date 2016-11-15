@@ -22,6 +22,7 @@ export default Backbone.View.extend({
   createMap() {
     const map = L.map(this.$el.find('.map__container').get(0), {
       scrollWheelZoom: false,
+      zoomControl: false,
     });
 
     map.setView([25.36, 17]);

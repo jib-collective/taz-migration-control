@@ -1,0 +1,16 @@
+.leaflet {
+  &-control-attribution {
+    background-color: $color-app-dark;
+    color: $text-color;
+
+    a {
+      color: currentColor;
+    }
+  }
+
+  &-map-pane {
+    path {
+      transition: all .3s ease;
+    }
+  }
+}

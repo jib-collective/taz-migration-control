@@ -1,0 +1,23 @@
+@mixin typo($id) {
+  @if $id == 'headline-bold' {
+    font-family: 'TisaPro';
+    font-size: 2.4rem;
+    font-weight: 700;
+    text-align: center;
+  }
+
+  @if $id == 'headline-small-bold' {
+    font-family: 'TisaPro';
+    font-size: 1.8rem;
+    font-weight: 700;
+    text-align: center;
+  }
+
+  @if $id == 'tag' {
+    font-family: 'MarkOT';
+    font-size: 1rem;
+    font-weight: 600;
+    letter-spacing: .1rem;
+    text-transform: uppercase;
+  }
+}

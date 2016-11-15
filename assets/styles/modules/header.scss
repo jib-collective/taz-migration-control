@@ -12,11 +12,10 @@
   }
 
   &__title {
+    @include typo('tag');
     align-self: center;
-    font-size: 1rem;
     line-height: 1;
     margin: 0 auto;
-    text-transform: uppercase;
   }
 
   &__languages {

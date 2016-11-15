@@ -1,7 +1,6 @@
 .thesis {
   &__item-title {
-    font-family: Georgia;
-    font-size: 1.6rem;
+    @include typo('headline-small-bold');
     line-height: 1.2;
     margin-bottom: 2.5rem;
     margin-top: 0;

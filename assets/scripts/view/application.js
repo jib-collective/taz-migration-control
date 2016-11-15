@@ -8,6 +8,7 @@ import IntroView from 'view/intro';
 import MapView from 'view/map';
 import NavigationView from 'view/navigation';
 import ThesisView from 'view/thesis';
+import WebFont from 'webfontloader';
 
 export default Backbone.View.extend({
   className: 'app',
@@ -36,6 +37,23 @@ export default Backbone.View.extend({
 
     /* on language change, re-render the whole application */
     this.listenTo(this.model, 'change:language', this.render);
+    this.loadWebfonts();
+  },
+
+  loadWebfonts() {
+    WebFont.load({
+      custom: {
+        families: [
+          'TisaPro',
+        ],
+        urls: [
+          '/dist/styles/fonts.css',
+        ]
+      },
+
+      classes: false,
+      events: false,
+    });
   },
 
   introIsVisible() {

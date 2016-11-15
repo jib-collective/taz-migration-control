@@ -8,6 +8,13 @@ const sass = require('gulp-sass');
 const uglify = require('gulp-uglify');
 const webpack = require('webpack-stream');
 
+gulp.task('fonts', () => {
+  return gulp.src([
+    'assets/fonts/**/*',
+  ])
+    .pipe(gulp.dest('dist/fonts/'));
+});
+
 gulp.task('scripts', () => {
   return gulp.src('assets/scripts/common.js')
     .pipe(webpack({
@@ -46,6 +53,10 @@ gulp.task('scripts', () => {
 });
 
 gulp.task('styles', () => {
+  const fontAssets = gulp.src([
+    './assets/styles/fonts.scss',
+  ]);
+
   const staticAssets = gulp.src([
     './node_modules/sanitize.css/sanitize.css',
     './node_modules/leaflet/dist/leaflet.css',
@@ -56,6 +67,17 @@ gulp.task('styles', () => {
     './assets/styles/common.scss',
   ])
     .pipe(sass().on('error', sass.logError));
+
+  fontAssets
+    .pipe(sass().on('error', sass.logError))
+    .pipe(autoprefixer())
+    .pipe(cssnano({
+      zindex: false,
+      discardUnused: {
+        fontFace: false,
+      },
+    }))
+    .pipe(gulp.dest('./dist/styles/'));
 
   merge(staticAssets, sassAssets)
     .pipe(autoprefixer())
@@ -72,6 +94,7 @@ gulp.task('watch', () => {
 });
 
 gulp.task('default', [
+  'fonts',
   'scripts',
   'styles',
 ]);

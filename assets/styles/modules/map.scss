@@ -3,12 +3,14 @@
   position: relative;
 
   &__title {
+    @include typo('headline-bold');
+    background-image: linear-gradient(to bottom, rgba(0, 0, 0, .6), transparent);
     left: 0;
     margin-bottom: 0;
     margin-top: 0;
+    padding-top: 0;
     position: absolute;
-    text-align: center;
-    top: .5rem;
+    top: 0;
     width: 100%;
     z-index: 500;
   }

@@ -1,5 +1,6 @@
 import _ from 'underscore';
 import $ from 'jquery';
+import d3 from 'd3';
 import i18n from 'lib/i18n';
 import L from 'leaflet';
 import SliderView from 'view/slider';
@@ -15,8 +16,14 @@ export default Backbone.View.extend({
           fillOpacity: Math.random(),
         });
       });
+
+      this.bubbleLayer.forEach(layer => {
+        layer.setRadius(1000000 * Math.random());
+      });
     });
+
     this.countryLayer = [];
+    this.bubbleLayer = [];
   },
 
   createMap() {
@@ -37,7 +44,25 @@ export default Backbone.View.extend({
     }, 300);
 
     L.tileLayer('http://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}.png').addTo(map);
+
+    // http://www.jeromecukier.net/blog/2011/08/11/d3-scales-and-color/
+    //let ramp = d3.scale.linear().domain([0,100]).range([0, 1]);
+    //console.log(ramp(98));
+
     return map;
+  },
+
+  drawBubble(map, layer) {
+    const center = layer.getBounds().getCenter();
+    const radius = 1000000 * Math.random();
+    const style = {
+      color: 'red',
+      fillColor: '#f03',
+      fillOpacity: 0.5,
+    };
+
+    const circle = L.circle(center, radius, style).addTo(map);
+    this.bubbleLayer.push(circle);
   },
 
   drawCountry(map, name) {
@@ -52,6 +77,7 @@ export default Backbone.View.extend({
       .then(data => {
         const layer = L.geoJson(data, {style}).addTo(map);
         this.countryLayer.push(layer);
+        this.drawBubble(map, layer);
       });
   },
 

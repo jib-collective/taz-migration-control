@@ -3,6 +3,6 @@ export default Backbone.Model.extend({
     max: 2016,
     min: 2010,
     value: 2010,
-    interval: 1000,
+    interval: 1500,
   },
 });

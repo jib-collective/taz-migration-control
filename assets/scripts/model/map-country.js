@@ -1,5 +1,7 @@
 import $ from 'jquery';
+import d3 from 'd3';
 import L from 'leaflet';
+import limax from 'limax';
 
 /*
 
@@ -21,7 +23,8 @@ export default Backbone.Model.extend({
     map: undefined,
 
     area: undefined,
-    areaType: 'migration-intensity',
+    areaType: 'hdi',
+    areaScale: [0, 1],
     areaStyle: {
       stroke: false,
       fill: true,
@@ -30,7 +33,8 @@ export default Backbone.Model.extend({
     },
 
     overlay: undefined,
-    overlayType: 'migration-money',
+    overlayType: 'oda',
+    overlayScale: [],
     overlayStyle: {
       stroke: false,
       fill: true,
@@ -43,23 +47,33 @@ export default Backbone.Model.extend({
 
   initialize(map) {
     this.on('change:year', this.updateCountry);
+    return this;
+  },
 
+  draw() {
     this.area()
       .then(() => {
         this.overlay();
       });
-
-    return this;
   },
 
   updateCountry(year) {
+    const areaLayer = this.get('area');
+    const overlayLayer = this.get('overlay');
+
+    if (!areaLayer || !overlayLayer) {
+      return this;
+    }
+
     this.setAreaYear(year);
     this.setOverlayYear(year);
+
     return this;
   },
 
   fetchCountryPolygon() {
-    return $.getJSON(`/data/geo/${this.get('name')}.geojson`);
+    const slug = limax(this.get('name'));
+    return $.getJSON(`/data/geo/${slug}.geojson`);
   },
 
   area() {
@@ -98,15 +112,32 @@ export default Backbone.Model.extend({
     return layer.setRadius(this._getRadius());
   },
 
-  _getRadius() {
-    // http://www.jeromecukier.net/blog/2011/08/11/d3-scales-and-color/
-    //let ramp = d3.scale.linear().domain([0,100]).range([0, 1]);
-    //console.log(ramp(98));
+  _getDataValueForYear(type, year) {
+    return this.get('data')[type][year];
+  },
 
-    return 500 * 1000 * Math.random();
+  _getRadius() {
+    const overlayType = this.get('overlayType');
+    const currentYear = this.get('year');
+    const overlayScale = this.get('overlayScale');
+    const range = d3.scale.linear().domain(overlayScale).range([0, 1]);
+    const value = this._getDataValueForYear(overlayType, currentYear);
+    const sizeFactor = range(value);
+
+    if (sizeFactor) {
+      return (1000000/2) * sizeFactor;
+    }
+
+    return 1;
   },
 
   _getOpacity() {
-    return Math.random();
+    const areaType = this.get('areaType');
+    const currentYear = this.get('year');
+    const areaScale = this.get('areaScale');
+    const range = d3.scale.linear().domain(areaScale).range([0, 1]);
+    const value = this._getDataValueForYear(areaType, currentYear);
+
+    return range(value);
   },
 });

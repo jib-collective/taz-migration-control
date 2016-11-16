@@ -3,11 +3,22 @@ import MapCountry from 'model/map-country';
 export default Backbone.Collection.extend({
   model: MapCountry,
 
+  initialize() {
+    this.on('add', (model) => {
+      const overlayType = model.get('overlayType');
+      model.set('overlayScale', this._getDataRange(overlayType, 1));
+      model.draw();
+    });
+
+    return this;
+  },
+
   parse(res) {
     return res.map(item => {
       return {
         name: item.label.toLowerCase(),
         map: this._map,
+        data: item.data,
       };
     });
   },
@@ -21,9 +32,12 @@ export default Backbone.Collection.extend({
   _getDataRange(type, min) {
     let max = 0;
 
-    this.model.forEach(country => {
-      country.data.keys().forEach(key => {
-        const value = parseFloat(country.data[key], 10);
+    this.models.forEach(country => {
+      const data = country.get('data');
+      const dataSet = data[type];
+
+      Object.keys(dataSet).forEach(year => {
+        const value = dataSet[year];
 
         if (value > max) {
           max = value;
@@ -35,18 +49,6 @@ export default Backbone.Collection.extend({
       min,
       max,
     ];
-  },
-
-  getHDIRange() {
-    return this._getDataRange('hdi', 0);
-  },
-
-  getODARange() {
-    return this._getDataRange('oda', 0);
-  },
-
-  getMigrationIndexRange() {
-    return this._getDataRange('migration', 0);
   },
 
   url: '/data/countries.json',

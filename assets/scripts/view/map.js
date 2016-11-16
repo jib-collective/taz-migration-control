@@ -5,6 +5,7 @@ import i18n from 'lib/i18n';
 import L from 'leaflet';
 import CountryCollection from 'collection/map';
 import MapCountry from 'model/map-country';
+import MapModel from 'model/map';
 import SliderView from 'view/slider';
 
 export default Backbone.View.extend({
@@ -13,6 +14,7 @@ export default Backbone.View.extend({
   initialize() {
     this.slider = new SliderView();
     this.countries = new CountryCollection();
+    this.model = new MapModel();
 
     this.listenTo(this.slider.model, 'change:value', (model, value) => {
       this.countries.setYear(value);
@@ -22,22 +24,26 @@ export default Backbone.View.extend({
   },
 
   createMap() {
-    const map = L.map(this.$el.find('.map__container').get(0), {
-      scrollWheelZoom: false,
-      zoomControl: false,
-    });
+    const options = this.model.get('mapOptions');
+    const tileLayer = this.model.get('tileLayer');
+    const view = this.model.get('view');
+    const zoom = this.model.get('zoom');
+    const targetContainer = this.$el.find('.map__container').get(0);
 
-    L.tileLayer('http://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}.png').addTo(map);
+    const map = L.map(targetContainer, options);
 
-    map.setView([25.36, 17]);
-    map.setZoom(4);
+    L.tileLayer(tileLayer).addTo(map);
+
+    map.setView(view);
+    map.setZoom(zoom);
 
     this.countries._map = map;
     this.countries.fetch();
 
+    // todo: try to get rid of this
     setTimeout(() => {
       map.invalidateSize();
-    }, 100);
+    }, 20);
 
     return map;
   },

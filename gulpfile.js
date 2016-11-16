@@ -18,6 +18,7 @@ gulp.task('fonts', () => {
 gulp.task('scripts', () => {
   return gulp.src('assets/scripts/common.js')
     .pipe(webpack({
+      devtool: 'source-map',
       entry: './assets/scripts/common.js',
       module: {
         loaders: [

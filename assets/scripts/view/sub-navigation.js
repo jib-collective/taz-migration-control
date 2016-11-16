@@ -7,9 +7,9 @@ export default Backbone.View.extend({
 
   className: 'sub-navigation',
 
-  initialize(data) {
-    this.collection = data.collection;
-    this.listenTo(this.collection, 'sync', this.render);
+  initialize(options) {
+    this.options = options;
+    this.listenTo(this.options.collection, 'sync', this.render);
     return this;
   },
 
@@ -19,11 +19,13 @@ export default Backbone.View.extend({
     }));
 
     /* render each entry */
-    this.collection.forEach(model => {
-      const view = new SubNavigationEntry({
-        attributes: this.attributes,
-        model,
-      });
+    this.options.collection.forEach(model => {
+      console.log(this.options);
+      const options = {
+        application: this.options.application,
+        _router: this.options._router,
+      };
+      const view = new SubNavigationEntry(Object.assign(options, {model}));
 
       view.render().$el.appendTo(this.$el.find('.sub-navigation__list'));
     });

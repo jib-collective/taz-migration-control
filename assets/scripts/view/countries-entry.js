@@ -5,7 +5,8 @@ import SubNavigationView from 'view/sub-navigation';
 export default Backbone.View.extend({
   className: 'countries',
 
-  initialize() {
+  initialize(options) {
+    this.options = options;
     this.collection = new SubNavigationCollection([], {
       url: '/data/countries.json',
     });
@@ -16,10 +17,8 @@ export default Backbone.View.extend({
   render() {
     this.$el.html(this.template());
 
-    const subNavigationView = new SubNavigationView({
-      attributes: this.attributes,
-      collection: this.collection,
-    });
+    const options = Object.assign(this.options, {collection: this.collection});
+    const subNavigationView = new SubNavigationView(options);
 
     subNavigationView.render().$el.prependTo(this.$el);
 

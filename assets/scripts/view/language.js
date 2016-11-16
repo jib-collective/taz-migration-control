@@ -9,7 +9,8 @@ export default Backbone.View.extend({
 
   className: 'header__languages',
 
-  initialize() {
+  initialize(options) {
+    this.options = options;
     this.collection = new LanguagesCollection(LANGUAGES);
   },
 
@@ -17,11 +18,7 @@ export default Backbone.View.extend({
     this.$el.html(this.template());
 
     this.collection.forEach(model => {
-      const view = new LanguageEntry({
-        attributes: this.attributes,
-        model
-      });
-
+      const view = new LanguageEntry(Object.assign(this.options, {model}));
       view.render().$el.appendTo(this.$el);
     });
 

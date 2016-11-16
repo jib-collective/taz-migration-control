@@ -1,18 +1,18 @@
 import _ from 'underscore';
 
 export default Backbone.View.extend({
+  className: 'background',
+
   initialize() {
     return this;
   },
 
   render() {
-    this.setElement(this.template());
+    this.$el.html(this.template());
     return this;
   },
 
   template: _.template(`
-    <div class="background">
-      <p>Background view</p>
-    </div>
+    <p>Background view</p>
   `),
 });

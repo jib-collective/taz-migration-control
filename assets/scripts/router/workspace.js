@@ -3,9 +3,7 @@ import ApplicationView from 'view/application';
 export default Backbone.Router.extend({
   initialize() {
     this.app = new ApplicationView({
-      attributes: {
-        _router: this,
-      },
+      _router: this,
     });
     this.app.render().append();
   },

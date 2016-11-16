@@ -7,21 +7,22 @@ export default Backbone.View.extend({
 
   className: 'sub-navigation__list-item',
 
-  initialize() {
+  initialize(options) {
+    this.options = options;
     this.setInitialState();
     this.addListeners();
     return this;
   },
 
   setInitialState() {
-    const appEntry = this.attributes.application.get('entry');
+    const appEntry = this.options.application.get('entry');
     this.model.set('active', appEntry === this.model.get('slug'));
   },
 
   addListeners() {
     this.listenTo(this.model, 'change', this.render);
 
-    this.listenTo(this.attributes.application, 'change:entry', (model, value) => {
+    this.listenTo(this.options.application, 'change:entry', (model, value) => {
       this.model.set('active', this.model.get('slug') === value);
     });
   },
@@ -34,12 +35,12 @@ export default Backbone.View.extend({
     event.preventDefault();
     let target = $(event.target).attr('href');
     if (target) {
-      this.attributes._router.navigate(target, {trigger: true});
+      this.options._router.navigate(target, {trigger: true});
     }
   },
 
   render() {
-    const language = this.attributes.application.get('language');
+    const language = this.options.application.get('language');
     const slug = this.model.get('slug');
     const attrs = {
       i18n,

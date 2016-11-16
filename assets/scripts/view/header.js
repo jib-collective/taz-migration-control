@@ -8,15 +8,17 @@ export default Backbone.View.extend({
 
   className: 'header',
 
+  initialize(options) {
+    this.options = options;
+  },
+
   render() {
     this.$el.html(this.template({
       i18n
     }));
 
     /* create language switch */
-    const languageSwitch = new LanguageView({
-      attributes: this.attributes,
-    });
+    const languageSwitch = new LanguageView(this.options);
     languageSwitch.render().$el.appendTo(this.$el);
 
     return this;

@@ -13,19 +13,17 @@ import WebFont from 'webfontloader';
 export default Backbone.View.extend({
   className: 'app',
 
-  initialize() {
+  initialize(options) {
     this.model = new ApplicationModel();
 
     this._globalCtx = {
-      attributes: {
-        application: this.model,
-        _router: this.attributes._router,
-      },
+      application: this.model,
+      _router: options._router,
     };
 
     this.views = {
       _header: new HeaderView(this._globalCtx),
-      _intro: new IntroView(this._globalCtx),
+      _intro: new IntroView(),
       _navigation: new NavigationView(this._globalCtx),
       _map: new MapView(this._globalCtx),
 

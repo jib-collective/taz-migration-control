@@ -8,7 +8,8 @@ export default Backbone.View.extend({
 
   className: 'navigation',
 
-  initialize() {
+  initialize(options) {
+    this.options = options;
     this.collection = new NavigationCollection(NAVIGATION_ENTRIES);
   },
 
@@ -17,11 +18,7 @@ export default Backbone.View.extend({
 
     /* render each entry */
     this.collection.forEach(model => {
-      const view = new NavigationEntry({
-        attributes: this.attributes,
-        model,
-      });
-
+      const view = new NavigationEntry(Object.assign(this.options, {model}));
       view.render().$el.appendTo(this.$el.find('.navigation__list'));
     });
 

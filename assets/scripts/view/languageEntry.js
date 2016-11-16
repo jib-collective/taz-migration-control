@@ -6,14 +6,15 @@ export default Backbone.View.extend({
 
   className: 'language',
 
-  initialize() {
+  initialize(options) {
+    this.options = options;
     this.listenTo(this.model, 'change', this.render);
     this.setInitialState();
     return this;
   },
 
   setInitialState() {
-    const appLanguage = this.attributes.application.get('language');
+    const appLanguage = this.options.application.get('language');
     this.model.set('active', this.model.getSlug() === appLanguage);
   },
 
@@ -23,7 +24,7 @@ export default Backbone.View.extend({
 
   navigateTo(event) {
     event.preventDefault();
-    this.attributes._router.navigate(this.model.getSlug(), {trigger: true});
+    this.options._router.navigate(this.model.getSlug(), {trigger: true});
   },
 
   render() {

@@ -1,6 +1,19 @@
 import $ from 'jquery';
 import L from 'leaflet';
 
+/*
+
+Datenstruktur
+
+Geld = ODA + Migrationsabwehrzahlungen
+
+- HDI / Geld: HDI Flaechenlayer
+** - Migrationsindex / Geld: MI Flaechenlayer
+- Migrationsindex / Detention Center: MI Flaechenlayer
+
+*/
+
+
 export default Backbone.Model.extend({
   defaults: {
     name: '',

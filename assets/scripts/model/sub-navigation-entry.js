@@ -1,7 +1,14 @@
+import limax from 'limax';
+
 export default Backbone.Model.extend({
   defaults: {
     active: false,
-    slug: '',
     label: '',
+  },
+
+  getSlug() {
+    const label = this.get('label').toLowerCase();
+
+    return limax(label);
   },
 });

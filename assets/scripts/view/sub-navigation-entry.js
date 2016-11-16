@@ -16,14 +16,14 @@ export default Backbone.View.extend({
 
   setInitialState() {
     const appEntry = this.options.application.get('entry');
-    this.model.set('active', appEntry === this.model.get('slug'));
+    this.model.set('active', this.model.getSlug() === appEntry);
   },
 
   addListeners() {
     this.listenTo(this.model, 'change', this.render);
 
     this.listenTo(this.options.application, 'change:entry', (model, value) => {
-      this.model.set('active', this.model.get('slug') === value);
+      this.model.set('active', this.model.getSlug() === value);
     });
   },
 
@@ -41,7 +41,7 @@ export default Backbone.View.extend({
 
   render() {
     const language = this.options.application.get('language');
-    const slug = this.model.get('slug');
+    const slug = this.model.getSlug();
     const attrs = {
       i18n,
       model: this.model,

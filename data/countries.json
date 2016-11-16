@@ -1,21 +1,16 @@
 [
   {
-    "label": "Germany",
-    "slug": "germany"
+    "label": "Chad",
+    "slug": "chad"
   },
 
   {
-    "label": "Austria",
-    "slug": "austria"
+    "label": "Libya",
+    "slug": "libya"
   },
 
   {
-    "label": "Czech Republic",
-    "slug": "czech-republic"
-  },
-
-  {
-    "label": "Poland",
-    "slug": "poland"
+    "label": "Mali",
+    "slug": "mali"
   }
 ]

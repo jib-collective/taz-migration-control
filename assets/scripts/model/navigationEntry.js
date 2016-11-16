@@ -1,3 +1,5 @@
+import limax from 'limax';
+
 export default Backbone.Model.extend({
   defaults: {
     active: false,
@@ -10,6 +12,6 @@ export default Backbone.Model.extend({
       return '';
     }
 
-    return label;
+    return limax(label);
   },
 });

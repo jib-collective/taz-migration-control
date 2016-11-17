@@ -20,7 +20,6 @@ export default Backbone.View.extend({
 
     /* render each entry */
     this.options.collection.forEach(model => {
-      console.log(this.options);
       const options = {
         application: this.options.application,
         _router: this.options._router,

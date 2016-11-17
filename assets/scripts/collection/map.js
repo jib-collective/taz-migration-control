@@ -6,7 +6,9 @@ export default Backbone.Collection.extend({
   initialize() {
     this.on('add', (model) => {
       const overlayType = model.get('overlayType');
+      const areaType = model.get('areaType');
       model.set('overlayScale', this._getDataRange(overlayType, 1));
+      model.set('areaScale', this._getDataRange(areaType, 0));
       model.draw();
     });
 

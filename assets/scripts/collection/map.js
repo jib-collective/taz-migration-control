@@ -5,10 +5,11 @@ export default Backbone.Collection.extend({
 
   initialize() {
     this.on('add', (model) => {
-      const overlayType = model.get('overlayType');
-      const areaType = model.get('areaType');
-      model.set('overlayScale', this._getDataRange(overlayType, 1));
-      model.set('areaScale', this._getDataRange(areaType, 0));
+      model.set({
+        overlayScale: this._getDataRange(model.get('overlayType')),
+        areaScale: this._getDataRange(model.get('areaType')),
+      });
+
       model.draw();
     });
 
@@ -31,8 +32,9 @@ export default Backbone.Collection.extend({
     });
   },
 
-  _getDataRange(type, min) {
+  _getDataRange(type) {
     let max = 0;
+    let min;
 
     this.models.forEach(country => {
       const data = country.get('data');
@@ -40,6 +42,12 @@ export default Backbone.Collection.extend({
 
       Object.keys(dataSet).forEach(year => {
         const value = dataSet[year];
+
+        if (!min) {
+          min = value
+        } else if (value < min) {
+          min = value;
+        }
 
         if (value > max) {
           max = value;

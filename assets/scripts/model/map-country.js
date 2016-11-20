@@ -105,11 +105,20 @@ export default Backbone.Model.extend({
     }
 
     const center = this.get('area').getBounds().getCenter();
-    const style = this.get('overlayStyle');
-    const radius = 1000000;
-    const layer = L.circleMarker(center, radius, style);
+    const markerStyle = this.get('overlayStyle');
+    const tooltipDefaults = {
+      className: 'leaflet-valetta-label',
+      direction: 'center',
+      permanent: true,
+    };
+    const markerDefaults = {
+      radius: 80,
+    };
+    const tooltip = L.tooltip(tooltipDefaults)
+    const layer = L.circleMarker(center, Object.assign(markerStyle, markerDefaults));
 
-    layer.bindTooltip(label, {permanent: true});
+    layer.bindTooltip(tooltip);
+    layer.setTooltipContent(label);
 
     this.set('overlay', layer);
 

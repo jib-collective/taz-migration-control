@@ -406,7 +406,7 @@
             "2016":7
          },
 
-         "valetta-label":"mehr als 2,3 Mrd EUR"
+         "valetta-label":"mehr als <strong class='leaflet-valetta-label__bold'>2,3 Mrd EUR</strong>"
       }
    },
    {
@@ -599,7 +599,7 @@
             "2015":8,
             "2016":8
          },
-         "valetta-label":"ca 3 Mrd EUR"
+         "valetta-label":"ca. <strong class='leaflet-valetta-label__bold'>3 Mrd EUR</strong>"
       }
    },
    {

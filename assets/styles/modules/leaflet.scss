@@ -13,4 +13,21 @@
       transition: all .3s ease;
     }
   }
+
+  &-valetta-label {
+    &#{&} {
+      background: transparent;
+      border: none;
+      box-shadow: none;
+      font-family: 'TisaPro';
+      font-size: 1rem;
+      line-height: 1.2;
+      text-align: center;
+    }
+
+    &__bold {
+      display: block;
+      font-size: 1.3rem;
+    }
+  }
 }

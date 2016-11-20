@@ -21,10 +21,39 @@
     padding-bottom: .3rem;
     position: absolute;
     transform: translateX(-50%);
+    z-index: 1002;
 
     &:hover,
     &:focus {
       border-color: $color-attention;
+    }
+  }
+
+  &__highlight {
+    color: $color-attention;
+  }
+
+  &__slide {
+    height: 100%;
+    left: 0;
+    position: absolute;
+    top: 0;
+    width: 100%;
+
+    &--is-hidden {
+      display: none;
+    }
+
+    &-text {
+      @include typo('headline-bold');
+      display: block;
+      left: 50%;
+      max-width: 40rem;
+      position: absolute;
+      text-align: center;
+      top: 50%;
+      transform: translate(-50%, -50%);
+      width: 100%;
     }
   }
 }

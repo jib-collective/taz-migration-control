@@ -1,4 +1,5 @@
 import _ from 'underscore';
+import $ from 'jquery';
 import ApplicationModel from 'model/application';
 import BackgroundView from 'view/background';
 import CountriesView from 'view/countries';
@@ -80,6 +81,15 @@ export default Backbone.View.extend({
 
     this.model.set('activeView', new this.views[viewName](this._globalCtx));
     this.model.get('activeView').render().$el.appendTo(this.$el.find('.app__main'));
+
+    // scroll intro view
+    if (section && !entry) {
+      setTimeout(() => {
+        const $content = $('.app__main');
+        const contentTop = $content.offset().top;
+        $(window).scrollTop(contentTop);
+      }, 500);
+    }
   },
 
   append() {

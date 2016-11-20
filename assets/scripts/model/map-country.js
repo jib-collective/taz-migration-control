@@ -23,13 +23,16 @@ export default Backbone.Model.extend({
     map: undefined,
 
     area: undefined,
-    areaType: 'hdi',
-    areaScale: [0, 1],
+    areaType: 'migration-intensity',
+    areaScale: [0, 8],
     areaStyle: {
-      stroke: false,
+      stroke: true,
+      color: 'rgb(255, 255, 255)',
       fill: true,
       fillColor: 'rgb(255, 255, 255)',
       fillOpacity: 1,
+      opacity: 1,
+      weight: 1,
     },
 
     overlay: undefined,
@@ -46,6 +49,7 @@ export default Backbone.Model.extend({
   },
 
   initialize(map) {
+    this.updateCountry(2010);
     this.on('change:year', this.updateCountry);
     return this;
   },
@@ -53,7 +57,7 @@ export default Backbone.Model.extend({
   draw() {
     this.area()
       .then(() => {
-        this.overlay();
+        //this.overlay();
       });
   },
 
@@ -61,12 +65,12 @@ export default Backbone.Model.extend({
     const areaLayer = this.get('area');
     const overlayLayer = this.get('overlay');
 
-    if (!areaLayer || !overlayLayer) {
+    if (!areaLayer) {
       return this;
     }
 
     this.setAreaYear(year);
-    this.setOverlayYear(year);
+    //this.setOverlayYear(year);
 
     return this;
   },
@@ -92,7 +96,9 @@ export default Backbone.Model.extend({
   setAreaYear(year) {
     const layer = this.get('area');
     const fillOpacity = this._getOpacity();
-    return layer.setStyle({fillOpacity});
+    const opacity = 1;
+
+    return layer.setStyle({fillOpacity, opacity});
   },
 
   overlay() {

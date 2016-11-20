@@ -38,7 +38,7 @@ export default Backbone.Collection.extend({
 
     this.models.forEach(country => {
       const data = country.get('data');
-      const dataSet = data[type];
+      const dataSet = data[type] || {};
 
       Object.keys(dataSet).forEach(year => {
         const value = dataSet[year];

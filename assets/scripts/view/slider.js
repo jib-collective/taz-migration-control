@@ -22,12 +22,20 @@ export default Backbone.View.extend({
 
       if (value + 1 <= this.model.get('max')) {
         value += 1;
+        this.model.set({value});
       } else {
-        value = this.model.get('min');
+        this.stop();
       }
 
-      this.model.set({value});
     }, this.model.get('interval'));
+  },
+
+  stop() {
+    if (this.interval) {
+      clearInterval(this.interval);
+    }
+
+    return this
   },
 
   updateValue(event) {

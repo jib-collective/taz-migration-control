@@ -6,11 +6,8 @@ export default Backbone.Collection.extend({
   initialize() {
     this.on('add', (model) => {
       model.set({
-        overlayScale: this._getDataRange(model.get('overlayType')),
         areaScale: this._getDataRange(model.get('areaType')),
       });
-
-      model.draw();
     });
 
     return this;

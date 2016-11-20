@@ -36,8 +36,6 @@ export default Backbone.Model.extend({
     },
 
     overlay: undefined,
-    overlayType: 'oda',
-    overlayScale: [],
     overlayStyle: {
       stroke: false,
       fill: true,
@@ -49,28 +47,21 @@ export default Backbone.Model.extend({
   },
 
   initialize(map) {
-    this.updateCountry(2010);
-    this.on('change:year', this.updateCountry);
+    this.on('change:year', (model, value) => this.updateCountry(value));
+    this.area().then(() => this.updateCountry(2010));
+
     return this;
   },
 
-  draw() {
-    this.area()
-      .then(() => {
-        //this.overlay();
-      });
-  },
-
   updateCountry(year) {
-    const areaLayer = this.get('area');
-    const overlayLayer = this.get('overlay');
+    const yearValue = parseInt(year, 10);
+    this.setAreaYear(yearValue);
 
-    if (!areaLayer) {
-      return this;
+    if (yearValue === 2016) {
+      this.setOverlayYear(year);
+    } else {
+      this.clearOverlayYear(year);
     }
-
-    this.setAreaYear(year);
-    //this.setOverlayYear(year);
 
     return this;
   },
@@ -98,43 +89,55 @@ export default Backbone.Model.extend({
     const fillOpacity = this._getOpacity();
     const opacity = 1;
 
-    return layer.setStyle({fillOpacity, opacity});
+    if (layer) {
+      layer.setStyle({fillOpacity, opacity})
+    }
+
+    return this;
   },
 
   overlay() {
+    const data = this.get('data');
+    const label = data['valetta-label'] || undefined;
+
+    if (!label) {
+      return undefined;
+    }
+
     const center = this.get('area').getBounds().getCenter();
     const style = this.get('overlayStyle');
-    const radius = this._getRadius();
-    const layer = L.circle(center, radius, style);
+    const radius = 1000000;
+    const layer = L.circleMarker(center, radius, style);
+
+    layer.bindTooltip(label, {permanent: true});
 
     this.set('overlay', layer);
-    layer.addTo(this.get('map'));
 
     return layer;
   },
 
   setOverlayYear(year) {
+    let layer = this.overlay();
+
+    if (layer) {
+      layer.addTo(this.get('map'));
+    }
+
+    return this;
+  },
+
+  clearOverlayYear(year) {
     const layer = this.get('overlay');
-    return layer.setRadius(this._getRadius());
+
+    if (layer) {
+      layer.remove();
+    }
+
+    return this;
   },
 
   _getDataValueForYear(type, year) {
     return this.get('data')[type][year];
-  },
-
-  _getRadius() {
-    const overlayType = this.get('overlayType');
-    const currentYear = this.get('year');
-    const overlayScale = this.get('overlayScale');
-    const range = d3.scale.linear().domain(overlayScale).range([0, 1]);
-    const value = this._getDataValueForYear(overlayType, currentYear);
-    const sizeFactor = range(value);
-
-    if (sizeFactor) {
-      return (1000000/2) * sizeFactor;
-    }
-
-    return 1;
   },
 
   _getOpacity() {

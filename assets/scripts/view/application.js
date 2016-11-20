@@ -34,8 +34,10 @@ export default Backbone.View.extend({
       countries_entry: CountriesEntryView,
     };
 
-    /* on language change, re-render the whole application */
-    this.listenTo(this.model, 'change:language', this.render);
+    this.listenTo(this.model, 'change:language', () => this.render('complete'));
+    this.listenTo(this.model, 'change:slug change:entry', () => this.render('content'));
+    this.listenTo(this.views._intro.model, 'change:visible', () => this.render('complete'));
+
     this.loadWebfonts();
   },
 
@@ -59,17 +61,12 @@ export default Backbone.View.extend({
     return this.views._intro.model.get('visible') === true;
   },
 
-  view(section, entry) {
-    /* destroy all dynamic views */
-    if (this.model.get('activeView')) {
-      const activeView = this.model.get('activeView');
+  append() {
+    return this.$el.prependTo('body');
+  },
 
-      activeView.remove();
-      this.model.set('activeView', undefined);
-    }
-
-    /* build requested view */
-    let viewName = section;
+  getViewName(slug, entry) {
+    let viewName = slug;
 
     if (!viewName) {
       viewName = 'index';
@@ -79,29 +76,56 @@ export default Backbone.View.extend({
       viewName += '_entry';
     }
 
-    this.model.set('activeView', new this.views[viewName](this._globalCtx));
-    this.model.get('activeView').render().$el.appendTo(this.$el.find('.app__main'));
+    return viewName;
+  },
 
-    // scroll intro view
-    if (section && !entry) {
-      setTimeout(() => {
-        const $content = $('.app__main');
-        const contentTop = $content.offset().top;
-        $(window).scrollTop(contentTop);
-      }, 500);
+  scrollToContent() {
+    if (slug && entry) {
+      return this;
     }
+
+    const $content = $('.app__main');
+    const contentTop = $content.offset().top;
+    $(window).scrollTop(contentTop);
   },
 
-  append() {
-    return this.$el.prependTo('body');
-  },
-
-  render() {
-    this.$el.html(this.template());
-
-    ['intro', 'navigation', 'map', 'header',].forEach(item => {
+  buildInterface() {
+    ['navigation', 'map', 'header',].forEach(item => {
       this.views[`_${item}`].render().$el.prependTo(this.$el);
     });
+
+    return this;
+  },
+
+  render(type = 'complete') {
+    const showIntro = this.views._intro.model.get('visible') === false;
+    const slug = this.model.get('slug');
+    const entry = this.model.get('entry');
+    const viewName = this.getViewName(slug, entry);
+    const activeView = this.model.get('activeView');
+
+    /* destroy dynamic view */
+    if (activeView) {
+      activeView.remove();
+      this.model.set('activeView', undefined);
+    }
+
+    /* build interface */
+    if (type === 'complete') {
+      this.$el.html(this.template());
+      this.buildInterface();
+    }
+
+    /* only build intro without anything else */
+    if (!showIntro) {
+      this.views._intro.render().$el.prependTo(this.$el);
+      return this;
+    }
+
+    /* build content view */
+    const view = new this.views[viewName](this._globalCtx);
+    this.model.set('activeView', view);
+    view.render().$el.appendTo(this.$el.find('.app__main'));
 
     return this;
   },

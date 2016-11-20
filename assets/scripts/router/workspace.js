@@ -5,7 +5,8 @@ export default Backbone.Router.extend({
     this.app = new ApplicationView({
       _router: this,
     });
-    this.app.render().append();
+
+    this.app.render('intro').append();
   },
 
   routes: {
@@ -23,9 +24,12 @@ export default Backbone.Router.extend({
   },
 
   renderIndex(language) {
-    this.app.model.set('language', language);
-    this.app.model.set('slug', '');
-    return this.app.view('');
+    this.app.model.set({
+      language,
+      slug: '',
+    });
+
+    return this;
   },
 
   renderView(language, slug, entry) {
@@ -34,6 +38,7 @@ export default Backbone.Router.extend({
       slug,
       entry,
     });
-    return this.app.view(slug, entry);
+
+    return this;
   },
 });

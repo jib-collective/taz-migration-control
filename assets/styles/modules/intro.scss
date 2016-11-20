@@ -21,7 +21,7 @@
     padding-bottom: .3rem;
     position: absolute;
     transform: translateX(-50%);
-    z-index: 1002;
+    z-index: 1005;
 
     &:hover,
     &:focus {
@@ -34,14 +34,18 @@
   }
 
   &__slide {
+    background-color: $color-app-dark;
     height: 100%;
     left: 0;
+    opacity: 0;
     position: absolute;
     top: 0;
+    transition: opacity 500ms ease;
     width: 100%;
 
-    &--is-hidden {
-      display: none;
+    &--is-active {
+      opacity: 1;
+      z-index: 1002;
     }
 
     &-text {

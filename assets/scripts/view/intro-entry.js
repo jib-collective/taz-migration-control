@@ -13,14 +13,14 @@ export default Backbone.View.extend({
   },
 
   render() {
-    const HIDDEN_CLASS = 'intro__slide--is-hidden';
+    const ACTIVE_CLASS = 'intro__slide--is-active';
 
     this.$el.html(this.template(this));
 
-    if (this.model.get('visible') === true) {
-      this.$el.removeClass(HIDDEN_CLASS);
+    if (this.model.get('visible') === false) {
+      this.$el.removeClass(ACTIVE_CLASS);
     } else {
-      this.$el.addClass(HIDDEN_CLASS);
+      this.$el.addClass(ACTIVE_CLASS);
     }
 
     /* timer for visibility time */

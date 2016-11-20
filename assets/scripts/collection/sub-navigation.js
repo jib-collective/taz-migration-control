@@ -9,4 +9,16 @@ export default Backbone.Collection.extend({
       this.fetch();
     }
   },
+
+  getActiveLabel() {
+    let label;
+
+    this.models.forEach(model => {
+      if (model.get('active') === true) {
+        label = model.get('label');
+      }
+    });
+
+    return label;
+  },
 });

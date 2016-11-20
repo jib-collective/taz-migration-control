@@ -1,0 +1,33 @@
+.sub-navigation {
+  background-color: $color-app-dark;
+
+  &__title {
+    border-bottom: 1px solid $border-color;
+    display: block;
+    font-size: 1.4rem;
+    margin-bottom: 0;
+    margin-top: 0;
+    padding: 1rem 1.5rem;
+    text-align: center;
+    text-transform: uppercase;
+  }
+
+  &__list {
+    column-count: 4;
+    column-gap: 1.5rem;
+    list-style: none;
+    margin: 0;
+    padding: 1.5rem;
+  }
+
+  &__item {
+    @include typo('tag-small');
+    color: currentColor;
+    text-decoration: none;
+    text-transform: uppercase;
+
+    &--active {
+      color: $color-attention;
+    }
+  }
+}

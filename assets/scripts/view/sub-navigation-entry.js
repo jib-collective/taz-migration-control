@@ -9,22 +9,16 @@ export default Backbone.View.extend({
 
   initialize(options) {
     this.options = options;
-    this.setInitialState();
     this.addListeners();
-    return this;
-  },
 
-  setInitialState() {
     const appEntry = this.options.application.get('entry');
     this.model.set('active', this.model.getSlug() === appEntry);
+
+    return this;
   },
 
   addListeners() {
     this.listenTo(this.model, 'change', this.render);
-
-    this.listenTo(this.options.application, 'change:entry', (model, value) => {
-      this.model.set('active', this.model.getSlug() === value);
-    });
   },
 
   events: {
@@ -52,14 +46,14 @@ export default Backbone.View.extend({
   },
 
   template: _.template(`
-    <% if (this.model.get('active')) { %>
+    <% if (model.get('active')) { %>
       <span class="sub-navigation__item sub-navigation__item--active">
-        <%= i18n( this.model.get('label') ) %>
+        <%= i18n( model.get('label') ) %>
       </span>
     <% } else { %>
       <a href="<%= url %>"
          class="sub-navigation__item">
-        <%= i18n( this.model.get('label') ) %>
+        <%= i18n( model.get('label') ) %>
       </a>
     <% } %>
   `),

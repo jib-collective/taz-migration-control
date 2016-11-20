@@ -8,7 +8,7 @@ export default Backbone.Model.extend({
   getSlug() {
     const label = this.get('label').toLowerCase();
 
-    if (label === 'thesis') {
+    if (label === 'countries') {
       return '';
     }
 

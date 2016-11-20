@@ -27,9 +27,9 @@ export default Backbone.View.extend({
       _navigation: new NavigationView(this._globalCtx),
       _map: new MapView(this._globalCtx),
 
-      index: ThesisView,
+      index: CountriesView,
       background: BackgroundView,
-      countries: CountriesView,
+      thesis: ThesisView,
       countries_entry: CountriesEntryView,
     };
 

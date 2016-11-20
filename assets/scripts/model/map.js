@@ -5,6 +5,7 @@ export default Backbone.Model.extend({
     mapOptions: {
       scrollWheelZoom: false,
       zoomControl: false,
+      doubleClickZoom: false,
     },
 
     view: [25.36, 17],

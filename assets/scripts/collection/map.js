@@ -6,7 +6,8 @@ export default Backbone.Collection.extend({
   initialize() {
     this.on('add', (model) => {
       model.set({
-        areaScale: this._getDataRange(model.get('areaType')),
+        intensityScale: this._getDataRange('migration-intensity'),
+        odaScale: this._getDataRange('oda'),
       });
     });
 

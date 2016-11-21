@@ -9,9 +9,8 @@ export default Backbone.Model.extend({
     year: 2010,
     map: undefined,
 
-    area: undefined,
-    areaType: 'migration-intensity',
-    areaStyle: {
+    intensity: undefined,
+    intensityStyle: {
       stroke: true,
       color: 'rgb(36, 36, 38)',
       fill: true,
@@ -42,16 +41,21 @@ export default Backbone.Model.extend({
 
   initialize(map) {
     this.on('change:year', (model, value) => this.updateCountry(value));
-    this.area().then(() => this.updateCountry(this.get('year')));
+
+    this.intensity()
+      .then(layer => {
+        this.oda(layer);
+        this.updateCountry();
+      });
 
     return this;
   },
 
-  updateCountry(year) {
-    const yearValue = parseInt(year, 10);
-    this.setAreaYear(yearValue);
+  updateCountry() {
+    const year = parseInt(this.get('year'), 10);
+    this.setIntensityYear(year);
 
-    if (yearValue === 2016) {
+    if (year === 2016) {
       this.setValettaYear(year);
     } else {
       this.clearValettaYear(year);
@@ -60,28 +64,39 @@ export default Backbone.Model.extend({
     return this;
   },
 
-  fetchCountryPolygon() {
-    const slug = limax(this.get('name'));
-    return $.getJSON(`/data/geo/${slug}.geojson`);
-  },
+  intensity() {
+    const fetchGeoData = () => {
+      const slug = limax(this.get('name'));
+      return $.getJSON(`/data/geo/${slug}.geojson`);
+    };
 
-  area() {
-    return this.fetchCountryPolygon()
+    return fetchGeoData()
       .then(data => {
-        const style = this.get('areaStyle');
+        const style = this.get('intensityStyle');
         const className = 'leaflet-country-overlay';
-        const layer = L.geoJson(data, Object.assign(style, {className}));
+        const opts = Object.assign(style, {className});
+        const layer = L.geoJson(data, opts);
 
-        this.set('area', layer);
+        this.set('intensity', layer);
         layer.addTo(this.get('map'));
 
         return layer;
       });
   },
 
-  setAreaYear(year) {
-    const layer = this.get('area');
-    const fillOpacity = this._getOpacity();
+  setIntensityYear(year) {
+    const getOpacity = (year) => {
+      const type = 'migration-intensity';
+      const scale = this.get('intensityScale');
+      console.log(scale);
+      const range = d3.scale.linear().domain(scale).range([0, 1]);
+      const value = this._getDataValueForYear(type, year);
+
+      return range(value);
+    };
+
+    const layer = this.get('intensity');
+    const fillOpacity = getOpacity(year);
     const opacity = 1;
 
     if (layer) {
@@ -99,7 +114,7 @@ export default Backbone.Model.extend({
       return undefined;
     }
 
-    const center = this.get('area').getBounds().getCenter();
+    const center = this.get('intensity').getBounds().getCenter();
     const markerStyle = this.get('valettaStyle');
     const tooltipDefaults = {
       className: 'leaflet-valetta-label',
@@ -141,17 +156,11 @@ export default Backbone.Model.extend({
     return this;
   },
 
-  _getDataValueForYear(type, year) {
-    return this.get('data')[type][year];
+  oda() {
+    return this;
   },
 
-  _getOpacity() {
-    const areaType = this.get('areaType');
-    const currentYear = this.get('year');
-    const areaScale = this.get('areaScale');
-    const range = d3.scale.linear().domain(areaScale).range([0, 1]);
-    const value = this._getDataValueForYear(areaType, currentYear);
-
-    return range(value);
+  _getDataValueForYear(type, year) {
+    return this.get('data')[type][year];
   },
 });

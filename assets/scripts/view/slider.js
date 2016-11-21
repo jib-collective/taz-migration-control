@@ -50,11 +50,13 @@ export default Backbone.View.extend({
     const max = this.model.get('max');
     const min = this.model.get('min');
     const value = this.model.get('value');
+    const ticks = _.range(min, max + 1, 1);
     const range = new Range(this.$el.children('input').get(0), {
       min,
       max,
-      ticks_labels: _.range(min, max + 1, 1),
-      ticks_snap_bounds: 30,
+      ticks,
+      ticks_labels: ticks,
+      ticks_snap_bounds: 50,
       tooltip: 'hide',
       value,
     });

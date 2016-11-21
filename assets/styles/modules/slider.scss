@@ -1,4 +1,6 @@
 .slider {
+  display: block;
+  vertical-align: middle;
   width: 100%;
 
   &-track {
@@ -14,6 +16,7 @@
     background-color: $color-app-medium;
     border-radius: 50%;
     height: 2rem;
+    margin-left: -1rem;
     position: absolute;
     top: -.8rem;
     width: 2rem;
@@ -21,14 +24,15 @@
 
   &-tick-label-container {
     @include typo('tag-small');
-    display: flex;
-    justify-content: space-between;
-    margin-top: 1.2rem;
+    margin-top: 1.5rem;
     text-shadow: 0 0 $color-app-dark;
+    white-space: nowrap;
+  }
 
-    > * {
-      display: flex;
-    }
+  &-tick-label {
+    cursor: pointer;
+    display: inline-block;
+    text-align: center;
   }
 
   .hide {

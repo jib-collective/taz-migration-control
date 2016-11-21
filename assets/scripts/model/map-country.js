@@ -51,19 +51,23 @@ export default Backbone.Model.extend({
     return this;
   },
 
+  /* update all country layers for a single year */
   updateCountry() {
     const year = parseInt(this.get('year'), 10);
+
     this.setIntensityYear(year);
+    this.setOdaYear(year);
 
     if (year === 2016) {
-      this.setValettaYear(year);
+      this.drawValetta();
     } else {
-      this.clearValettaYear(year);
+      this.removeValetta();
     }
 
     return this;
   },
 
+  /* draw intensity layer */
   intensity() {
     const fetchGeoData = () => {
       const slug = limax(this.get('name'));
@@ -78,17 +82,15 @@ export default Backbone.Model.extend({
         const layer = L.geoJson(data, opts);
 
         this.set('intensity', layer);
-        layer.addTo(this.get('map'));
-
-        return layer;
+        return this._addLayerToMap(layer);
       });
   },
 
+  /* set intensity for a single year */
   setIntensityYear(year) {
     const getOpacity = (year) => {
       const type = 'migration-intensity';
       const scale = this.get('intensityScale');
-      console.log(scale);
       const range = d3.scale.linear().domain(scale).range([0, 1]);
       const value = this._getDataValueForYear(type, year);
 
@@ -106,6 +108,7 @@ export default Backbone.Model.extend({
     return this;
   },
 
+  /* draw valetta label */
   valetta() {
     const data = this.get('data');
     const label = data['valetta-label'] || undefined;
@@ -136,17 +139,19 @@ export default Backbone.Model.extend({
     return layer;
   },
 
-  setValettaYear(year) {
+  /* draw valetta label for a single year */
+  drawValetta() {
     let layer = this.valetta();
 
     if (layer) {
-      layer.addTo(this.get('map'));
+      return this._addLayerToMap(layer);
     }
 
     return this;
   },
 
-  clearValettaYear(year) {
+  /* remove valetta label */
+  removeValetta() {
     const layer = this.get('valetta');
 
     if (layer) {
@@ -156,11 +161,51 @@ export default Backbone.Model.extend({
     return this;
   },
 
+  /* calculate radius for an oda bubble for a single year */
+  getOdaRadius(year) {
+    const scale = this.get('odaScale');
+    const range = d3.scale.linear().domain(scale).range([0, 1]);
+    const value = this._getDataValueForYear('oda', year);
+    const radiusFactor = range(value);
+
+    if (radiusFactor) {
+      return 700 * 1000 * radiusFactor;
+    }
+
+    return 1;
+  },
+
+  /* draw oda layer */
   oda() {
+    const center = this.get('intensity').getBounds().getCenter();
+    const style = this.get('odaStyle');
+    const radius = this.getOdaRadius(this.get('year'));
+    const layer = L.circle(center, radius, style);
+
+    this.set('oda', layer);
+
+    return this._addLayerToMap(layer);
+  },
+
+  /* update ODA layer */
+  setOdaYear(year) {
+    const layer = this.get('oda');
+
+    if (layer) {
+      layer.setRadius(this.getOdaRadius(year))
+    }
+
     return this;
   },
 
+  /* get dataset for a single year */
   _getDataValueForYear(type, year) {
     return this.get('data')[type][year];
+  },
+
+  /* draw a layer on the map */
+  _addLayerToMap(layer) {
+    layer.addTo(this.get('map'));
+    return layer;
   },
 });

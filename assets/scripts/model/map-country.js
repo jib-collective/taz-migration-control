@@ -75,7 +75,8 @@ export default Backbone.Model.extend({
     return this.fetchCountryPolygon()
       .then(data => {
         const style = this.get('areaStyle');
-        const layer = L.geoJson(data, style);
+        const className = 'leaflet-country-overlay';
+        const layer = L.geoJson(data, Object.assign(style, {className}));
 
         this.set('area', layer);
         layer.addTo(this.get('map'));
@@ -112,6 +113,7 @@ export default Backbone.Model.extend({
       permanent: true,
     };
     const markerDefaults = {
+      className: 'leaflet-valetta-marker',
       radius: 80,
     };
     const tooltip = L.tooltip(tooltipDefaults)

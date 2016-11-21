@@ -30,4 +30,10 @@
       font-size: 1.3rem;
     }
   }
+
+  &-country-overlay {
+    &#{&} {
+      fill: red;
+    }
+  }
 }

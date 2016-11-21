@@ -1,9 +1,10 @@
 import _ from 'underscore';
 import $ from 'jquery';
 import Slider from 'model/slider';
+import Range from 'bootstrap-slider';
 
 export default Backbone.View.extend({
-  className: 'map__slider slider',
+  className: 'map__slider',
 
   events: {
     'change [data-slider]': 'updateValue',
@@ -45,6 +46,19 @@ export default Backbone.View.extend({
 
   render() {
     this.$el.html(this.template(this));
+
+    const max = this.model.get('max');
+    const min = this.model.get('min');
+    const value = this.model.get('value');
+    const range = new Range(this.$el.children('input').get(0), {
+      min,
+      max,
+      ticks_labels: _.range(min, max + 1, 1),
+      ticks_snap_bounds: 30,
+      tooltip: 'hide',
+      value,
+    });
+
     this.delegateEvents();
     return this;
   },

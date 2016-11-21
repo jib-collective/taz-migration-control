@@ -23,10 +23,11 @@
   }
 
   &__slider {
-    bottom: .5rem;
+    bottom: 2.5rem;
     left: 50%;
     position: absolute;
     transform: translateX(-50%);
+    width: 50%;
     z-index: 1000;
   }
 }

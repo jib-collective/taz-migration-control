@@ -3,19 +3,6 @@ import d3 from 'd3';
 import L from 'leaflet';
 import limax from 'limax';
 
-/*
-
-Datenstruktur
-
-Geld = ODA + Migrationsabwehrzahlungen
-
-- HDI / Geld: HDI Flaechenlayer
-** - Migrationsindex / Geld: MI Flaechenlayer
-- Migrationsindex / Detention Center: MI Flaechenlayer
-
-*/
-
-
 export default Backbone.Model.extend({
   defaults: {
     name: '',
@@ -24,23 +11,30 @@ export default Backbone.Model.extend({
 
     area: undefined,
     areaType: 'migration-intensity',
-    areaScale: [0, 8],
     areaStyle: {
       stroke: true,
-      color: 'rgb(255, 255, 255)',
+      color: 'rgb(36, 36, 38)',
       fill: true,
-      fillColor: 'rgb(255, 255, 255)',
+      fillColor: 'rgb(255, 253, 56)',
       fillOpacity: 1,
       opacity: 1,
       weight: 1,
     },
 
-    overlay: undefined,
-    overlayStyle: {
+    valetta: undefined,
+    valettaStyle: {
       stroke: false,
       fill: true,
-      fillColor: 'rgb(255, 253, 56)',
-      fillOpacity: .8,
+      fillColor: 'rgb(255, 255, 255)',
+      fillOpacity: .95,
+    },
+
+    oda: undefined,
+    odaStyle: {
+      stroke: false,
+      fill: true,
+      fillColor: 'rgb(255, 255, 255)',
+      fillOpacity: .95,
     },
 
     data: {},
@@ -48,7 +42,7 @@ export default Backbone.Model.extend({
 
   initialize(map) {
     this.on('change:year', (model, value) => this.updateCountry(value));
-    this.area().then(() => this.updateCountry(2010));
+    this.area().then(() => this.updateCountry(this.get('year')));
 
     return this;
   },
@@ -58,9 +52,9 @@ export default Backbone.Model.extend({
     this.setAreaYear(yearValue);
 
     if (yearValue === 2016) {
-      this.setOverlayYear(year);
+      this.setValettaYear(year);
     } else {
-      this.clearOverlayYear(year);
+      this.clearValettaYear(year);
     }
 
     return this;
@@ -97,7 +91,7 @@ export default Backbone.Model.extend({
     return this;
   },
 
-  overlay() {
+  valetta() {
     const data = this.get('data');
     const label = data['valetta-label'] || undefined;
 
@@ -106,7 +100,7 @@ export default Backbone.Model.extend({
     }
 
     const center = this.get('area').getBounds().getCenter();
-    const markerStyle = this.get('overlayStyle');
+    const markerStyle = this.get('valettaStyle');
     const tooltipDefaults = {
       className: 'leaflet-valetta-label',
       direction: 'center',
@@ -122,13 +116,13 @@ export default Backbone.Model.extend({
     layer.bindTooltip(tooltip);
     layer.setTooltipContent(label);
 
-    this.set('overlay', layer);
+    this.set('valetta', layer);
 
     return layer;
   },
 
-  setOverlayYear(year) {
-    let layer = this.overlay();
+  setValettaYear(year) {
+    let layer = this.valetta();
 
     if (layer) {
       layer.addTo(this.get('map'));
@@ -137,8 +131,8 @@ export default Backbone.Model.extend({
     return this;
   },
 
-  clearOverlayYear(year) {
-    const layer = this.get('overlay');
+  clearValettaYear(year) {
+    const layer = this.get('valetta');
 
     if (layer) {
       layer.remove();

@@ -36,4 +36,15 @@
       //fill: red;
     }
   }
+
+  &-control-attribution {
+    &#{&} {
+      background: $color-app !important;
+      color: $text-color;
+
+      a {
+        color: currentColor;
+      }
+    }
+  }
 }

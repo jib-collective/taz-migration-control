@@ -12,7 +12,7 @@ export default Backbone.View.extend({
 
   initialize() {
     this.model = new Slider();
-    this.listenTo(this.model, 'change', this.render);
+    this.listenTo(this.model, 'change', this.updateRangeSlider);
     this.start();
     return this;
   },
@@ -47,11 +47,11 @@ export default Backbone.View.extend({
   render() {
     this.$el.html(this.template(this));
 
-    const max = this.model.get('max');
+    const max = this.model.get('max') + 1;
     const min = this.model.get('min');
     const value = this.model.get('value');
-    const ticks = _.range(min, max + 1, 1);
-    const range = new Range(this.$el.children('input').get(0), {
+    const ticks = _.range(min, max, 1);
+    this.range = new Range(this.$el.children('input').get(0), {
       min,
       max,
       ticks,
@@ -61,7 +61,20 @@ export default Backbone.View.extend({
       value,
     });
 
-    this.delegateEvents();
+    setTimeout(() => {
+      this.range.refresh();
+    }, 50);
+
+    return this;
+  },
+
+  updateRangeSlider() {
+    if (!this.range) {
+      return this;
+    }
+
+    const value = this.model.get('value');
+    this.range.setValue(value);
     return this;
   },
 

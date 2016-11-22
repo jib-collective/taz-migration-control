@@ -167,6 +167,11 @@ export default Backbone.Model.extend({
     const scale = this.get('odaScale');
     const range = d3.scale.linear().domain(scale).range([0, 1]);
     const value = this._getDataValueForYear('oda', year);
+
+    if (!value) {
+      return 1;
+    }
+
     const radiusFactor = range(value);
 
     if (radiusFactor) {
@@ -201,7 +206,13 @@ export default Backbone.Model.extend({
 
   /* get dataset for a single year */
   _getDataValueForYear(type, year) {
-    return this.get('data')[type][year];
+    const data = this.get('data');
+
+    if (data[type] && data[type][year]) {
+      return data[type][year];
+    }
+
+    return undefined;
   },
 
   /* draw a layer on the map */

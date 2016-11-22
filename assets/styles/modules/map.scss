@@ -30,4 +30,11 @@
     width: 50%;
     z-index: 1000;
   }
+
+  &__layer-control {
+    bottom: 1.5rem;
+    position: absolute;
+    right: 1.5rem;
+    z-index: 1000;
+  }
 }

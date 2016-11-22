@@ -30,6 +30,11 @@ export default Backbone.Collection.extend({
     });
   },
 
+  getDataKeys() {
+    // todo: make it dynamic
+    return ['oda', 'intensity'];
+  },
+
   _getDataRange(type) {
     let max = 0;
     let min;

@@ -46,6 +46,7 @@ export default Backbone.Model.extend({
       .then(layer => {
         this.oda(layer);
         this.updateCountry();
+        this.trigger('layers-painted');
       });
 
     return this;

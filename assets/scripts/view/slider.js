@@ -65,6 +65,8 @@ export default Backbone.View.extend({
       this.range.refresh();
     }, 50);
 
+    this.delegateEvents();
+
     return this;
   },
 

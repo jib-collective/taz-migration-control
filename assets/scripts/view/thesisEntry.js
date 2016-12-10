@@ -1,29 +1,53 @@
 import _ from 'underscore';
 import ChartHDIView from 'view/chart-migration-hdi';
 import ChartPaymentView from 'view/chart-payment';
+import RemittancesView from 'view/chart-remittances';
 import ThesisCollection from 'collection/thesis';
 
 export default Backbone.View.extend({
   className: 'thesis__item',
 
   renderChart() {
-    let view;
+    let views = [];
 
     switch (this.model.get('diagramType')) {
-      case 'hdi':
-        view = new ChartHDIView();
+      case 'payments':
+        views.push(new ChartHDIView({
+          countries: [
+            10216 // Tschad
+          ],
+        }));
         break;
 
-      case 'payments':
-        view = new ChartPaymentView();
+      case 'hdi':
+        views.push(new ChartPaymentView({
+          countries: [
+            10216, // Tschad
+            9922, // South-Sudan
+            8340, // Marocco
+            7514, // Kap Verde
+          ],
+        }));
         break;
 
       case 'remittances':
+        [
+          9460, // Sierre Leone
+          5988, // Djibouti
+          9698, // Sudan
+          7290, // Cameroon
+        ].forEach(country => views.push(
+          new RemittancesView({
+            countries: [
+              country,
+            ]
+          })
+        ));
         break;
     }
 
-    if (view) {
-      view.$el.appendTo(this.$el.find('.thesis__chart'));
+    if (views.length > 0) {
+      views.forEach(view => view.$el.appendTo(this.$el.find('.thesis__chart')));
     }
 
     return this;

@@ -1,49 +1,19 @@
 import _ from 'underscore';
 import $ from 'jquery';
-import Backbone from 'backbone';
-import c3 from 'c3';
+import Chart from 'view/chart';
 import i18n from 'lib/i18n';
 
-export default Backbone.View.extend({
+export default Chart.extend({
   className: 'chart',
 
-  fetchData() {
-    const countryId = 9931;
-
-    return $.getJSON(`http://localhost:8080/migrationcontrol/v1/de/country/${countryId}/`)
-      .then(data => {
-        let column1 = [i18n('Migrationsaufkommen')];
-        let column2 = [i18n('EU Geld')];
-        let years = [];
-
-        _.forEach(data.data.migrationIntensity, item => {
-          return column1.push(_.values(item)[0]);
-        });
-
-        _.forEach(data.data.oda, item => {
-          return column2.push(_.values(item)[0]);
-        });
-
-        _.forEach(data.data.migrationIntensity, item => {
-          return years.push(_.keys(item)[0]);
-        });
-
-        return {
-          column1,
-          column2,
-          years,
-        };
-      });
-  },
+  type: 'hdi',
 
   renderChart(data) {
-    const {column1, column2, years} = data;
-
     const c3Options = {
       axis: {
         x: {
           type: 'category',
-          categories: years,
+          categories: [],
         },
         y: {
           show: true,
@@ -56,8 +26,8 @@ export default Backbone.View.extend({
       data: {
         axes: {},
         columns: [
-          column1,
-          column2,
+          [i18n('Migrationsaufkommen')],
+          [i18n('EU Geld')],
         ],
         types: {},
       },
@@ -69,28 +39,24 @@ export default Backbone.View.extend({
       }
     };
 
-    c3Options.data.axes[column1[0]] = 'y';
-    c3Options.data.axes[column2[0]] = 'y2';
+    data.forEach(country => {
+      country.data.migrationIntensity.forEach(item => {
+        c3Options.axis.x.categories.push(_.keys(item)[0]);
+        c3Options.data.columns[0].push(_.values(item)[0]);
+      });
 
-    c3Options.data.types[column1[0]] = 'area-spline';
-    c3Options.data.types[column2[0]] = 'area-spline';
+      country.data.oda.forEach(item => {
+        c3Options.data.columns[1].push(_.values(item)[0]);
+      });
+    });
 
-    const chart = c3.generate(c3Options);
+    c3Options.data.axes[c3Options.data.columns[0][0]] = 'y';
+    c3Options.data.axes[c3Options.data.columns[1][0]] = 'y2';
 
-    setTimeout(() => {
-      chart.flush();
-    }, 100);
+    c3Options.data.types[c3Options.data.columns[0][0]] = 'area-spline';
+    c3Options.data.types[c3Options.data.columns[1][0]] = 'area-spline';
+
+    return this.buildChart(c3Options);
   },
 
-  initialize() {
-    this.fetchData()
-      .then(data => this.renderChart(data));
-
-    return this;
-  },
-
-  render() {
-    this.$el.html('');
-    return this;
-  },
 });

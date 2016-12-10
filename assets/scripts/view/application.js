@@ -4,6 +4,7 @@ import ApplicationModel from 'model/application';
 import BackgroundView from 'view/background';
 import CountriesView from 'view/countries';
 import CountriesEntryView from 'view/countries-entry';
+import Footer from 'view/footer';
 import HeaderView from 'view/header';
 import MapView from 'view/map';
 import NavigationView from 'view/navigation';
@@ -25,6 +26,7 @@ export default Backbone.View.extend({
       _header: new HeaderView(this._globalCtx),
       _navigation: new NavigationView(this._globalCtx),
       _map: new MapView(this._globalCtx),
+      _footer: new Footer(),
 
       index: CountriesView,
       background: BackgroundView,
@@ -90,6 +92,8 @@ export default Backbone.View.extend({
     ['navigation', 'map', 'header',].forEach(item => {
       this.views[`_${item}`].render().$el.prependTo(this.$el);
     });
+
+    this.views._footer.render().$el.appendTo(this.$el);
 
     return this;
   },

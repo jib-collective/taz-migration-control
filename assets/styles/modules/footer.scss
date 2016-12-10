@@ -1,0 +1,31 @@
+.footer {
+  background-color: $color-app-dark;
+  color: $text-color;
+  margin-top: 10rem;
+
+  a {
+    color: currentColor;
+    text-decoration: none;
+
+    &:hover,
+    &:focus {
+      color: currentColor;
+    }
+  }
+
+  &__list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  &__list-item {
+    @include typo('tag-small');
+    padding: .8rem;
+    text-align: center;
+  }
+
+  &__list-item + &__list-item {
+    border-top: 1px solid $border-color;
+  }
+}

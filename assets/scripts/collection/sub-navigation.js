@@ -1,24 +1,17 @@
-import SubNavigationEntry from 'model/sub-navigation-entry';
+import BaseCollection from 'collection/base';
+import SubNavigationColumn from 'model/sub-navigation-column';
 
-export default Backbone.Collection.extend({
-  model: SubNavigationEntry,
+export default BaseCollection.extend({
+  model: SubNavigationColumn,
 
   initialize(data, options) {
-    if (options.url) {
-      this.url = options.url;
+    if (options.endpoint) {
+      this.url = this.getAPIEndpointURL(options.endpoint);
       this.fetch();
     }
   },
 
   getActiveLabel() {
-    let label;
-
-    this.models.forEach(model => {
-      if (model.get('active') === true) {
-        label = model.get('label');
-      }
-    });
-
-    return label;
+    return 'Something';
   },
 });

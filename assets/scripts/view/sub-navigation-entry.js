@@ -48,12 +48,12 @@ export default Backbone.View.extend({
   template: _.template(`
     <% if (model.get('active')) { %>
       <span class="sub-navigation__item sub-navigation__item--active">
-        <%= i18n( model.get('label') ) %>
+        <%= i18n( model.getTitle() ) %>
       </span>
     <% } else { %>
       <a href="<%= url %>"
          class="sub-navigation__item">
-        <%= i18n( model.get('label') ) %>
+        <%= i18n( model.getTitle() ) %>
       </a>
     <% } %>
   `),

@@ -1,6 +1,6 @@
 import _ from 'underscore';
 import i18n from 'lib/i18n';
-import SubNavigationEntry from 'view/sub-navigation-entry';
+import SubNavigationColumn from 'view/sub-navigation-column';
 
 export default Backbone.View.extend({
   tagName: 'nav',
@@ -30,8 +30,8 @@ export default Backbone.View.extend({
         model,
       };
 
-      const view = new SubNavigationEntry(options);
-      view.render().$el.appendTo(this.$el.find('.sub-navigation__list'));
+      const view = new SubNavigationColumn(options);
+      view.render().$el.appendTo(this.$el.find('.sub-navigation__list-container'));
     });
 
     return this;
@@ -42,6 +42,6 @@ export default Backbone.View.extend({
       <%= this.collection.getActiveLabel() %>
     </h4>
 
-    <ul class="sub-navigation__list"></ul>
+    <div class="sub-navigation__list-container"></div>
   `),
 });

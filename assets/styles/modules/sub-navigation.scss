@@ -1,6 +1,14 @@
 .sub-navigation {
   background-color: $color-app-dark;
 
+  &__list-container {
+    display: flex;
+
+    > * {
+      flex: 0 1 auto;
+    }
+  }
+
   &__title {
     border-bottom: 1px solid $border-color;
     display: block;
@@ -10,14 +18,6 @@
     padding: 1rem 1.5rem;
     text-align: center;
     text-transform: uppercase;
-  }
-
-  &__list {
-    column-count: 4;
-    column-gap: 1.5rem;
-    list-style: none;
-    margin: 0;
-    padding: 1.5rem;
   }
 
   &__item {

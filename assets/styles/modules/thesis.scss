@@ -1,8 +1,30 @@
 .thesis {
+  &__item + &__item {
+    margin-top: 4rem;
+  }
+
   &__item-title {
     @include typo('headline-small-bold');
     line-height: 1.2;
-    margin-bottom: 2.5rem;
+    margin-bottom: .5rem;
     margin-top: 0;
+  }
+
+  &__item-count {
+    @include typo('tag');
+    background-color: $color-app-dark;
+    display: block;
+    margin-bottom: 1.5rem;
+    padding: .4rem;
+    text-align: center;
+  }
+
+  &__item-text {
+    @include typo('text');
+  }
+
+  &__item-context {
+    @include typo('text-small');
+    font-size: .9rem;
   }
 }

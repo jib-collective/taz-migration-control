@@ -1,12 +1,11 @@
-import $ from 'jquery';
+import Base from 'collection/base';
 import ThesisEntry from 'model/thesis';
 
-export default Backbone.Collection.extend({
+export default Base.extend({
   model: ThesisEntry,
 
-  url: '/data/thesis.json',
-
   initialize() {
+    this.url = this.getAPIEndpointURL('theses');
     this.fetch();
     return this;
   },

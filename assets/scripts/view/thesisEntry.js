@@ -8,13 +8,15 @@ export default Backbone.View.extend({
   renderChart() {
     let view;
 
-    switch (this.model.get('chart')) {
-      case 'migration-hdi-time':
+    switch (this.model.get('diagramType')) {
+      case 'hdi':
         view = new ChartMigrationHDIView();
         break;
     }
 
-    view.render().$el.appendTo(this.$el.find('.thesis__chart'));
+    if (view) {
+      view.render().$el.appendTo(this.$el.find('.thesis__chart'));
+    }
 
     return this;
   },
@@ -22,7 +24,7 @@ export default Backbone.View.extend({
   render() {
     this.$el.html(this.template(this));
 
-    if (this.model.has('chart')) {
+    if (this.model.has('diagramType')) {
       this.renderChart();
     }
 
@@ -31,15 +33,25 @@ export default Backbone.View.extend({
 
   template: _.template(`
     <h3 class="thesis__item-title">
+      <span class="thesis__item-count">
+        Thesis <%= this.model.get('count') %>
+      </span>
+
       <%= this.model.get('title') %>
     </h3>
 
-    <% if (this.model.get('chart')) { %>
+    <% if (this.model.get('diagramType')) { %>
       <div class="thesis__chart"></div>
     <% } %>
 
-    <p class="thesis__item-teaser">
-      <%= this.model.get('description') %>
+    <p class="thesis__item-text">
+      <%= this.model.get('text') %>
     </p>
+
+    <% if (this.model.get('contextualisation')) { %>
+      <p class="thesis__item-context">
+        <%= this.model.get('contextualisation') %>
+      </p>
+    <% } %>
   `),
 });

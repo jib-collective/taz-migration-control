@@ -14,8 +14,10 @@ export default Backbone.View.extend({
   render() {
     this.$el.html(this.template(this.attrs));
 
-    this.collection.forEach(model => {
-      const view = new ThesisEntryView({ model });
+    this.collection.forEach((model, index) => {
+      const count = index + 1;
+      model.set({count});
+      const view = new ThesisEntryView({model});
       view.render().$el.appendTo(this.$el);
     });
 

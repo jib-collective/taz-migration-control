@@ -15,7 +15,7 @@ export default Backbone.View.extend({
         break;
 
       case 'payments':
-        //view = new ChartPaymentView();
+        view = new ChartPaymentView();
         break;
 
       case 'remittances':

@@ -25,12 +25,13 @@
   &__item {
     @include typo('tag');
     color: $text-color;
+    line-height: 1;
     padding: .8rem 7rem;
     text-decoration: none;
 
     &--active {
       background-color: $color-attention;
-      box-shadow: 0 -10px 0 0 $color-attention, 0 10px 0 0 $color-attention;
+      box-shadow: 0 -7px 0 0 $color-attention, 0 7px 0 0 $color-attention;
       color: $text-color-inverse;
     }
   }

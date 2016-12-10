@@ -6,7 +6,7 @@ export default Backbone.Router.extend({
       _router: this,
     });
 
-    this.app.render('intro').append();
+    this.app.render('complete').append();
   },
 
   routes: {

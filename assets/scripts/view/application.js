@@ -5,7 +5,6 @@ import BackgroundView from 'view/background';
 import CountriesView from 'view/countries';
 import CountriesEntryView from 'view/countries-entry';
 import HeaderView from 'view/header';
-import IntroView from 'view/intro';
 import MapView from 'view/map';
 import NavigationView from 'view/navigation';
 import ThesisView from 'view/thesis';
@@ -24,7 +23,6 @@ export default Backbone.View.extend({
 
     this.views = {
       _header: new HeaderView(this._globalCtx),
-      _intro: new IntroView(),
       _navigation: new NavigationView(this._globalCtx),
       _map: new MapView(this._globalCtx),
 
@@ -36,7 +34,6 @@ export default Backbone.View.extend({
 
     this.listenTo(this.model, 'change:language', () => this.render('complete'));
     this.listenTo(this.model, 'change:slug change:entry', () => this.render('content'));
-    this.listenTo(this.views._intro.model, 'change:visible', () => this.render('complete'));
 
     this.loadWebfonts();
   },
@@ -98,7 +95,6 @@ export default Backbone.View.extend({
   },
 
   render(type = 'complete') {
-    const showIntro = this.views._intro.model.get('visible') === false;
     const slug = this.model.get('slug');
     const entry = this.model.get('entry');
     const viewName = this.getViewName(slug, entry);
@@ -114,12 +110,6 @@ export default Backbone.View.extend({
     if (type === 'complete') {
       this.$el.html(this.template());
       this.buildInterface();
-    }
-
-    /* only build intro without anything else */
-    if (!showIntro) {
-      this.views._intro.render().$el.prependTo(this.$el);
-      return this;
     }
 
     /* build content view */

@@ -89,7 +89,7 @@ export default Backbone.View.extend({
   },
 
   buildInterface() {
-    ['navigation', 'map', 'header',].forEach(item => {
+    ['navigation', /*'map',*/ 'header',].forEach(item => {
       this.views[`_${item}`].render().$el.prependTo(this.$el);
     });
 

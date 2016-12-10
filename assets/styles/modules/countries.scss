@@ -1,0 +1,25 @@
+.countries {
+  &__block {
+    &-title {
+      @include typo('tag');
+      background-color: $color-app-dark;
+      margin-bottom: 2rem;
+      margin-top: 2rem;
+      padding: .5rem;
+      text-align: center;
+    }
+
+    &-lead {
+      @include typo('text');
+      margin-bottom: 0;
+    }
+
+    &-corpus {
+      display: none;
+    }
+  }
+
+  &__sub-title {
+    @include typo('headline-small-bold');
+  }
+}

@@ -1,4 +1,3 @@
-import _ from 'underscore';
 import SubNavigationCollection from 'collection/sub-navigation';
 import SubNavigationView from 'view/sub-navigation';
 
@@ -18,7 +17,8 @@ export default Backbone.View.extend({
   },
 
   render() {
-    this.$el.html(this.template());
+    console.log('render', this);
+    this.$el.html(this.template(this));
     this.subnavView.render().$el.prependTo(this.$el);
     return this;
   },

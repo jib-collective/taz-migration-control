@@ -38,9 +38,9 @@ export default Backbone.View.extend({
   },
 
   template: _.template(`
-    <h4 class="sub-navigation__title">
+    <h1 class="sub-navigation__title">
       <%= this.collection.getActiveLabel() %>
-    </h4>
+    </h1>
 
     <div class="sub-navigation__list-container"></div>
   `),

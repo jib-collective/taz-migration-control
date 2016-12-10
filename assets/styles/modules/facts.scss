@@ -1,0 +1,26 @@
+.facts {
+  border: 4px solid $border-color;
+  display: flex;
+  flex-wrap: wrap;
+
+  > * {
+    flex: 0 1 auto;
+    width: 50%;
+  }
+
+  > * + * {
+    border-top: 1px solid $border-color;
+  }
+
+  &__term,
+  &__value {
+    @include typo('text');
+    padding: .5rem 1rem;
+  }
+
+  &__value {
+    border-left: 1px solid $border-color;
+    margin-left: 0;
+    word-wrap: break-word;
+  }
+}

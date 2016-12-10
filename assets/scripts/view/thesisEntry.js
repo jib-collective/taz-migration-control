@@ -1,5 +1,6 @@
 import _ from 'underscore';
-import ChartMigrationHDIView from 'view/chart-migration-hdi';
+import ChartHDIView from 'view/chart-migration-hdi';
+import ChartPaymentView from 'view/chart-payment';
 import ThesisCollection from 'collection/thesis';
 
 export default Backbone.View.extend({
@@ -10,12 +11,19 @@ export default Backbone.View.extend({
 
     switch (this.model.get('diagramType')) {
       case 'hdi':
-        view = new ChartMigrationHDIView();
+        view = new ChartHDIView();
+        break;
+
+      case 'payments':
+        //view = new ChartPaymentView();
+        break;
+
+      case 'remittances':
         break;
     }
 
     if (view) {
-      view.render().$el.appendTo(this.$el.find('.thesis__chart'));
+      view.$el.appendTo(this.$el.find('.thesis__chart'));
     }
 
     return this;

@@ -2,6 +2,8 @@ import CountryBaseView from './country-base';
 import limax from 'limax';
 
 export default CountryBaseView.extend({
+  subnav: false,
+
   initialize(options) {
     options.api.findCountryByName('EU')
       .then(country => {

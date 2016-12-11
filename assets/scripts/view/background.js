@@ -2,6 +2,8 @@ import BaseView from './background-base';
 import limax from 'limax';
 
 export default BaseView.extend({
+  subnav: false,
+
   initialize(options) {
     options.api.findBackgroundByName('Abkommen')
       .then(background => {

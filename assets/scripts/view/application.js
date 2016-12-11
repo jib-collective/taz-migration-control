@@ -100,7 +100,7 @@ export default Backbone.View.extend({
   },
 
   buildInterface() {
-    ['navigation', /*'map',*/ 'header',].forEach(item => {
+    ['navigation', 'map', 'header',].forEach(item => {
       this.views[`_${item}`].render().$el.prependTo(this.$el);
     });
 
@@ -167,7 +167,7 @@ export default Backbone.View.extend({
     if (type === 'complete') {
       this.$el.html(this.template());
       this.buildInterface();
-      this.model.set({firstBuild: false});
+      this.model.set({firstBuild: true});
       this.$el.prependTo('body');
     }
 

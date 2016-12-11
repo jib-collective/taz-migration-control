@@ -6,10 +6,6 @@ export default Backbone.View.extend({
 
   subnav: 'background',
 
-  initialize() {
-    return this;
-  },
-
   render() {
     if (this.template) {
       this.$el.html(this.template({

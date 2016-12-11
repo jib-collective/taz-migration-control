@@ -1,4 +1,3 @@
-import _ from 'underscore';
 import CountryBaseView from './country-base';
 import limax from 'limax';
 

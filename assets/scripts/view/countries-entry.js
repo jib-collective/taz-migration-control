@@ -81,6 +81,10 @@ export default CountryBaseView.extend({
                       class="read-more">
                 <%= i18n('Read More') %>
               </button>
+
+              <div class="countries__block-corpus">
+                <%= feature.corpus %>
+              </div>
             </li>
           <% }); %>
         </ul>

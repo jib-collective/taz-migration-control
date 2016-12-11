@@ -7,8 +7,8 @@ export default Backbone.View.extend({
     const promises = [];
     const promiseData = [];
 
-    this.options.countries.forEach(id => {
-      const promise = this.options.api.findCountryById(id)
+    this.options.countries.forEach(name => {
+      const promise = this.options.api.findCountryByName(name)
         .then(data => promiseData.push(data));
 
       promises.push(promise);

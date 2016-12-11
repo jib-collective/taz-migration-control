@@ -15,7 +15,7 @@ export default Backbone.View.extend({
         views.push(new ChartHDIView({
           api: this.options.api,
           countries: [
-            10216 // Tschad
+            'Tschad',
           ],
         }));
         break;
@@ -24,20 +24,20 @@ export default Backbone.View.extend({
         views.push(new ChartPaymentView({
           api: this.options.api,
           countries: [
-            10216, // Tschad
-            9922, // South-Sudan
-            8340, // Marocco
-            7514, // Kap Verde
+            'Tschad',
+            'Südsudan',
+            'Marokko',
+            'Kap Verde',
           ],
         }));
         break;
 
       case 'remittances':
         [
-          9460, // Sierre Leone
-          5988, // Djibouti
-          9698, // Sudan
-          7290, // Cameroon
+          'Sierra Leone',
+          'Dschibuti',
+          'Sudan',
+          'Kamerun',
         ].forEach(country => views.push(
           new RemittancesView({
             api: this.options.api,

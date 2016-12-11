@@ -60,5 +60,22 @@ export default class API {
         return this.findCountryById(id);
       });
   }
+
+  findCountryByName(name) {
+    return this.fetch('countriesoverview')
+      .then(data => {
+        let id;
+
+        _.forEach(data, item => {
+          _.forEach(item.entries, country => {
+            if (name === country.name) {
+              id = country.id;
+            }
+          })
+        });
+
+        return this.findCountryById(id);
+      });
+  }
 };
 

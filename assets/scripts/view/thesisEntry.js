@@ -81,7 +81,7 @@ export default Backbone.View.extend({
         <%= i18n('Thesis') %> <%= this.model.get('count') %>
       </span>
 
-      <%= this.model.get('title') %>
+      <%= this.model.get('name') %>
     </h3>
 
     <% if (this.model.get('diagramType')) { %>

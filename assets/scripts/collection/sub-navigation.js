@@ -16,8 +16,4 @@ export default BaseCollection.extend({
         });
     }
   },
-
-  getActiveLabel() {
-    return 'Something';
-  },
 });

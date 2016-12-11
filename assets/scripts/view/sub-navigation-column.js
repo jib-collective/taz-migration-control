@@ -14,7 +14,9 @@ export default Backbone.View.extend({
   render() {
     this.$el.html('');
 
-    this.options.model.attributes.entries.forEach(entry => {
+    const entries = this.model.get('entries');
+
+    entries.forEach(entry => {
       const model = new EntryModel(entry);
       const options = {
         application: this.options.application,
@@ -22,6 +24,12 @@ export default Backbone.View.extend({
         model,
         slug: this.options.slug,
       };
+
+      this.listenTo(model, 'change:active', (model, value) => {
+        if (value === true) {
+          this.options.subnav.setTitle(model.getTitle());
+        }
+      });
 
       const view = new Entry(options);
       view.$el.appendTo(this.$el);

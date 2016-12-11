@@ -8,10 +8,16 @@ export default Backbone.View.extend({
 
   initialize(options) {
     this.options = options;
-    this.listenTo(this.model, 'change', this.render);
-
     const appEntry = this.options.application.get('entry');
-    this.model.set('active', this.model.getSlug() === appEntry);
+
+    this.listenTo(this.options.application, 'change:entry', (model, value) => {
+      this.model.set('active', this.model.getSlug() === value);
+      this.render();
+    });
+
+    if (this.model.getSlug() === appEntry) {
+      this.model.set('active', true);
+    }
 
     return this.render();
   },

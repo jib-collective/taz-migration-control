@@ -9,14 +9,13 @@ export default Backbone.View.extend({
 
   initialize(options) {
     this.options = options;
+    this.columns = [];
     this.listenTo(this.collection, 'sync', this.render);
-    this.listenTo(this.collection, 'change:active', model => this.setTitle());
     return this.render();
   },
 
-  setTitle() {
-    const label = this.collection.getActiveLabel();
-    this.$el.find('.sub-navigation__title').text(label);
+  setTitle(title) {
+    this.$el.find('.sub-navigation__title').text(title);
     return this;
   },
 
@@ -29,9 +28,11 @@ export default Backbone.View.extend({
         _router: this.options._router,
         model,
         slug: this.collection.options.slug,
+        subnav: this,
       };
 
       const view = new SubNavigationColumn(options);
+      this.columns.push(view);
       view.$el.appendTo(this.$el.find('.sub-navigation__list-container'));
     });
 
@@ -39,10 +40,7 @@ export default Backbone.View.extend({
   },
 
   template: _.template(`
-    <h1 class="sub-navigation__title">
-      <%= this.collection.getActiveLabel() %>
-    </h1>
-
+    <h1 class="sub-navigation__title"></h1>
     <div class="sub-navigation__list-container"></div>
   `),
 });

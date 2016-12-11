@@ -9,6 +9,7 @@ export default Backbone.View.extend({
 
     this.subnavView = new SubNavigationView(Object.assign({
       collection: new SubNavigationCollection([], {
+        api: this.options.api,
         endpoint: 'countriesoverview',
       }),
     }, this.options));

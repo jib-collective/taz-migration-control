@@ -6,7 +6,9 @@ export default Backbone.View.extend({
 
   initialize(options) {
     this.options = options;
-    this.collection = new ThesisCollection();
+    this.collection = new ThesisCollection([], {
+      api: this.options.api,
+    });
     this.listenTo(this.collection, 'sync', this.render);
     return this;
   },

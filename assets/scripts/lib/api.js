@@ -4,6 +4,7 @@ import limax from 'limax';
 
 export default class API {
   constructor() {
+    this.pending = {};
     this.store = {};
     this.api = {
       host: 'http://localhost:8080',
@@ -21,13 +22,20 @@ export default class API {
   fetch(endpoint) {
     const url = this._buildAPIUrl(endpoint);
 
+    // send back the promise
+    if (!!this.pending[url]) {
+      return this.pending[url];
+    }
+
+    // send back the content
     if (!!this.store[url]) {
       return $.Deferred().resolve(this.store[url]);
     }
 
-    return $.getJSON(url)
+    return this.pending[url] = $.getJSON(url)
       .then(data => {
         this.store[url] = data;
+        this.pending[url] = undefined;
         return data;
       });
   }

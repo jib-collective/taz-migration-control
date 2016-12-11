@@ -25,7 +25,7 @@ export default Backbone.Router.extend({
   renderIndex(language) {
     this.app.model.set({
       language,
-      slug: '',
+      slug: 'index',
       entry: '',
     });
 

@@ -34,10 +34,10 @@ export default Backbone.View.extend({
       _map: new MapView(this._globalCtx),
       _footer: new Footer(),
 
-      index: CountriesView,
+      index: ThesisView,
       background: BackgroundView,
       background_entry: BackgroundEntryView,
-      theses: ThesisView,
+      countries: CountriesView,
       countries_entry: CountriesEntryView,
     };
 

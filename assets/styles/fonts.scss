@@ -1,5 +1,16 @@
 @font-face {
   font-family: 'TisaPro';
+  font-weight: 500;
+  src: url('../fonts/TisaPro-Medium.eot?#iefix');
+  src:
+    url('../fonts/TisaPro-Medium?#iefix') format('eot'),
+    url('../fonts/TisaPro-Medium.woff2') format('woff2'),
+    url('../fonts/TisaPro-Medium.woff') format('woff'),
+    url('../fonts/TisaPro-Medium.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'TisaPro';
   font-weight: 700;
   src: url('../fonts/TisaPro-Bold.eot?#iefix');
   src:
@@ -11,11 +22,22 @@
 
 @font-face {
   font-family: 'MarkOT';
-  font-weight: 600;
+  font-weight: 500;
   src: url('../fonts/MarkOT-Medium.eot?#iefix');
   src:
     url('../fonts/MarkOT-Medium?#iefix') format('eot'),
     url('../fonts/MarkOT-Medium.woff2') format('woff2'),
     url('../fonts/MarkOT-Medium.woff') format('woff'),
     url('../fonts/MarkOT-Medium.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'MarkOT';
+  font-weight: 900;
+  src: url('../fonts/MarkOT-Black.eot?#iefix');
+  src:
+    url('../fonts/MarkOT-Black?#iefix') format('eot'),
+    url('../fonts/MarkOT-Black.woff2') format('woff2'),
+    url('../fonts/MarkOT-Black.woff') format('woff'),
+    url('../fonts/MarkOT-Black.ttf') format('truetype');
 }

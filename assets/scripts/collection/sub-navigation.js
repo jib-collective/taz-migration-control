@@ -8,8 +8,8 @@ export default BaseCollection.extend({
   initialize(data, options) {
     this.options = options;
 
-    if (options.endpoint) {
-      this.options.api.fetch(options.endpoint)
+    if (options.slug) {
+      this.options.api.fetch(options.slug + 'overview')
         .then(data => {
           _.forEach(data, item => this.add(item));
           this.trigger('sync');

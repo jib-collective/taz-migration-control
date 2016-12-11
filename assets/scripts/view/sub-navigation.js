@@ -11,7 +11,7 @@ export default Backbone.View.extend({
     this.options = options;
     this.listenTo(this.collection, 'sync', this.render);
     this.listenTo(this.collection, 'change:active', model => this.setTitle());
-    return this;
+    return this.render();
   },
 
   setTitle() {
@@ -32,7 +32,7 @@ export default Backbone.View.extend({
       };
 
       const view = new SubNavigationColumn(options);
-      view.render().$el.appendTo(this.$el.find('.sub-navigation__list-container'));
+      view.$el.appendTo(this.$el.find('.sub-navigation__list-container'));
     });
 
     return this;

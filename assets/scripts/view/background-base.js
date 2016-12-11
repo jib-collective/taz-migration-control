@@ -1,22 +1,12 @@
 import _ from 'underscore';
 import i18n from 'lib/i18n';
-import SubNavigationCollection from 'collection/sub-navigation';
-import SubNavigationView from 'view/sub-navigation';
 
 export default Backbone.View.extend({
   className: 'countries',
 
-  initialize(options) {
-    this.options = options;
+  subnav: 'background',
 
-    this.subnavView = new SubNavigationView(Object.assign({
-      collection: new SubNavigationCollection([], {
-        api: this.options.api,
-        endpoint: 'backgroundoverview',
-        slug: 'background',
-      }),
-    }, this.options));
-
+  initialize() {
     return this;
   },
 
@@ -27,8 +17,6 @@ export default Backbone.View.extend({
         i18n,
       }));
     }
-
-    this.subnavView.render().$el.prependTo(this.$el);
 
     return this;
   },

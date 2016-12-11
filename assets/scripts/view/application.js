@@ -11,6 +11,8 @@ import HeaderView from 'view/header';
 import MapView from 'view/map';
 import i18n from 'lib/i18n';
 import NavigationView from 'view/navigation';
+import SubNavigationCollection from 'collection/sub-navigation';
+import SubNavigation from 'view/sub-navigation';
 import ThesisView from 'view/thesis';
 import WebFont from 'webfontloader';
 
@@ -103,6 +105,48 @@ export default Backbone.View.extend({
     return this;
   },
 
+  buildSubnav(view) {
+    const activeSubnav = this.model.get('subnav');
+    let resourceChange = false;
+    const destroySubnav = (subnav) => {
+      if (!subnav) {
+        return;
+      }
+
+      subnav.remove();
+      this.model.set('subnav', undefined);
+    };
+
+    if (!view.subnav) {
+      destroySubnav(activeSubnav);
+      return this;
+    }
+
+    /* Rebuild, if the view-resource has changed, e.g. going from background
+       to country */
+    if (activeSubnav) {
+      resourceChange = view.subnav !== activeSubnav.collection.options.slug;
+
+      if (resourceChange) {
+        destroySubnav(activeSubnav);
+      }
+    }
+
+    if (!activeSubnav || (activeSubnav && resourceChange)) {
+      const collection = new SubNavigationCollection([], {
+        api: this._globalCtx.api,
+        slug: view.subnav,
+      });
+      const options = Object.assign({collection}, this._globalCtx);
+      const subnav = new SubNavigation(options);
+
+      this.model.set('subnav', subnav);
+      subnav.$el.insertBefore(this.model.get('activeView').$el);
+    }
+
+    return this;
+  },
+
   render(type = 'complete') {
     const slug = i18n(this.model.get('slug'), 'en');
     const entry = this.model.get('entry');
@@ -125,6 +169,9 @@ export default Backbone.View.extend({
     const view = new this.views[viewName](this._globalCtx);
     this.model.set('activeView', view);
     view.render().$el.appendTo(this.$el.find('.app__main'));
+
+    /* build content subnavigation */
+    this.buildSubnav(view);
 
     return this;
   },

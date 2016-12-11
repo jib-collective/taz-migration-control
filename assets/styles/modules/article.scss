@@ -33,7 +33,7 @@
     h4,
     h5,
     h6 {
-      @include typo('tag');
+      @include typo('tag-black');
       color: $color-attention;
       margin-bottom: 0;
 

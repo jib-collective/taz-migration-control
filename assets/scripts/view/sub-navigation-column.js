@@ -8,7 +8,7 @@ export default Backbone.View.extend({
 
   initialize(options) {
     this.options = options;
-    return this;
+    return this.render();
   },
 
   render() {
@@ -22,9 +22,9 @@ export default Backbone.View.extend({
         model,
         slug: this.options.slug,
       };
-      const view = new Entry(options);
 
-      view.render().$el.appendTo(this.$el);
+      const view = new Entry(options);
+      view.$el.appendTo(this.$el);
     });
 
     return this;

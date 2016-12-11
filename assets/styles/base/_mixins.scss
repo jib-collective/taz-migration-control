@@ -15,30 +15,38 @@
   }
 
   @if $id == 'tag' {
-    font-family: 'MarkOT';
+    font-family: 'MarkOT', Arial, sans-serif;
     font-size: 1rem;
-    font-weight: 600;
+    font-weight: 500;
+    letter-spacing: .1rem;
+    text-transform: uppercase;
+  }
+
+  @if $id == 'tag-black' {
+    font-family: 'MarkOT', Arial, sans-serif;
+    font-size: 1.3rem;
+    font-weight: 900;
     letter-spacing: .1rem;
     text-transform: uppercase;
   }
 
   @if $id == 'tag-small' {
-    font-family: 'MarkOT';
-    font-size: .95rem;
-    font-weight: 600;
+    font-family: 'MarkOT', Arial, sans-serif;
+    font-size: 1rem;
+    font-weight: 500;
     text-transform: uppercase;
   }
 
   @if $id == 'text' {
     font-family: 'TisaPro';
-    font-size: 1rem;
-    font-weight: 400;
+    font-size: 1.1rem;
+    font-weight: 500;
     line-height: 1.4;
   }
 
   @if $id == 'text-small' {
     font-family: 'TisaPro';
     font-size: .8rem;
-    font-weight: 400;
+    font-weight: 500;
   }
 }

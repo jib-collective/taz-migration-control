@@ -1,5 +1,5 @@
 .sub-navigation {
-  background-color: $color-app-dark;
+  background-color: $color-app-medium-dark;
   margin-bottom: 3rem;
 
   &__list-container {
@@ -16,7 +16,7 @@
     font-size: 1.4rem;
     margin-bottom: 0;
     margin-top: 0;
-    padding: 1rem 1.5rem;
+    padding: 1.2rem .5rem;
     text-align: center;
     text-transform: uppercase;
   }
@@ -24,8 +24,15 @@
   &__item {
     @include typo('tag-small');
     color: currentColor;
+    display: block;
+    padding: .15rem 0;
     text-decoration: none;
     text-transform: uppercase;
+
+    &:hover,
+    &:focus {
+      text-decoration: underline;
+    }
 
     &--active {
       color: $color-attention;

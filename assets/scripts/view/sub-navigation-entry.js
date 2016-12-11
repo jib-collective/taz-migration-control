@@ -8,16 +8,12 @@ export default Backbone.View.extend({
 
   initialize(options) {
     this.options = options;
-    this.addListeners();
+    this.listenTo(this.model, 'change', this.render);
 
     const appEntry = this.options.application.get('entry');
     this.model.set('active', this.model.getSlug() === appEntry);
 
-    return this;
-  },
-
-  addListeners() {
-    this.listenTo(this.model, 'change', this.render);
+    return this.render();
   },
 
   events: {
@@ -27,6 +23,7 @@ export default Backbone.View.extend({
   navigateTo(event) {
     event.preventDefault();
     let target = $(event.target).attr('href');
+
     if (target) {
       this.options._router.navigate(target, {trigger: true});
     }

@@ -12,6 +12,7 @@ export default Backbone.Router.extend({
   routes: {
     '': 'redirectToLocale',
     ':language': 'renderIndex',
+    ':language/imprint': 'renderImprint',
     ':language/:slug': 'renderView',
     ':language/:slug/:entry': 'renderView',
   },

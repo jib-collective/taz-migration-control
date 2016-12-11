@@ -22,6 +22,16 @@
         display: block;
       }
 
+      a {
+        color: currentColor;
+        text-decoration: underline;
+
+        &:hover,
+        &:focus {
+          color: $color-attention;
+        }
+      }
+
       h2,
       h3,
       h4,

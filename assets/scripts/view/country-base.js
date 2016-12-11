@@ -19,11 +19,15 @@ export default Backbone.View.extend({
   },
 
   render() {
-    this.$el.html(this.template({
-      this,
-      i18n,
-    }));
+    if (this.template) {
+      this.$el.html(this.template({
+        this,
+        i18n,
+      }));
+    }
+
     this.subnavView.render().$el.prependTo(this.$el);
+
     return this;
   },
 });

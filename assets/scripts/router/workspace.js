@@ -27,6 +27,7 @@ export default Backbone.Router.extend({
     this.app.model.set({
       language,
       slug: '',
+      entry: '',
     });
 
     return this;

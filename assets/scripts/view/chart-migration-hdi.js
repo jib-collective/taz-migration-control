@@ -33,7 +33,7 @@ export default Chart.extend({
       },
       color: {
         pattern: [
-          'rgb(216, 216, 216)',
+          'rgb(51, 51, 51)',
           'rgb(255, 253, 56)',
         ],
       }

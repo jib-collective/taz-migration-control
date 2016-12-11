@@ -44,7 +44,7 @@ export default Chart.extend({
       color: {
         pattern: [
           'rgb(255, 253, 56)',
-          'rgb(216, 216, 216)',
+          'rgb(51, 51, 51)',
         ],
       }
     };

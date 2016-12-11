@@ -98,5 +98,22 @@ export default class API {
         return this.findCountryById(id);
       });
   }
+
+  findBackgroundByName(name) {
+    return this.fetch('backgroundoverview')
+      .then(data => {
+        let id;
+
+        _.forEach(data, item => {
+          _.forEach(item.entries, background => {
+            if (name === background.name) {
+              id = background.id;
+            }
+          })
+        });
+
+        return this.findBackgroundById(id);
+      });
+  }
 };
 

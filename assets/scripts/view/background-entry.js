@@ -3,8 +3,6 @@ import Background from 'model/background';
 import BaseView from './background-base';
 
 export default BaseView.extend({
-  className: 'background',
-
   template: _.template(`
     <div class="article">
       <% if (this.model.get('headline')) { %>

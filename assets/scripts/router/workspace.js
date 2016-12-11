@@ -5,8 +5,6 @@ export default Backbone.Router.extend({
     this.app = new ApplicationView({
       _router: this,
     });
-
-    this.app.render('complete').append();
   },
 
   routes: {

@@ -2,7 +2,7 @@ import _ from 'underscore';
 import i18n from 'lib/i18n';
 
 export default Backbone.View.extend({
-  className: 'countries',
+  className: 'background',
 
   subnav: 'background',
 

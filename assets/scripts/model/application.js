@@ -1,6 +1,7 @@
 export default Backbone.Model.extend({
   defaults: {
-    language: 'en',
+    firstBuild: false,
+    language: 'de',
     slug: '',
     entry: '',
   },

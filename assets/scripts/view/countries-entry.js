@@ -4,8 +4,6 @@ import Country from 'model/country';
 import CountryBaseView from './country-base';
 
 export default CountryBaseView.extend({
-  className: 'countries',
-
   events: {
     'click [data-module="read-more"]': 'readMore',
   },

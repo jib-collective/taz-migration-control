@@ -42,7 +42,15 @@ export default Backbone.View.extend({
     };
 
     this.listenTo(this.model, 'change:language', () => this.render('complete'));
-    this.listenTo(this.model, 'change:slug change:entry', () => this.render('content'));
+    this.listenTo(this.model, 'change:slug change:entry', () => {
+      let type = 'content';
+
+      if (this.model.get('firstBuild') === false) {
+        type = 'complete';
+      }
+
+      this.render(type);
+    });
 
     this.loadWebfonts();
   },
@@ -65,10 +73,6 @@ export default Backbone.View.extend({
 
   introIsVisible() {
     return this.views._intro.model.get('visible') === true;
-  },
-
-  append() {
-    return this.$el.prependTo('body');
   },
 
   getViewName(slug, entry) {
@@ -141,7 +145,7 @@ export default Backbone.View.extend({
       const subnav = new SubNavigation(options);
 
       this.model.set('subnav', subnav);
-      subnav.$el.insertBefore(this.model.get('activeView').$el);
+      subnav.$el.prependTo(this.$el.find('.app__main'));
     }
 
     return this;
@@ -163,6 +167,8 @@ export default Backbone.View.extend({
     if (type === 'complete') {
       this.$el.html(this.template());
       this.buildInterface();
+      this.model.set({firstBuild: false});
+      this.$el.prependTo('body');
     }
 
     /* build content view */

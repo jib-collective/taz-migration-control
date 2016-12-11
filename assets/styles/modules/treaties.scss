@@ -1,0 +1,49 @@
+.treaties {
+  list-style: none;
+  margin: 3rem 0 0 0;
+  padding: 0;
+
+  &__country-item + &__country-item {
+    margin-top: .5rem;
+  }
+
+  &__country {
+    @include typo('tag-small');
+    background-color: $color-app-medium-dark;
+    color: $text-color;
+    cursor: pointer;
+    display: block;
+    padding: .5rem 0;
+    width: 100%;
+  }
+
+  &__item-treaties {
+    display: none;
+    list-style: none;
+    margin: 2rem 0;
+    padding: 0;
+
+    &--open {
+      display: block;
+    }
+  }
+
+  &__item + &__item {
+    margin-top: .75rem;
+  }
+
+  &__contract {
+    @include typo('headline-x-small-bold-sans-serif');
+    color: $text-color;
+    display: block;
+    padding-left: 5rem;
+    text-decoration: none;
+  }
+
+  &__contract-date {
+    color: $color-attention;
+    display: block;
+    font-size: .85rem;
+    margin-top: -.2rem;
+  }
+}

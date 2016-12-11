@@ -1,8 +1,21 @@
 import _ from 'underscore';
+import $ from 'jquery';
 import Background from 'model/background';
 import BaseView from './background-base';
 
 export default BaseView.extend({
+  events: {
+    'click [data-module="treaties-toggle"]': 'toggleTreaties',
+  },
+
+  toggleTreaties(event) {
+    event.preventDefault();
+
+    const $target = $(event.target);
+
+    $target.next().toggleClass('treaties__item-treaties--open');
+  },
+
   template: _.template(`
     <div class="article">
       <% if (this.model.get('headline')) { %>
@@ -21,6 +34,10 @@ export default BaseView.extend({
         <div class="article__corpus article__corpus--open">
           <%= this.model.get('corpus') %>
         </div>
+      <% } %>
+
+      <% if (this.model.get('treaties')) { %>
+        <%= renderTreatyList(this.model.get('treaties')) %>
       <% } %>
     </div>
   `),

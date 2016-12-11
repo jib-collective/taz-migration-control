@@ -109,6 +109,14 @@ export default CountryBaseView.extend({
           </dl>
         </div>
       <% } %>
+
+      <% if (this.model.attributes.treaties) { %>
+        <h2 class="countries__block-title">
+          <%= i18n('Treaties') %>
+        </h2>
+
+        <%= renderCountryTreaties(this.model.attributes.treaties, true) %>
+      <% } %>
     </div>
   `),
 

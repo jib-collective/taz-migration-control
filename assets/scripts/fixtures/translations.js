@@ -129,4 +129,12 @@ export default {
   'Read More': {
     de: 'Weiter lesen',
   },
+
+  Information: {
+    de: 'Infos',
+  },
+
+  Treaties: {
+    de: 'Abkommen',
+  },
 };

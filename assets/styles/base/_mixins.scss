@@ -37,6 +37,12 @@
     text-transform: uppercase;
   }
 
+  @if $id == 'headline-x-small-bold-sans-serif' {
+    font-family: 'MarkOT', Arial, sans-serif;
+    font-size: 1.4rem;
+    font-weight: 500;
+  }
+
   @if $id == 'text' {
     font-family: 'TisaPro';
     font-size: 1.1rem;

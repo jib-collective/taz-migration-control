@@ -1,4 +1,5 @@
 import i18n from 'lib/i18n';
+import {renderCountryTreaties} from 'lib/render-treaties';
 
 export default Backbone.View.extend({
   className: 'countries',
@@ -10,6 +11,7 @@ export default Backbone.View.extend({
       this.$el.html(this.template({
         this,
         i18n,
+        renderCountryTreaties,
       }));
     }
 

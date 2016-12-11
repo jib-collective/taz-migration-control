@@ -7,6 +7,20 @@ export default Backbone.View.extend({
 
   className: 'sub-navigation',
 
+  events: {
+    'click [data-module="toggle"]': 'toggleMenu',
+  },
+
+  toggleMenu(event) {
+    event.preventDefault();
+
+    this.$el
+      .find('.sub-navigation__list-container')
+      .toggleClass('sub-navigation__list-container--open');
+
+    return this;
+  },
+
   initialize(options) {
     this.options = options;
     this.columns = [];
@@ -40,7 +54,10 @@ export default Backbone.View.extend({
   },
 
   template: _.template(`
-    <h1 class="sub-navigation__title"></h1>
+    <button class="sub-navigation__title"
+            data-module="toggle">
+      Lorem ipsum
+    </button>
     <div class="sub-navigation__list-container"></div>
   `),
 });

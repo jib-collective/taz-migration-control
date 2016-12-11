@@ -1,9 +1,20 @@
 .sub-navigation {
   background-color: $color-app-medium-dark;
   margin-bottom: 3rem;
+  position: relative;
 
   &__list-container {
-    display: flex;
+    background-color: $color-app-medium-dark;
+    border-top: 1px solid $border-color;
+    display: none;
+    left: 0;
+    position: absolute;
+    top: 100%;
+    width: 100%;
+
+    &--open {
+      display: flex;
+    }
 
     > * {
       flex: 0 1 auto;
@@ -11,14 +22,15 @@
   }
 
   &__title {
-    border-bottom: 1px solid $border-color;
+    @include typo('tag-black');
+    cursor: pointer;
     display: block;
-    font-size: 1.4rem;
     margin-bottom: 0;
     margin-top: 0;
     padding: 1.2rem .5rem;
     text-align: center;
     text-transform: uppercase;
+    width: 100%;
   }
 
   &__item {

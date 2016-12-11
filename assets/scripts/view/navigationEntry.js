@@ -9,21 +9,20 @@ export default Backbone.View.extend({
 
   initialize(options) {
     this.options = options;
-    this.setInitialState();
-    this.addListeners();
+    this.setActiveState();
+    this.listenTo(this.model, 'change', this.render);
+    this.listenTo(this.options.application, 'change:slug', this.setActiveState);
 
     return this;
   },
 
-  addListeners() {
-    this.listenTo(this.model, 'change', this.render);
-    this.listenTo(this.options.application, 'change:slug', (model, value) => {
-      this.model.set('active', this.model.getSlug() === value);
-    });
-  },
+  setActiveState() {
+    let appSlug = this.options.application.get('slug');
 
-  setInitialState() {
-    const appSlug = this.options.application.get('slug');
+    if (appSlug === 'index') {
+      appSlug = '';
+    }
+
     this.model.set('active', this.model.getSlug() === appSlug);
   },
 

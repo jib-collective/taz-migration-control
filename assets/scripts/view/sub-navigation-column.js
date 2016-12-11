@@ -20,6 +20,7 @@ export default Backbone.View.extend({
         application: this.options.application,
         _router: this.options._router,
         model,
+        slug: this.options.slug,
       };
       const view = new Entry(options);
 

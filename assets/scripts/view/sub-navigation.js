@@ -28,6 +28,7 @@ export default Backbone.View.extend({
         application: this.options.application,
         _router: this.options._router,
         model,
+        slug: this.collection.options.slug,
       };
 
       const view = new SubNavigationColumn(options);

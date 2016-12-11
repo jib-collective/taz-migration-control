@@ -1,18 +1,6 @@
 import _ from 'underscore';
+import BaseView from './background-base';
 
-export default Backbone.View.extend({
+export default BaseView.extend({
   className: 'background',
-
-  initialize() {
-    return this;
-  },
-
-  render() {
-    this.$el.html(this.template());
-    return this;
-  },
-
-  template: _.template(`
-    <p>Background view</p>
-  `),
 });

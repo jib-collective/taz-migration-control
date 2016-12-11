@@ -3,6 +3,7 @@ import $ from 'jquery';
 import API from 'lib/api';
 import ApplicationModel from 'model/application';
 import BackgroundView from 'view/background';
+import BackgroundEntryView from 'view/background-entry';
 import CountriesView from 'view/countries';
 import CountriesEntryView from 'view/countries-entry';
 import Footer from 'view/footer';
@@ -33,6 +34,7 @@ export default Backbone.View.extend({
 
       index: CountriesView,
       background: BackgroundView,
+      background_entry: BackgroundEntryView,
       theses: ThesisView,
       countries_entry: CountriesEntryView,
     };

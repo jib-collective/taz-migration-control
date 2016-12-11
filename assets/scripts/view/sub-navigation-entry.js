@@ -34,9 +34,10 @@ export default Backbone.View.extend({
 
   render() {
     const language = this.options.application.get('language');
+    const slug = this.options.slug;
     const attrs = {
       model: this.model,
-      url: `/${language}/countries/${this.model.getSlug()}`,
+      url: `/${language}/${slug}/${this.model.getSlug()}`,
     };
 
     this.$el.html(this.template(attrs));

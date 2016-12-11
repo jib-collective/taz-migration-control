@@ -1,3 +1,4 @@
+import _ from 'underscore';
 import i18n from 'lib/i18n';
 import SubNavigationCollection from 'collection/sub-navigation';
 import SubNavigationView from 'view/sub-navigation';
@@ -11,8 +12,8 @@ export default Backbone.View.extend({
     this.subnavView = new SubNavigationView(Object.assign({
       collection: new SubNavigationCollection([], {
         api: this.options.api,
-        endpoint: 'countriesoverview',
-        slug: 'countries',
+        endpoint: 'backgroundoverview',
+        slug: 'background',
       }),
     }, this.options));
 

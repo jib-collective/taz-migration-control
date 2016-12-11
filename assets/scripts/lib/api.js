@@ -44,6 +44,10 @@ export default class API {
     return this.fetch(`country/${id}`);
   }
 
+  findBackgroundById(id) {
+    return this.fetch(`background/${id}`);
+  }
+
   findCountryBySlug(slug) {
     return this.fetch('countriesoverview')
       .then(data => {
@@ -58,6 +62,23 @@ export default class API {
         });
 
         return this.findCountryById(id);
+      });
+  }
+
+  findBackgroundBySlug(slug) {
+    return this.fetch('backgroundoverview')
+      .then(data => {
+        let id;
+
+        _.forEach(data, item => {
+          _.forEach(item.entries, background => {
+            if (slug === limax(background.name)) {
+              id = background.id;
+            }
+          })
+        });
+
+        return this.findBackgroundById(id);
       });
   }
 

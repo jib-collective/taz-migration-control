@@ -87,11 +87,13 @@ export default CountryBaseView.extend({
   `),
 
   initialize(options) {
-    this.model = new Country({
-      slug: options.application.get('entry'),
-    });
+    const slug = options.application.get('entry');
+    options.api.findCountryBySlug(slug)
+      .then(country => {
+        this.model = new Country(country);
+        this.render();
+      });
 
-    this.listenTo(this.model, 'sync', this.render);
     return CountryBaseView.prototype.initialize.apply(this, [options]);
   },
 });

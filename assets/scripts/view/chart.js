@@ -8,7 +8,7 @@ export default Backbone.View.extend({
     const promiseData = [];
 
     this.options.countries.forEach(id => {
-      const promise = $.getJSON(`http://localhost:8080/migrationcontrol/v1/de/country/${id}/`)
+      const promise = this.options.api.findCountryById(id)
         .then(data => promiseData.push(data));
 
       promises.push(promise);

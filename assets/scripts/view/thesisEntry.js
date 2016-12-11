@@ -13,6 +13,7 @@ export default Backbone.View.extend({
     switch (this.model.get('diagramType')) {
       case 'payments':
         views.push(new ChartHDIView({
+          api: this.options.api,
           countries: [
             10216 // Tschad
           ],
@@ -21,6 +22,7 @@ export default Backbone.View.extend({
 
       case 'hdi':
         views.push(new ChartPaymentView({
+          api: this.options.api,
           countries: [
             10216, // Tschad
             9922, // South-Sudan
@@ -38,6 +40,7 @@ export default Backbone.View.extend({
           7290, // Cameroon
         ].forEach(country => views.push(
           new RemittancesView({
+            api: this.options.api,
             countries: [
               country,
             ]
@@ -50,6 +53,11 @@ export default Backbone.View.extend({
       views.forEach(view => view.$el.appendTo(this.$el.find('.thesis__chart')));
     }
 
+    return this;
+  },
+
+  initialize(options) {
+    this.options = options;
     return this;
   },
 

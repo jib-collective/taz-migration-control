@@ -17,7 +17,6 @@ export default Backbone.View.extend({
   },
 
   render() {
-    console.log('render', this);
     this.$el.html(this.template(this));
     this.subnavView.render().$el.prependTo(this.$el);
     return this;

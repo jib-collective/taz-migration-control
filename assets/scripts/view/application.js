@@ -1,5 +1,6 @@
 import _ from 'underscore';
 import $ from 'jquery';
+import API from 'lib/api';
 import ApplicationModel from 'model/application';
 import BackgroundView from 'view/background';
 import CountriesView from 'view/countries';
@@ -20,6 +21,7 @@ export default Backbone.View.extend({
     this._globalCtx = {
       application: this.model,
       _router: options._router,
+      api: new API(),
     };
 
     this.views = {

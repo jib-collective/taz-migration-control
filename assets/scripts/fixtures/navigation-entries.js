@@ -4,7 +4,7 @@ export default [
   },
 
   {
-    label: 'Thesis',
+    label: 'Theses',
   },
 
   {

@@ -1,3 +1,4 @@
+import i18n from 'lib/i18n';
 import limax from 'limax';
 
 export default Backbone.Model.extend({
@@ -6,9 +7,9 @@ export default Backbone.Model.extend({
   },
 
   getSlug() {
-    const label = this.get('label').toLowerCase();
+    let label = this.get('label').toLowerCase();
 
-    if (label === 'countries') {
+    if (i18n(label, 'en') === 'countries') {
       return '';
     }
 

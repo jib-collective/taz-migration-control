@@ -30,7 +30,7 @@ export default Chart.extend({
         axes: {},
         columns: [
           [i18n('Human Development Index') + ' (' + YEAR + ')'],
-          [i18n('EU-Gelder') + ' (' + YEAR + ')'],
+          [i18n('EU Money') + ' (' + YEAR + ')'],
         ],
         type: 'bar'
       },

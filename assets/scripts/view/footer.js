@@ -18,7 +18,7 @@ export default Backbone.View.extend({
     <ul class="footer__list">
       <li class="footer__list-item">
         <a href="http://www/taz.de">
-          <%= i18n('Ein Projekt von taz, die Tageszeitung') %>
+          <%= i18n('A project of taz, the daily newspaper') %>
         </a>
       </li>
 
@@ -30,19 +30,19 @@ export default Backbone.View.extend({
 
       <li class="footer__list-item">
         <a href="/">
-          <%= i18n('Finanzierung') %>
+          <%= i18n('Funding') %>
         </a>
       </li>
 
       <li class="footer__list-item">
         <a href="/">
-          <%= i18n('Quellen') %>
+          <%= i18n('Sources') %>
         </a>
       </li>
 
       <li class="footer__list-item">
         <a href="/">
-          <%= i18n('Impressum') %>
+          <%= i18n('Imprint') %>
         </a>
       </li>
 

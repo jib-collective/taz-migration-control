@@ -75,7 +75,7 @@ export default CountryBaseView.extend({
         <dl class="facts">
           <% _.mapObject(this.model.attributes.factSheet, function(item, index) { %>
             <dt class="facts__term">
-              <%= index %>
+              <%= i18n(index) %>
             </dt>
             <dd class="facts__value">
               <%= item %>

@@ -26,8 +26,8 @@ export default Chart.extend({
       data: {
         axes: {},
         columns: [
-          [i18n('Migrationsaufkommen')],
-          [i18n('EU Geld')],
+          [i18n('Migrationintensity')],
+          [i18n('EU Money')],
         ],
         types: {},
       },

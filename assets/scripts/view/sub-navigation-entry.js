@@ -1,6 +1,5 @@
 import _ from 'underscore';
 import $ from 'jquery';
-import i18n from 'lib/i18n';
 
 export default Backbone.View.extend({
   tagName: 'li',
@@ -36,7 +35,6 @@ export default Backbone.View.extend({
   render() {
     const language = this.options.application.get('language');
     const attrs = {
-      i18n,
       model: this.model,
       url: `/${language}/countries/${this.model.getSlug()}`,
     };
@@ -48,12 +46,12 @@ export default Backbone.View.extend({
   template: _.template(`
     <% if (model.get('active')) { %>
       <span class="sub-navigation__item sub-navigation__item--active">
-        <%= i18n( model.getTitle() ) %>
+        <%= model.getTitle() %>
       </span>
     <% } else { %>
       <a href="<%= url %>"
          class="sub-navigation__item">
-        <%= i18n( model.getTitle() ) %>
+        <%= model.getTitle() %>
       </a>
     <% } %>
   `),

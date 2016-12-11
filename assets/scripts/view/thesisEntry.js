@@ -1,6 +1,7 @@
 import _ from 'underscore';
 import ChartHDIView from 'view/chart-migration-hdi';
 import ChartPaymentView from 'view/chart-payment';
+import i18n from 'lib/i18n';
 import RemittancesView from 'view/chart-remittances';
 import ThesisCollection from 'collection/thesis';
 
@@ -62,7 +63,10 @@ export default Backbone.View.extend({
   },
 
   render() {
-    this.$el.html(this.template(this));
+    this.$el.html(this.template({
+      this,
+      i18n,
+    }));
 
     if (this.model.has('diagramType')) {
       this.renderChart();
@@ -74,7 +78,7 @@ export default Backbone.View.extend({
   template: _.template(`
     <h3 class="thesis__item-title">
       <span class="thesis__item-count">
-        Thesis <%= this.model.get('count') %>
+        <%= i18n('Thesis') %> <%= this.model.get('count') %>
       </span>
 
       <%= this.model.get('title') %>

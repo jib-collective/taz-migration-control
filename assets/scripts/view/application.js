@@ -8,6 +8,7 @@ import CountriesEntryView from 'view/countries-entry';
 import Footer from 'view/footer';
 import HeaderView from 'view/header';
 import MapView from 'view/map';
+import i18n from 'lib/i18n';
 import NavigationView from 'view/navigation';
 import ThesisView from 'view/thesis';
 import WebFont from 'webfontloader';
@@ -32,7 +33,7 @@ export default Backbone.View.extend({
 
       index: CountriesView,
       background: BackgroundView,
-      thesis: ThesisView,
+      theses: ThesisView,
       countries_entry: CountriesEntryView,
     };
 
@@ -101,7 +102,7 @@ export default Backbone.View.extend({
   },
 
   render(type = 'complete') {
-    const slug = this.model.get('slug');
+    const slug = i18n(this.model.get('slug'), 'en');
     const entry = this.model.get('entry');
     const viewName = this.getViewName(slug, entry);
     const activeView = this.model.get('activeView');

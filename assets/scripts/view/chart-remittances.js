@@ -15,8 +15,8 @@ export default Chart.extend({
       bindto: this.$el.get(0),
       data: {
         columns: [
-          [i18n('Rueckueberweisung')],
-          [i18n('EU-Gelder')],
+          [i18n('Remittances')],
+          [i18n('EU Money')],
         ],
         type : 'pie',
       },

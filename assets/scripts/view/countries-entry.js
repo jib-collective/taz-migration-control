@@ -1,9 +1,26 @@
 import _ from 'underscore';
+import $ from 'jquery';
 import Country from 'model/country';
 import CountryBaseView from './country-base';
 
 export default CountryBaseView.extend({
   className: 'countries',
+
+  events: {
+    'click [data-module="read-more"]': 'readMore',
+  },
+
+  readMore(event) {
+    event.preventDefault();
+
+    const $target = $(event.currentTarget);
+
+    $target
+      .next('.countries__block-corpus')
+      .addClass('countries__block-corpus--open');
+
+    $target.remove();
+  },
 
   template: _.template(`
     <% if (this.model.attributes.finding) { %>
@@ -16,8 +33,10 @@ export default CountryBaseView.extend({
           <%= this.model.getFinding('lead') %>
         </p>
 
-        <button type="button">
-          Weiter lesen
+        <button type="button"
+                data-module="read-more"
+                class="read-more">
+          <%= i18n('Read More') %>
         </button>
 
         <div class="countries__block-corpus">
@@ -29,7 +48,7 @@ export default CountryBaseView.extend({
     <% if (this.model.attributes.features && this.model.attributes.features.length > 0) { %>
       <div class="countries__block">
         <h2 class="countries__block-title">
-          Features
+          <%= i18n('Features') %>
         </h2>
 
         <ul class="features">
@@ -57,8 +76,10 @@ export default CountryBaseView.extend({
                 <%= feature.lead %>
               </p>
 
-              <button type="button">
-                Weiter lesen
+              <button type="button"
+                      data-module="read-more"
+                      class="read-more">
+                <%= i18n('Read More') %>
               </button>
             </li>
           <% }); %>
@@ -69,7 +90,7 @@ export default CountryBaseView.extend({
     <% if (this.model.attributes.factSheet) { %>
       <div class="countries__block">
         <h2 class="countries__block-title">
-          Infos
+          <%= i18n('Information') %>
         </h2>
 
         <dl class="facts">

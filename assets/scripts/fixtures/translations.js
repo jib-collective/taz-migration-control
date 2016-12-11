@@ -125,4 +125,8 @@ export default {
   Migrationintensity: {
     de: 'Migrationsintensitaet',
   },
+
+  'Read More': {
+    de: 'Weiter lesen',
+  },
 };

@@ -15,7 +15,26 @@
     }
 
     &-corpus {
+      @include typo('text');
       display: none;
+
+      &--open {
+        display: block;
+      }
+
+      h2,
+      h3,
+      h4,
+      h5,
+      h6 {
+        @include typo('tag');
+        color: $color-attention;
+        margin-bottom: 0;
+
+        & + p {
+          margin-top: 0;
+        }
+      }
     }
   }
 

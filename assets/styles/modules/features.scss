@@ -30,7 +30,7 @@
     }
 
     &-caption {
-      @include typo('text-small');
+      @include typo('tag-small');
       margin-top: .5rem;
     }
   }

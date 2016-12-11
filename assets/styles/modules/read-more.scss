@@ -1,0 +1,16 @@
+.read-more {
+  @include typo('tag-small');
+  color: $color-attention;
+  cursor: pointer;
+  display: block;
+  margin-top: .5rem;
+  padding: 0;
+  text-align: center;
+  text-decoration: none;
+  width: 100%;
+
+  &:hover,
+  &:focus {
+    text-decoration: underline;
+  }
+}

@@ -1,0 +1,23 @@
+.sm-button {
+  background-color: white;
+  border-radius: 50%;
+  display: inline-block;
+  line-height: 2rem;
+  text-align: center;
+  width: 2rem;
+
+  &:hover,
+  &:focus {
+    background-color: $color-attention;
+  }
+
+  &__logo {
+    color: $color-app-dark;
+    height: 1.2rem;
+    width: 1.2rem;
+  }
+
+  & + & {
+    margin-left: .5rem;
+  }
+}

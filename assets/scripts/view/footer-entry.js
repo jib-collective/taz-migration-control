@@ -20,7 +20,8 @@ export default Backbone.View.extend({
 
   template: _.template(`
     <a href="/<%= language %>/pages/<%= this.model.getSlug() %>"
-       class="footer__item">
+       class="footer__item"
+       data-module="link">
       <%= this.model.get('name') %>
     </a>
   `),

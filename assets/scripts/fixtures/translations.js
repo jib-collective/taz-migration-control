@@ -102,8 +102,12 @@ export default {
     de: 'Finanzierung',
   },
 
-  'A project of taz, the daily newspaper': {
-    de: 'Ein Projekt der taz Tageszeitung',
+  'A project of': {
+    de: 'Ein Projekt von',
+  },
+
+  'taz, the daily newspaper': {
+    de: 'taz, die Tageszeitung',
   },
 
   laender: {

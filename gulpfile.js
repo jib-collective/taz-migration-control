@@ -2,13 +2,21 @@ const autoprefixer = require('gulp-autoprefixer');
 const concat = require('gulp-concat');
 const cssnano = require('gulp-cssnano');
 const gulp = require('gulp');
+const gulpif = require('gulp-if');
 const merge = require('merge-stream');
 const path = require('path');
+const replace = require('gulp-replace');
 const sass = require('gulp-sass');
 const svgMin = require('gulp-svgmin');
 const svgSprite = require('gulp-svg-sprite');
 const uglify = require('gulp-uglify');
 const webpack = require('webpack-stream');
+
+let API_HOST = 'http://localhost:8080';
+
+if (process.env.ENV === 'production') {
+  API_HOST = '';
+}
 
 gulp.task('fonts', () => {
   return gulp.src([
@@ -20,7 +28,7 @@ gulp.task('fonts', () => {
 gulp.task('scripts', () => {
   return gulp.src('assets/scripts/common.js')
     .pipe(webpack({
-      devtool: 'source-map',
+      devtool: process.env.ENV === 'production' ? false : 'source-map',
       entry: './assets/scripts/common.js',
       module: {
         loaders: [
@@ -51,7 +59,8 @@ gulp.task('scripts', () => {
         ]
       }
     }))
-    //.pipe(uglify())
+    .pipe(replace('{{API_HOST}}', API_HOST))
+    .pipe(gulpif(process.env.ENV === 'production', uglify()))
     .pipe(gulp.dest('dist/scripts'));
 });
 

@@ -7,7 +7,7 @@ export default class API {
     this.pending = {};
     this.store = {};
     this.api = {
-      host: 'http://localhost:8080',
+      host: '{{API_HOST}}',
       language: 'de',
       namespace: 'migrationcontrol',
       version: 'v1',

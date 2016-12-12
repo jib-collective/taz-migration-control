@@ -1,7 +1,7 @@
 import _ from 'underscore';
 import $ from 'jquery';
 import Background from 'model/background';
-import BaseView from './background-base';
+import BaseView from 'view/background-base';
 import {toggle} from 'lib/icon';
 
 export default BaseView.extend({
@@ -72,6 +72,6 @@ export default BaseView.extend({
         this.render();
       });
 
-    return BaseView.prototype.initialize.apply(this, [options]);
+    return this;
   },
 });

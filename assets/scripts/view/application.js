@@ -11,6 +11,8 @@ import HeaderView from 'view/header';
 import MapView from 'view/map';
 import i18n from 'lib/i18n';
 import NavigationView from 'view/navigation';
+import PagesView from 'view/pages';
+import PagesEntryView from 'view/pages-entry';
 import SubNavigationCollection from 'collection/sub-navigation';
 import SubNavigation from 'view/sub-navigation';
 import ThesisView from 'view/thesis';
@@ -32,13 +34,15 @@ export default Backbone.View.extend({
       _header: new HeaderView(this._globalCtx),
       _navigation: new NavigationView(this._globalCtx),
       _map: new MapView(this._globalCtx),
-      _footer: new Footer(),
+      _footer: new Footer(this._globalCtx),
 
       index: ThesisView,
       background: BackgroundView,
       background_entry: BackgroundEntryView,
       countries: CountriesView,
       countries_entry: CountriesEntryView,
+      pages: PagesView,
+      pages_entry: PagesEntryView,
     };
 
     this.listenTo(this.model, 'change:language', () => this.render('complete'));
@@ -174,7 +178,7 @@ export default Backbone.View.extend({
     /* build content view */
     const view = new this.views[viewName](this._globalCtx);
     this.model.set('activeView', view);
-    view.render().$el.appendTo(this.$el.find('.app__main'));
+    view.$el.appendTo(this.$el.find('.app__main'));
 
     /* build content subnavigation */
     this.buildSubnav(view);

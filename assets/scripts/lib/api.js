@@ -48,6 +48,10 @@ export default class API {
     return this.fetch(`background/${id}`);
   }
 
+  findPageById(id) {
+    return this.fetch(`imprint/${id}`);
+  }
+
   findCountryBySlug(slug) {
     return this.fetch('countriesoverview')
       .then(data => {
@@ -82,6 +86,21 @@ export default class API {
       });
   }
 
+  findPageBySlug(slug) {
+    return this.fetch('imprint')
+      .then(data => {
+        let res;
+
+        _.forEach(data, page => {
+          if (slug === limax(page.name)) {
+            res = page;
+          }
+        });
+
+        return res;
+      });
+  }
+
   findCountryByName(name) {
     return this.fetch('countriesoverview')
       .then(data => {
@@ -113,6 +132,21 @@ export default class API {
         });
 
         return this.findBackgroundById(id);
+      });
+  }
+
+  findPageByName(name) {
+    return this.fetch('imprint')
+      .then(data => {
+        let res;
+
+        _.forEach(data, page => {
+          if (name === page.name) {
+            res = page;
+          }
+        });
+
+        return res;
       });
   }
 };

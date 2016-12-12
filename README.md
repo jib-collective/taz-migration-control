@@ -6,7 +6,7 @@ Client application for the taz project.
 
 `npm install`
 
-### Development
+### Development builds
 
 `npm run build`
 
@@ -14,6 +14,6 @@ Watch for changes:
 
 `npm run watch`
 
-### Production
+### Production builds
 
 `ENV='production' npm run build`

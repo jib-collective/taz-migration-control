@@ -1,10 +1,14 @@
 .chart {
   margin-bottom: 1.5rem;
   margin-top: 1.5rem;
+  width: 100%;
 
   &--remittances {
-    float: left;
-    width: 25%;
+    width: 14%;
+
+    & + & {
+      margin-left: 1rem;
+    }
   }
 
   .c3-area {

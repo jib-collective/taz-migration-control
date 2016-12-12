@@ -27,4 +27,9 @@
     @include typo('text-small');
     font-size: .9rem;
   }
+
+  &__chart {
+    display: flex;
+    flex-wrap: wrap;
+  }
 }

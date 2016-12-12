@@ -25,8 +25,9 @@ export default Backbone.View.extend({
         views.push(new ChartPaymentView({
           api: this.options.api,
           countries: [
-            'Tschad',
             'Südsudan',
+            'Tschad',
+            'Tunesien',
             'Marokko',
             'Kap Verde',
           ],
@@ -35,10 +36,27 @@ export default Backbone.View.extend({
 
       case 'remittances':
         [
-          'Sierra Leone',
+          'Ägpten',
+          'Algerien',
+          'Äthiopien',
+          'Benin',
+          'Burkina Faso',
           'Dschibuti',
-          'Sudan',
+          'Elfenbeinküste',
+          'Gambia',
+          'Ghana',
+          'Guinea',
           'Kamerun',
+          'Kap Verde',
+          'Kenia',
+          'Mali',
+          'Marokko',
+          'Niger',
+          'Nigeria',
+          'Senegal',
+          'Sierra Leone',
+          'Sudan',
+          'Uganda'
         ].forEach(country => views.push(
           new RemittancesView({
             api: this.options.api,

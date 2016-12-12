@@ -18,10 +18,7 @@ export default Backbone.View.extend({
   },
 
   buildChart(options) {
-    if (this.type === 'remittances') {
-      this.$el.addClass('chart--remittances');
-    }
-
+    this.$el.addClass(`chart--${this.type}`);
     return c3.generate(options);
   },
 

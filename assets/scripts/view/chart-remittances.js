@@ -1,5 +1,6 @@
 import _ from 'underscore';
 import $ from 'jquery';
+import d3 from 'd3';
 import Chart from 'view/chart';
 import i18n from 'lib/i18n';
 
@@ -25,7 +26,18 @@ export default Chart.extend({
           'rgb(51, 51, 51)',
           'rgb(255, 253, 56)',
         ],
-      }
+      },
+      legend: {
+        show: false,
+      },
+      size: {
+        height: 80,
+      },
+      pie: {
+        label: {
+          show: false,
+        },
+      },
     };
 
     data.forEach(country => {
@@ -42,7 +54,17 @@ export default Chart.extend({
       });
     });
 
-    return this.buildChart(c3Options);
+    const chart = this.buildChart(c3Options);
+
+    /* custom label */
+    d3.select(this.$el.get(0))
+      .insert('p')
+        .attr('class', 'country-legend')
+        .html(id => {
+          return data[0].name;
+        });
+
+    return chart;
   },
 
 });

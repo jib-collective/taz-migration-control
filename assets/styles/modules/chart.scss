@@ -4,14 +4,28 @@
   width: 100%;
 
   &--remittances {
-    width: 14%;
+    margin-bottom: 3.5rem;
+    margin-top: 0;
+    padding-bottom: 1rem;
+    padding-right: .3rem;
+    width: 10%;
 
-    & + & {
-      margin-left: 1rem;
+    .c3-chart-arc path {
+      stroke: $color-app;
+    }
+
+    .country-legend {
+      @include typo('chart-legend');
+      text-align: center;
+      word-wrap: break-word;
     }
   }
 
   .c3-area {
     opacity: .95;
+  }
+
+  .c3-legend-item {
+    @include typo('chart-legend');
   }
 }

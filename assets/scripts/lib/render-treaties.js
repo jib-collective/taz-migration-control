@@ -1,4 +1,5 @@
 import _ from 'underscore';
+import {icon} from 'lib/icon';
 
 const COUNTRY_TREATIES = _.template(`
   <% if (treaties) { %>
@@ -11,6 +12,7 @@ const COUNTRY_TREATIES = _.template(`
              class="treaties__contract"
              target="_blank"
              rel="noopener noreferrer">
+            <%= icon('file-text', 'treaties__contract-icon') %>
             <%= treaty.name %> (<%= treaty.partner %> - <%= treaty.country %>)
 
             <span class="treaties__contract-date">
@@ -30,6 +32,8 @@ const LIST_TREATIES = _.template(`
         <button data-module="treaties-toggle"
                 class="treaties__country">
           <%= country.country %>
+
+          <%= icon('chevron-down', 'treaties__country-toggle-icon') %>
         </button>
 
         <% if (index === 0) { %>
@@ -46,6 +50,7 @@ export function renderCountryTreaties(treaties, open) {
   return COUNTRY_TREATIES({
     treaties,
     open,
+    icon,
   });
 };
 
@@ -53,5 +58,6 @@ export function renderTreatyList(treaties) {
   return LIST_TREATIES({
     treaties,
     renderCountryTreaties,
+    icon,
   });
 };

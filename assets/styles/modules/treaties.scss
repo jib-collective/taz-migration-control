@@ -17,10 +17,17 @@
     width: 100%;
   }
 
+  &__country-toggle-icon {
+    height: 1rem;
+    margin-left: .5rem;
+    margin-top: -.3rem;
+    width: 1rem;
+  }
+
   &__item-treaties {
     display: none;
     list-style: none;
-    margin: 2rem 0;
+    margin: 2rem;
     padding: 0;
 
     &--open {
@@ -36,8 +43,17 @@
     @include typo('headline-x-small-bold-sans-serif');
     color: $text-color;
     display: block;
-    padding-left: 5rem;
+    padding-left: 3rem;
+    position: relative;
     text-decoration: none;
+  }
+
+  &__contract-icon {
+    height: 2.2rem;
+    left: 0;
+    position: absolute;
+    top: .4rem;
+    width: 2.2rem;
   }
 
   &__contract-date {

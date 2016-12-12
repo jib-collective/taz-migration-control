@@ -46,6 +46,11 @@
     padding-left: 3rem;
     position: relative;
     text-decoration: none;
+
+    &:hover &-title,
+    &:focus &-title {
+      text-decoration: underline;
+    }
   }
 
   &__contract-icon {

@@ -5,6 +5,8 @@ const gulp = require('gulp');
 const merge = require('merge-stream');
 const path = require('path');
 const sass = require('gulp-sass');
+const svgMin = require('gulp-svgmin');
+const svgSprite = require('gulp-svg-sprite');
 const uglify = require('gulp-uglify');
 const webpack = require('webpack-stream');
 
@@ -89,13 +91,33 @@ gulp.task('styles', () => {
     .pipe(gulp.dest('./dist/styles/'));
 });
 
+gulp.task('images', () => {
+  return gulp.src('assets/images/*')
+    .pipe(svgMin())
+    .pipe(svgSprite({
+      mode: {
+        css: false,
+        defs: {
+          dest: '',
+          sprite: './symbols.svg',
+        },
+        stack: false,
+        symbol: false,
+        view: false,
+      }
+    }))
+    .pipe(gulp.dest('dist/images'));
+});
+
 gulp.task('watch', () => {
   gulp.watch('./assets/scripts/**/*', ['scripts']);
   gulp.watch('./assets/styles/**/*', ['styles']);
+  gulp.watch('./assets/images/**/*', ['images']);
 });
 
 gulp.task('default', [
   'fonts',
   'scripts',
   'styles',
+  'images',
 ]);

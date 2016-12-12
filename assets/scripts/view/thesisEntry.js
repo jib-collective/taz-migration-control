@@ -27,7 +27,7 @@ export default Backbone.View.extend({
           countries: [
             'Südsudan',
             'Tschad',
-            'Tunesien',
+            //'Tunesien',
             'Marokko',
             'Kap Verde',
           ],

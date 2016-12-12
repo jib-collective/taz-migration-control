@@ -1,12 +1,16 @@
 {
   "name": "migration-control-client",
   "version": "1.0.0",
-  "description": "Static client",
+  "description": "Client application for the taz project",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/gustavpursche/migration-control-client.git"
   },
-  "keywords": [],
+  "scripts": {
+    "gulp": "gulp",
+    "build": "gulp",
+    "watch": "gulp watch"
+  },
   "author": "Gustav Pursche <pursche@posteo.de>",
   "license": "GPL-3.0",
   "devDependencies": {

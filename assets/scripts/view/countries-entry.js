@@ -21,6 +21,10 @@ export default CountryBaseView.extend({
   },
 
   template: _.template(`
+    <h2 class="visually-hidden">
+      <%= i18n('Introduction') %>
+    </h2>
+
     <div class="article">
       <% if (this.model.attributes.finding) { %>
         <div class="countries__block">

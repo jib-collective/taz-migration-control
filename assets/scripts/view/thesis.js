@@ -1,4 +1,6 @@
+import _ from 'underscore';
 import Entry from 'view/thesisEntry';
+import i18n from 'lib/i18n';
 import ThesisCollection from 'collection/thesis';
 
 export default Backbone.View.extend({
@@ -14,7 +16,9 @@ export default Backbone.View.extend({
   },
 
   render() {
-    this.$el.html('');
+    this.$el.html(this.template({
+      i18n,
+    }));
 
     this.collection.forEach((model, index) => {
       const count = index + 1;
@@ -28,4 +32,10 @@ export default Backbone.View.extend({
 
     return this;
   },
+
+  template: _.template(`
+    <h1 class="visually-hidden">
+      <%= i18n('Theses') %>
+    </h1>
+  `),
 });

@@ -94,13 +94,14 @@ export default Backbone.View.extend({
   },
 
   template: _.template(`
-    <h3 class="thesis__item-title">
+    <h2 class="thesis__item-title">
       <span class="thesis__item-count">
         <%= i18n('Thesis') %> <%= this.model.get('count') %>
+        <span class="visually-hidden">:</span>
       </span>
 
       <%= this.model.get('name') %>
-    </h3>
+    </h2>
 
     <% if (this.model.get('diagramType')) { %>
       <div class="thesis__chart"></div>

@@ -58,6 +58,9 @@ export default BaseView.extend({
       <% } %>
 
       <% if (this.model.get('treaties')) { %>
+        <h2 class="visually-hidden">
+          <%= i18n('Treaties') %>
+        </h2>
         <%= renderTreatyList(this.model.get('treaties')) %>
       <% } %>
     </div>

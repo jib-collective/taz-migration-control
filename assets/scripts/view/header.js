@@ -25,8 +25,8 @@ export default Backbone.View.extend({
   },
 
   template: _.template(`
-    <h1 class="header__title">
+    <strong class="header__title">
       <%= i18n('Migration Control') %>
-    </h1>
+    </strong>
   `),
 });

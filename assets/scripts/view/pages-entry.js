@@ -1,7 +1,6 @@
 import _ from 'underscore';
 import Backbone from 'backbone';
 import Page from 'model/pages-entry';
-import {nl2br} from 'lib/format';
 
 export default Backbone.View.extend({
   tagName: 'article',
@@ -17,13 +16,14 @@ export default Backbone.View.extend({
         this.render();
       });
 
+    this.$el.addClass(`page--${slug}`);
+
     return this;
   },
 
   render() {
     this.$el.html(this.template({
       model: this.model,
-      nl2br,
     }));
 
     return this;
@@ -35,7 +35,7 @@ export default Backbone.View.extend({
     </h1>
 
     <div class="article__corpus article__corpus--open">
-      <%= nl2br(model.getText()) %>
+      <%= model.getText() %>
     </div>
   `),
 });

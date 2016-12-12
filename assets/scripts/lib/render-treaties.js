@@ -33,7 +33,11 @@ const LIST_TREATIES = _.template(`
                 class="treaties__country">
           <%= country.country %>
 
-          <%= icon('chevron-down', 'treaties__country-toggle-icon') %>
+          <% if (index === 0) { %>
+            <%= icon('chevron-up', 'treaties__country-toggle-icon') %>
+          <% } else { %>
+            <%= icon('chevron-down', 'treaties__country-toggle-icon') %>
+          <% } %>
         </button>
 
         <% if (index === 0) { %>

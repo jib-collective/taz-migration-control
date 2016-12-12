@@ -2,6 +2,7 @@ import _ from 'underscore';
 import $ from 'jquery';
 import Background from 'model/background';
 import BaseView from './background-base';
+import {toggle} from 'lib/icon';
 
 export default BaseView.extend({
   events: {
@@ -11,9 +12,29 @@ export default BaseView.extend({
   toggleTreaties(event) {
     event.preventDefault();
 
-    const $target = $(event.target);
+    const $eventTarget = $(event.target);
+    const $target = $eventTarget.next();
+    const $icon = $eventTarget.children('.treaties__country-toggle-icon');
 
-    $target.next().toggleClass('treaties__item-treaties--open');
+    if (this.isTreatyOpen($target)) {
+      this.closeTreaty($target, $icon);
+    } else {
+      this.openTreaty($target, $icon);
+    }
+  },
+
+  openTreaty($treaty, $icon) {
+    toggle($icon, 'chevron-up');
+    return $treaty.addClass('treaties__item-treaties--open');
+  },
+
+  closeTreaty($treaty, $icon) {
+    toggle($icon, 'chevron-down');
+    return $treaty.removeClass('treaties__item-treaties--open');
+  },
+
+  isTreatyOpen($treaty) {
+    return $treaty.hasClass('treaties__item-treaties--open');
   },
 
   template: _.template(`

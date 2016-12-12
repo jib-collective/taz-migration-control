@@ -1,6 +1,6 @@
 import _ from 'underscore';
 import i18n from 'lib/i18n';
-import {icon} from 'lib/icon';
+import {icon, toggle} from 'lib/icon';
 import SubNavigationColumn from 'view/sub-navigation-column';
 
 export default Backbone.View.extend({
@@ -16,11 +16,17 @@ export default Backbone.View.extend({
     return this.$el.find('.sub-navigation__list-container');
   },
 
+  _getListToggleIcon() {
+    return this.$el.find('.sub-navigation__toggle-icon');
+  },
+
   closeMenu() {
+    toggle(this._getListToggleIcon(), 'chevron-down');
     return this._getListContainer().removeClass(this.__containerOpenClass);
   },
 
   openMenu() {
+    toggle(this._getListToggleIcon(), 'chevron-up');
     return this._getListContainer().addClass(this.__containerOpenClass);
   },
 

@@ -23,6 +23,7 @@ export default Backbone.View.extend({
         _router: this.options._router,
         model,
         slug: this.options.slug,
+        subnav: this.options.subnav,
       };
 
       this.listenTo(model, 'change:active', (model, value) => {

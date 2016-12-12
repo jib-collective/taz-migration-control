@@ -31,6 +31,15 @@
     text-align: center;
     text-transform: uppercase;
     width: 100%;
+
+    &:hover,
+    &:focus {
+      background-color: darken($color-app-medium-dark, 5%);
+    }
+
+    &:active {
+      background-color: darken($color-app-medium-dark, 15%);
+    }
   }
 
   &__item {
@@ -49,5 +58,10 @@
     &--active {
       color: $color-attention;
     }
+  }
+
+  &__toggle-icon {
+    margin-left: .5rem;
+    margin-top: -.4rem;
   }
 }

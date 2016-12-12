@@ -1,5 +1,6 @@
 import _ from 'underscore';
 import i18n from 'lib/i18n';
+import {icon} from 'lib/icon';
 import SubNavigationColumn from 'view/sub-navigation-column';
 
 export default Backbone.View.extend({
@@ -11,30 +12,56 @@ export default Backbone.View.extend({
     'click [data-module="toggle"]': 'toggleMenu',
   },
 
+  _getListContainer() {
+    return this.$el.find('.sub-navigation__list-container');
+  },
+
+  closeMenu() {
+    return this._getListContainer().removeClass(this.__containerOpenClass);
+  },
+
+  openMenu() {
+    return this._getListContainer().addClass(this.__containerOpenClass);
+  },
+
+  isMenuOpen() {
+    return this._getListContainer().hasClass(this.__containerOpenClass);
+  },
+
   toggleMenu(event) {
     event.preventDefault();
 
-    this.$el
-      .find('.sub-navigation__list-container')
-      .toggleClass('sub-navigation__list-container--open');
+    if (this.isMenuOpen()) {
+      this.closeMenu();
+    } else {
+      this.openMenu();
+    }
 
     return this;
   },
 
   initialize(options) {
     this.options = options;
+    this.__containerOpenClass = 'sub-navigation__list-container--open';
     this.columns = [];
     this.listenTo(this.collection, 'sync', this.render);
     return this.render();
   },
 
   setTitle(title) {
-    this.$el.find('.sub-navigation__title').text(title);
+    this.$el
+      .find('.sub-navigation__title')
+        .children('span')
+          .text(title);
+
     return this;
   },
 
   render() {
-    this.$el.html(this.template(this));
+    this.$el.html(this.template({
+      this,
+      icon,
+    }));
 
     this.collection.models.forEach(model => {
       const options = {
@@ -56,7 +83,8 @@ export default Backbone.View.extend({
   template: _.template(`
     <button class="sub-navigation__title"
             data-module="toggle">
-      Lorem ipsum
+      <span>Lorem ipsum</span>
+      <%= icon('chevron-down', 'sub-navigation__toggle-icon') %>
     </button>
     <div class="sub-navigation__list-container"></div>
   `),

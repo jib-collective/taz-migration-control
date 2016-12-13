@@ -2,6 +2,7 @@ import _ from 'underscore';
 import Entry from 'view/thesisEntry';
 import i18n from 'lib/i18n';
 import ThesisCollection from 'collection/thesis';
+import {setPageTitle} from 'lib/title';
 
 export default Backbone.View.extend({
   className: 'thesis',
@@ -12,6 +13,7 @@ export default Backbone.View.extend({
       api: this.options.api,
     });
     this.listenTo(this.collection, 'sync', this.render);
+    setPageTitle(i18n('Theses'));
     return this;
   },
 

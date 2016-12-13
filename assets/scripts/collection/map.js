@@ -1,15 +1,35 @@
+import _ from 'underscore';
 import MapCountry from 'model/map-country';
 
 export default Backbone.Collection.extend({
   model: MapCountry,
 
-  initialize() {
+  initialize(data, options) {
+    this.options = options;
     this.on('add', (model) => {
       model.set({
-        intensityScale: this._getDataRange('migration-intensity'),
+        intensityScale: this._getDataRange('migrationIntensity'),
         odaScale: this._getDataRange('oda'),
       });
     });
+
+    return this;
+  },
+
+  build(map) {
+    this.options.api.fetch('countriesoverview')
+      .then(data => {
+        _.forEach(data, item => {
+          _.forEach(item.entries, overviewCountry => {
+            this.options.api.fetch(`country/${overviewCountry.id}`)
+              .then(country => {
+                const attrs = country;
+                attrs.map = map;
+                this.add(attrs);
+              });
+          });
+        });
+      });
 
     return this;
   },
@@ -30,11 +50,6 @@ export default Backbone.Collection.extend({
     });
   },
 
-  getDataKeys() {
-    // todo: make it dynamic
-    return ['oda', 'intensity'];
-  },
-
   _getDataRange(type) {
     let max = 0;
     let min;
@@ -43,8 +58,8 @@ export default Backbone.Collection.extend({
       const data = country.get('data');
       const dataSet = data[type] || {};
 
-      Object.keys(dataSet).forEach(year => {
-        const value = dataSet[year];
+      _.forEach(dataSet, item => {
+        const value = _.values(item)[0];
 
         if (!min) {
           min = value
@@ -63,6 +78,4 @@ export default Backbone.Collection.extend({
       max,
     ];
   },
-
-  url: '/data/countries.json',
 });

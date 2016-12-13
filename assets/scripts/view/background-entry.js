@@ -3,6 +3,7 @@ import $ from 'jquery';
 import Background from 'model/background';
 import BaseView from 'view/background-base';
 import {toggle} from 'lib/icon';
+import {setPageTitle} from 'lib/title';
 
 export default BaseView.extend({
   events: {
@@ -72,6 +73,7 @@ export default BaseView.extend({
     options.api.findBackgroundBySlug(slug)
       .then(background => {
         this.model = new Background(background);
+        setPageTitle(this.model.get('headline'));
         this.render();
       });
 

@@ -1,16 +1,17 @@
+import _ from 'underscore';
 import TRANSLATIONS from 'fixtures/translations';
 
-export default function i18n(str, targetLanguage) {
-  const language = targetLanguage || 'de';
+export default function i18n(str, sourceLanguage) {
+  const language = sourceLanguage || 'de';
   const entity = TRANSLATIONS[str] || undefined;
   let translation;
 
-  if (entity) {
+  if (sourceLanguage) {
+    const opts = {};
+    opts[sourceLanguage] = str;
+    translation = _.findKey(TRANSLATIONS, opts);
+  } else if (entity) {
     translation = entity[language] || undefined;
-  }
-
-  if (!translation) {
-    console.log('Missed translation: ', str, ', language: ', language);
   }
 
   return translation || str;

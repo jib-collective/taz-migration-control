@@ -2,6 +2,7 @@ import _ from 'underscore';
 import $ from 'jquery';
 import Country from 'model/country';
 import CountryBaseView from './country-base';
+import {setPageTitle} from 'lib/title';
 
 export default CountryBaseView.extend({
   events: {
@@ -48,7 +49,7 @@ export default CountryBaseView.extend({
         </div>
       <% } %>
 
-      <% if (this.model.attributes.features && this.model.attributes.features.length > 0) { %>
+      <% if (this.model.getFeatures()) { %>
         <div class="countries__block">
           <h2 class="countries__block-title">
             <%= i18n('Features') %>
@@ -130,6 +131,7 @@ export default CountryBaseView.extend({
     options.api.findCountryBySlug(slug)
       .then(country => {
         this.model = new Country(country);
+        setPageTitle(this.model.get('name'));
         this.render();
       });
 

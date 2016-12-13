@@ -12,12 +12,13 @@ import SliderView from 'view/slider';
 export default Backbone.View.extend({
   className: 'map',
 
-  initialize() {
+  initialize(options) {
     this.slider = new SliderView();
-    this.countries = new CountryCollection();
+    this.countries = new CountryCollection([], options);
     this.model = new MapModel();
     this.layerControl = new LayerControl({
       collection: this.countries,
+      map: this,
     });
 
     this.listenTo(this.slider.model, 'change:value', (model, value) => {
@@ -41,8 +42,7 @@ export default Backbone.View.extend({
     map.setView(view);
     map.setZoom(zoom);
 
-    this.countries._map = map;
-    this.countries.fetch();
+    this.countries.build(map);
 
     // todo: try to get rid of this
     setTimeout(() => {

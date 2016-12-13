@@ -1,11 +1,12 @@
 import $ from 'jquery';
+import _ from 'underscore';
 import d3 from 'd3';
+import i18n from 'lib/i18n';
 import L from 'leaflet';
 import limax from 'limax';
 
 export default Backbone.Model.extend({
   defaults: {
-    name: '',
     year: 2010,
     map: undefined,
 
@@ -39,15 +40,19 @@ export default Backbone.Model.extend({
     data: {},
   },
 
-  initialize(map) {
-    this.on('change:year', (model, value) => this.updateCountry(value));
+  initialize() {
+    // only draw layers for receiving countries
+    if (!this.get('isDonorCountry')) {
+      this.on('change:year', (model, value) => this.updateCountry(value));
 
-    this.intensity()
-      .then(layer => {
-        this.oda(layer);
-        this.updateCountry();
-        this.trigger('layers-painted');
-      });
+      this.intensity()
+        .then(layer => {
+          this.updateCountry();
+          this.trigger('layers-painted');
+        });
+    } else {
+      this.trigger('layers-painted');
+    }
 
     return this;
   },
@@ -55,23 +60,14 @@ export default Backbone.Model.extend({
   /* update all country layers for a single year */
   updateCountry() {
     const year = parseInt(this.get('year'), 10);
-
     this.setIntensityYear(year);
-    this.setOdaYear(year);
-
-    if (year === 2016) {
-      this.drawValetta();
-    } else {
-      this.removeValetta();
-    }
-
     return this;
   },
 
   /* draw intensity layer */
   intensity() {
     const fetchGeoData = () => {
-      const slug = limax(this.get('name'));
+      const slug = i18n(limax(this.get('name')), 'de');
       return $.getJSON(`/data/geo/${slug}.geojson`);
     };
 
@@ -90,7 +86,7 @@ export default Backbone.Model.extend({
   /* set intensity for a single year */
   setIntensityYear(year) {
     const getOpacity = (year) => {
-      const type = 'migration-intensity';
+      const type = 'migrationIntensity';
       const scale = this.get('intensityScale');
       const range = d3.scale.linear().domain(scale).range([0, 1]);
       const value = this._getDataValueForYear(type, year);
@@ -207,12 +203,15 @@ export default Backbone.Model.extend({
   /* get dataset for a single year */
   _getDataValueForYear(type, year) {
     const data = this.get('data');
+    let response;
 
-    if (data[type] && data[type][year]) {
-      return data[type][year];
-    }
+    _.forEach(data[type], item => {
+      if (_.keys(item)[0] == year) {
+        response = item[year];
+      }
+    });
 
-    return undefined;
+    return response;
   },
 
   /* draw a layer on the map */

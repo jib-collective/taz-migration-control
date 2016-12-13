@@ -1,3 +1,4 @@
+import _ from 'underscore';
 import Backbone from 'backbone';
 
 export default Backbone.Model.extend({
@@ -6,6 +7,7 @@ export default Backbone.Model.extend({
   },
 
   getFeatures() {
-    return this.attributes.features;
+    const features = _.compact(this.get('features'));
+    return features.length > 0 ? features : false;
   },
 });

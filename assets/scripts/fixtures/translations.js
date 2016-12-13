@@ -1,18 +1,18 @@
 export default {
   refugeesInCountry: {
-    de: 'Anzahl von Gefluechteten im Land',
+    de: 'Anzahl von Geflüchteten im Land',
   },
 
   applicationsForAsylum: {
-    de: 'Asylantraege',
+    de: 'Asylanträge',
   },
 
   refugeesOutsideCountry: {
-    de: 'Gefluechtete ausserhalb des Landes',
+    de: 'Geflüchtete außerhalb des Landes',
   },
 
   refugeesInEU: {
-    de: 'Gefluechtete in der EU',
+    de: 'Geflüchtete in der EU',
   },
 
   idp: {
@@ -24,7 +24,7 @@ export default {
   },
 
   countriesRepatriationAgreement: {
-    de: 'Ruecknameabkommen',
+    de: 'Rücknameabkommen',
   },
 
   otherMigrationAgreements: {
@@ -44,7 +44,7 @@ export default {
   },
 
   Countries: {
-    de: 'Laender',
+    de: 'Länder',
   },
 
   Thesis: {
@@ -119,7 +119,7 @@ export default {
   },
 
   Remittances: {
-    de: 'Rueckueberweisungen',
+    de: 'Rückueberweisungen',
   },
 
   'EU Money': {
@@ -127,7 +127,7 @@ export default {
   },
 
   Migrationintensity: {
-    de: 'Migrationsintensitaet',
+    de: 'Migrationsintensität',
   },
 
   'Read More': {
@@ -141,4 +141,74 @@ export default {
   Treaties: {
     de: 'Abkommen',
   },
+
+  Introduction: {
+    de: 'Einleitung',
+  },
+
+  'Who gets paid to stop the worlds refugees?': {
+    de: 'Wer wird bezahlt, um die Geflüchteten der Welt zu stoppen?'
+  },
+
+  egypt: {
+    de: 'aegypten',
+  },
+
+  tunisia: {
+    de: 'tunesien',
+  },
+
+  chad: {
+    de: 'tschad',
+  },
+
+  ethiopia: {
+    de: 'aethiopien',
+  },
+
+  morocco: {
+    de: 'marokko',
+  },
+
+  'south-sudan': {
+    de: 'suedsudan',
+  },
+
+  kenya: {
+    de: 'kenia',
+  },
+
+  mauritania: {
+    de: 'mauretanien',
+  },
+
+  libya: {
+    de: 'libyen',
+  },
+
+  cameroon: {
+    de: 'kamerun',
+  },
+
+  algeria: {
+    de: 'algerien',
+  },
+
+  turkey: {
+    de: 'tuerkei',
+  },
+
+  djibouti: {
+    de: 'dschibuti',
+  },
+
+  'cote-divoire': {
+    de: 'elfenbeinkueste',
+  },
+
+  capeverde: {
+    de: 'kap-verde',
+  },
+
+
 };

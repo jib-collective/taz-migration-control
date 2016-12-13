@@ -105,6 +105,9 @@ export default Backbone.View.extend({
 
     <% if (this.model.get('diagramType')) { %>
       <div class="thesis__chart"></div>
+    <% } else if (this.model.get('imageUrl')) { %>
+      <img src="<%= this.model.get('imageUrl') %>"
+           class="fluid-image thesis__image" />
     <% } %>
 
     <p class="thesis__item-text">

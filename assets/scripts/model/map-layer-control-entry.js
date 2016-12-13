@@ -2,7 +2,7 @@ import Backbone from 'backbone';
 
 export default Backbone.Model.extend({
   defaults: {
-    active: true,
+    active: false,
     key: '',
   },
 });

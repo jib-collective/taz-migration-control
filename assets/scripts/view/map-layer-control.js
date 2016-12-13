@@ -1,6 +1,8 @@
 import _ from 'underscore';
 import Backbone from 'backbone';
-import DetentionCollection from 'collection/detention';
+import DetentionCollection from 'collection/map-detention';
+import MigrationIntensityCollection from 'collection/map-intensity';
+import ODACollection from 'collection/map-oda';
 import LayerControlItem from 'view/map-layer-control-entry';
 
 export default Backbone.View.extend({
@@ -8,32 +10,49 @@ export default Backbone.View.extend({
 
   initialize(options) {
     this.options = options;
-    this.listenTo(this.collection, 'layers-painted', this.render);
-    return this;
+    return this.render();
   },
 
   render() {
-    this.$el.html(this.template(this));
+    this.$el.html(this.template());
 
     [
       'oda',
       'migrationIntensity',
-    ].forEach(key => {
-      const view = new LayerControlItem({
-        collection: this.collection,
+      'detentionCenter',
+    ].forEach((key, index) => {
+      let attrs;
+      let collectionAttrs = _.pick(this.options, 'api', 'map');
+
+      switch (key) {
+        case 'oda':
+          attrs = {
+            collection: new ODACollection([], collectionAttrs),
+          };
+          break;
+
+        case 'migrationIntensity':
+          attrs = {
+            collection: new MigrationIntensityCollection([], collectionAttrs),
+          };
+          break;
+
+        case 'detentionCenter':
+          attrs = {
+            collection: new DetentionCollection([], collectionAttrs),
+          };
+          break;
+      }
+
+      const viewAttrs = Object.assign({
+        map: this.options.map,
         key,
-      });
+        active: index === 0,
+      }, attrs);
+      const view = new LayerControlItem(viewAttrs);
 
-      view.render().$el.appendTo(this.$el.children('.layer-control'));
+      view.$el.appendTo(this.$el.children('.layer-control'));
     });
-
-    const detentionCenterView = new LayerControlItem({
-      map: this.options.map,
-      collection: new DetentionCollection([]),
-      key: 'detentionCenter',
-    });
-
-    detentionCenterView.render().$el.appendTo(this.$el.children('.layer-control'));
 
     return this;
   },

@@ -23,7 +23,11 @@
   }
 
   &-tick-label-container {
-    @include typo('tag-small');
+    font-family: $font-family-sans-serif;
+    font-size: .8rem;
+    font-weight: $weight-sans-serif-bold;
+    letter-spacing: .02rem;
+    text-transform: uppercase;
     margin-top: 1.5rem;
     text-shadow: 0 0 $color-app-dark;
     white-space: nowrap;

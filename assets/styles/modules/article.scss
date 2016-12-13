@@ -1,18 +1,26 @@
 .article {
   &__title {
-    @include typo('headline-small-bold');
-    margin-bottom: .5rem;
+    font-family: $font-family-serif;
+    font-size: 1.9rem;
+    font-weight: $weight-serif-bold;
+    margin-bottom: 0;
     margin-top: .2rem;
+    text-align: center;
   }
 
   &__lead {
-    @include typo('text');
+    font-family: $font-family-serif;
+    font-size: 1.25rem;
+    font-weight: $weight-serif-regular;
     margin-bottom: 0;
+    margin-top: .5rem;
   }
 
   &__corpus {
-    @include typo('text');
     display: none;
+    font-family: $font-family-serif;
+    font-size: 1.25rem;
+    font-weight: $weight-serif-regular;
 
     &--open {
       display: block;
@@ -28,14 +36,23 @@
       }
     }
 
+    strong,
+    b {
+      font-weight: $weight-serif-bold;
+    }
+
     h2,
     h3,
     h4,
     h5,
     h6 {
-      @include typo('tag-black');
       color: $color-attention;
-      margin-bottom: 0;
+      font-family: $font-family-sans-serif;
+      font-size: 1.25rem;
+      font-weight: $weight-sans-serif-bold;
+      margin-bottom: .2rem;
+      margin-top: 2rem;
+      text-transform: uppercase;
 
       & + p {
         margin-top: 0;

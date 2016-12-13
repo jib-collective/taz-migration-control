@@ -8,19 +8,23 @@
   }
 
   &__country {
-    @include typo('tag-small');
     background-color: $color-app-medium-dark;
     color: $text-color;
     cursor: pointer;
     display: block;
-    padding: .5rem 0;
+    font-family: $font-family-sans-serif;
+    font-size: 1.4rem;
+    font-weight: $weight-sans-serif-bold;
+    letter-spacing: .1rem;
+    padding: .3rem .5rem;
+    text-transform: uppercase;
     width: 100%;
   }
 
   &__country-toggle-icon {
     height: 1rem;
     margin-left: .5rem;
-    margin-top: -.3rem;
+    margin-top: -.4rem;
     width: 1rem;
   }
 
@@ -36,14 +40,18 @@
   }
 
   &__item + &__item {
-    margin-top: .75rem;
+    margin-top: 1.5rem;
   }
 
   &__contract {
-    @include typo('headline-x-small-bold-sans-serif');
     color: $text-color;
     display: block;
-    padding-left: 3rem;
+    font-family: $font-family-sans-serif;
+    font-size: 1.45rem;
+    font-weight: $weight-sans-serif-bold;
+    letter-spacing: .02rem;
+    line-height: 1.2;
+    padding-left: 4rem;
     position: relative;
     text-decoration: none;
 
@@ -54,17 +62,17 @@
   }
 
   &__contract-icon {
-    height: 2.2rem;
+    height: 2.5rem;
     left: 0;
     position: absolute;
-    top: .4rem;
-    width: 2.2rem;
+    top: .2rem;
+    width: 2.5rem;
   }
 
   &__contract-date {
     color: $color-attention;
     display: block;
-    font-size: .85rem;
-    margin-top: -.2rem;
+    font-size: .7em;
+    margin-top: .1rem;
   }
 }

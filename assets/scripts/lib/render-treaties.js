@@ -14,7 +14,7 @@ const COUNTRY_TREATIES = _.template(`
              rel="noopener noreferrer">
             <%= icon('file-text', 'treaties__contract-icon') %>
             <span class="treaties__contract-title">
-              <%= treaty.name %> (<%= treaty.partner %> - <%= treaty.country %>)
+              <%= treaty.name %> <%= treaty.country %> – <%= treaty.partner %>
             </span>
 
             <span class="treaties__contract-date">

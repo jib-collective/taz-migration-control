@@ -4,28 +4,41 @@
   }
 
   &__item-title {
-    @include typo('headline-small-bold');
+    font-family: $font-family-serif;
+    font-size: 2.45rem;
+    font-weight: $weight-serif-bold;
+    letter-spacing: .01rem;
     line-height: 1.2;
     margin-bottom: .5rem;
     margin-top: 0;
-  }
-
-  &__item-count {
-    @include typo('tag');
-    background-color: $color-app-dark;
-    display: block;
-    margin-bottom: 1.5rem;
-    padding: .4rem;
     text-align: center;
   }
 
+  &__item-count {
+    background-color: $color-app-dark;
+    display: block;
+    font-family: $font-family-sans-serif;
+    font-size: 1.4rem;
+    font-weight: $weight-sans-serif-bold;
+    letter-spacing: .1rem;
+    margin-bottom: 1.5rem;
+    padding: .3rem .5rem;
+    text-align: center;
+    text-transform: uppercase;
+  }
+
   &__item-text {
-    @include typo('text');
+    font-family: $font-family-serif;
+    font-size: 1.25rem;
+    font-weight: $weight-serif-regular;
+    line-height: 1.4;
   }
 
   &__item-context {
-    @include typo('text-small');
-    font-size: .9rem;
+    font-family: $font-family-serif;
+    font-size: 1rem;
+    font-weight: $weight-serif-regular;
+    line-height: 1.4;
   }
 
   &__chart {

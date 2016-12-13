@@ -18,6 +18,10 @@ export default CountryBaseView.extend({
       .next('.article__corpus')
       .addClass('article__corpus--open');
 
+    $target
+      .next('.features__item-corpus')
+      .addClass('features__item-corpus--open');
+
     $target.remove();
   },
 
@@ -58,7 +62,7 @@ export default CountryBaseView.extend({
           <ul class="features">
             <% _.forEach(this.model.getFeatures(), function(feature) { %>
               <li class="features__item">
-                <h3 class="article__title">
+                <h3 class="features__item-title">
                   <span class="features__item-title-dossier">
                     <%= feature.kicker %>
                   </span>
@@ -75,9 +79,10 @@ export default CountryBaseView.extend({
                     <figcaption class="features__item-caption">
                       <%= image.caption %>
                     </figcaption>
+                  </figure>
                 <% }) %>
 
-                <p class="article__lead">
+                <p class="features__item-lead">
                   <%= feature.lead %>
                 </p>
 
@@ -87,7 +92,7 @@ export default CountryBaseView.extend({
                   <%= i18n('Read More') %>
                 </button>
 
-                <div class="article__corpus">
+                <div class="features__item-corpus">
                   <%= feature.corpus %>
                 </div>
               </li>

@@ -119,5 +119,11 @@ export default Backbone.View.extend({
         <%= this.model.get('contextualisation') %>
       </p>
     <% } %>
+
+    <% if (this.model.get('sourceinfo')) { %>
+      <p class="thesis__item-context">
+        <%= this.model.get('sourceinfo') %>
+      </p>
+    <% } %>
   `),
 });

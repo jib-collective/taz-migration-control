@@ -39,6 +39,16 @@
     font-size: 1rem;
     font-weight: $weight-serif-regular;
     line-height: 1.4;
+
+    a {
+      color: $text-color;
+      text-decoration: underline;
+
+      &:hover,
+      &:focus {
+        color: $color-attention;
+      }
+    }
   }
 
   &__chart {

@@ -13,11 +13,9 @@ const uglify = require('gulp-uglify');
 const webpack = require('webpack-stream');
 
 let API_HOST = 'http://localhost:8080';
-let PUSH_STATE = '/*{pushState: true}*/';
 
 if (process.env.ENV === 'production') {
   API_HOST = '';
-  PUSH_STATE = '{pushState: true}';
 }
 
 gulp.task('fonts', () => {
@@ -61,7 +59,6 @@ gulp.task('scripts', () => {
         ]
       }
     }))
-    .pipe(replace('/*{pushState: true}*/', PUSH_STATE))
     .pipe(replace('{{API_HOST}}', API_HOST))
     .pipe(gulpif(process.env.ENV === 'production', uglify()))
     .pipe(gulp.dest('dist/scripts'));

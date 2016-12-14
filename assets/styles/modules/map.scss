@@ -21,7 +21,8 @@
     z-index: 500;
   }
 
-  &__container {
+  &__container.leaflet-container {
+    background-color: lighten($color-app, 5%);
     height: 100%;
     left: 0;
     position: absolute;

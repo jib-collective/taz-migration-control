@@ -7,7 +7,7 @@ $(function() {
   let env = '{{ENV}}';
   let workspace = new Workspace();
   let options = {
-    pushState: true
+    pushState: false,
   };
 
   if (env === 'production') {

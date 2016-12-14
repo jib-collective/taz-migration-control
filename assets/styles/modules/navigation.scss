@@ -7,11 +7,16 @@
 
   &__list {
     display: flex;
+    flex-direction: column;
     justify-content: center;
     list-style: none;
     margin-bottom: 0;
     margin-top: 0;
     padding-left: 0;
+
+    @include small {
+      flex-direction: row;
+    }
 
     > * {
       display: flex;
@@ -19,7 +24,9 @@
   }
 
   &__list-item + &__list-item {
-    margin-left: 1rem;
+    @include small {
+      margin-left: 1rem;
+    }
   }
 
   &__item {
@@ -29,14 +36,29 @@
     font-weight: $weight-sans-serif-bold;
     letter-spacing: .1rem;
     line-height: 1;
-    padding: .8rem 7rem;
+    padding: .8rem .5rem;
+    text-align: center;
     text-transform: uppercase;
     text-decoration: none;
+    width: 100%;
+
+    @include small {
+      padding-left: 4rem;
+      padding-right: 4rem;
+    }
+
+    @include medium {
+      padding-left: 7rem;
+      padding-right: 7rem;
+    }
 
     &--active {
       background-color: $color-attention;
-      box-shadow: 0 -7px 0 0 $color-attention, 0 7px 0 0 $color-attention;
       color: $text-color-inverse;
+
+      @include small {
+        box-shadow: 0 -7px 0 0 $color-attention, 0 7px 0 0 $color-attention;
+      }
     }
   }
 }

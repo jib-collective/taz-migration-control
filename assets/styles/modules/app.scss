@@ -1,10 +1,19 @@
 .app {
   min-height: 100vh;
+  max-width: 100%;
+  overflow-x: hidden;
 
   &__main {
     margin-left: auto;
     margin-right: auto;
     margin-top: 3rem;
     max-width: 45rem;
+    padding-left: 1rem;
+    padding-right: 1rem;
+
+    @include small {
+      padding-left: 0;
+      padding-right: 0;
+    }
   }
 }

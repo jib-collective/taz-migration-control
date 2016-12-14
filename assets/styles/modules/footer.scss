@@ -6,11 +6,15 @@
   &__item {
     color: currentColor;
     font-family: $font-family-sans-serif;
-    font-size: 1rem;
+    font-size: .8rem;
     font-weight: $weight-sans-serif-bold;
     letter-spacing: .15rem;
     text-decoration: none;
     text-transform: uppercase;
+
+    @include small {
+      font-size: 1rem;
+    }
 
     &:hover,
     &:focus {

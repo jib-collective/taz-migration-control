@@ -1,4 +1,5 @@
 import _ from 'underscore';
+import $ from 'jquery';
 import ChartHDIView from 'view/chart-migration-hdi';
 import ChartPaymentView from 'view/chart-payment';
 import i18n from 'lib/i18n';
@@ -35,6 +36,8 @@ export default Backbone.View.extend({
         break;
 
       case 'remittances':
+        let charts = [];
+
         [
           'Ägpten',
           'Algerien',
@@ -70,6 +73,10 @@ export default Backbone.View.extend({
 
     if (views.length > 0) {
       views.forEach(view => view.$el.appendTo(this.$el.find('.thesis__chart')));
+
+      if (this.model.get('diagramType') === 'remittances') {
+        this.addRemittancesLabels();
+      }
     }
 
     return this;
@@ -78,6 +85,32 @@ export default Backbone.View.extend({
   initialize(options) {
     this.options = options;
     return this;
+  },
+
+  addRemittancesLabels(chart) {
+    [
+      {
+        label: i18n('Remittances'),
+        color: 'rgb(128, 127, 128)',
+      },
+
+      {
+        label: i18n('EU Money'),
+        color: 'rgb(255, 253, 56)',
+      },
+    ].forEach(item => {
+      const $color = $('<span />')
+                      .addClass('chart__label-color')
+                      .css('background-color', item.color);
+      const $label = $('<span />')
+                      .addClass('chart__label-text')
+                      .text(item.label);
+      const $container = $('<span />')
+                          .addClass('chart__label');
+
+      $container.append($color, $label);
+      this.$el.find('.thesis__chart').append($container);
+    })
   },
 
   render() {

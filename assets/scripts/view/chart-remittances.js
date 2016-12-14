@@ -54,7 +54,7 @@ export default Chart.extend({
       });
     });
 
-    const chart = this.buildChart(c3Options);
+    this.chart = this.buildChart(c3Options);
 
     /* custom label */
     d3.select(this.$el.get(0))
@@ -64,7 +64,7 @@ export default Chart.extend({
           return data[0].name;
         });
 
-    return chart;
+    return this.chart;
   },
 
 });

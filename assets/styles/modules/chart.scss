@@ -59,8 +59,22 @@
     }
   }
 
+  &__label {
+    display: inline-block;
+    margin-bottom: .5rem;
+    margin-top: .5rem;
+  }
 
-  .c3-legend-item {
+  &__label-color {
+    display: inline-block;
+    height: 1rem;
+    margin-right: .5rem;
+    vertical-align: middle;
+    width: 1rem;
+  }
+
+  .c3-legend-item,
+  &__label {
     font-family: $font-family-sans-serif;
     font-size: .65rem;
     font-weight: $weight-sans-serif-bold;

@@ -24,7 +24,8 @@ export default Backbone.View.extend({
 
   initialize(options) {
     this.options = options;
-    this.fetchData().then(data => this.renderChart(data));
-    return this;
+
+    return this.fetchData()
+      .then(data => this.renderChart(data));
   },
 });

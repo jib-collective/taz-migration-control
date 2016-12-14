@@ -10,9 +10,9 @@ $(function() {
     pushState: false,
   };
 
-  if (env === 'production') {
-    options.pushState = true;
-  }
+  //if (env === 'production') {
+  //  options.pushState = true;
+  //}
 
   Backbone.history.start(options);
 });

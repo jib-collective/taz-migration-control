@@ -146,7 +146,7 @@ export default CountryBaseView.extend({
                       print(i18n('yes'));
 
                       if (item.description) {
-                        print(item.description);
+                        print(', ' + item.description);
                       }
                     } else {
                       print('-');

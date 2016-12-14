@@ -69,4 +69,35 @@
     text-transform: uppercase;
     word-wrap: break-word;
   }
+
+  .c3-tooltip {
+    box-shadow: none;
+    font-family: $font-family-sans-serif;
+    font-size: .65rem;
+    font-weight: $weight-sans-serif-bold;
+    letter-spacing: .02rem;
+
+    th,
+    td {
+      padding: .4rem .8rem;
+    }
+
+    th {
+      background-color: $color-app-medium-dark;
+      text-transform: uppercase;
+    }
+
+    td {
+      background-color: $color-app;
+      border-left: none;
+    }
+
+    tr {
+      border: none;
+    }
+
+    tr + tr {
+      border-top: 1px solid $color-app-medium-dark;
+    }
+  }
 }

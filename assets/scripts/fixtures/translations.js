@@ -225,4 +225,8 @@ export default {
   no: {
     de: 'nein',
   },
+
+  negotiating: {
+    de: 'Verhandlung',
+  },
 };

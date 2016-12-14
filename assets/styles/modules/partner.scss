@@ -1,0 +1,21 @@
+.partner {
+  display: flex;
+  flex-wrap: wrap;
+  list-style: none;
+  margin: 2rem 0 0 0;
+  padding: 0;
+
+  > li {
+    align-items: center;
+    background-color: white;
+    border: .2rem solid $color-app;
+    display: flex;
+    padding: .5rem;
+    width: 20%;
+  }
+
+  > li > img {
+    height: auto;
+    max-width: 100%;
+  }
+}

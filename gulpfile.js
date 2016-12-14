@@ -13,9 +13,11 @@ const uglify = require('gulp-uglify');
 const webpack = require('webpack-stream');
 
 let API_HOST = 'http://localhost:8080';
+let ENV = 'development';
 
 if (process.env.ENV === 'production') {
   API_HOST = '';
+  ENV = 'production';
 }
 
 gulp.task('fonts', () => {
@@ -60,6 +62,7 @@ gulp.task('scripts', () => {
       }
     }))
     .pipe(replace('{{API_HOST}}', API_HOST))
+    .pipe(replace('{{ENV}}', ENV))
     .pipe(gulpif(process.env.ENV === 'production', uglify()))
     .pipe(gulp.dest('dist/scripts'));
 });

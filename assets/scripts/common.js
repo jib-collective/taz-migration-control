@@ -4,6 +4,15 @@ import Backbone from 'backbone';
 import Workspace from 'router/workspace';
 
 $(function() {
+  let env = '{{ENV}}';
   let workspace = new Workspace();
-  Backbone.history.start(/*{pushState: true}*/);
+  let options = {
+    pushState: true
+  };
+
+  if (env === 'production') {
+    options.pushState = true;
+  }
+
+  Backbone.history.start(options);
 });

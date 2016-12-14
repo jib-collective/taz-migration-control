@@ -210,5 +210,7 @@ export default {
     de: 'kap-verde',
   },
 
-
+  'Skip Video': {
+    de: 'Video überspringen',
+  },
 };

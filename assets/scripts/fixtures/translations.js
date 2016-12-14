@@ -229,4 +229,8 @@ export default {
   negotiating: {
     de: 'Verhandlung',
   },
+
+  Photo: {
+    de: 'Foto',
+  },
 };

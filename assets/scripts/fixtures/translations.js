@@ -1,34 +1,34 @@
 export default {
   refugeesInCountry: {
-    de: 'Anzahl von Geflüchteten im Land',
+    de: 'Anzahl internationaler Geflüchter im Land',
   },
 
   applicationsForAsylum: {
-    de: 'Asylanträge',
+    de: 'Asylanträge in der EU-28 gesamt',
   },
 
   refugeesOutsideCountry: {
-    de: 'Geflüchtete außerhalb des Landes',
+    de: 'Ins Ausland Geflüchtete aus diesem Land',
   },
 
   refugeesInEU: {
-    de: 'Geflüchtete in der EU',
+    de: 'In die EU geflüchtete aus diesem Land',
   },
 
   idp: {
-    de: 'IDP',
+    de: 'Binnenvertriebene',
   },
 
   asylumApprovalRate: {
-    de: 'Anerkennungsquote',
+    de: 'Anerkennungsquote in der EU-28 gesamt',
   },
 
   countriesRepatriationAgreement: {
-    de: 'Rücknameabkommen',
+    de: 'Formale Rücknahmeabkommen',
   },
 
   otherMigrationAgreements: {
-    de: 'Andere Migrationsabkommen',
+    de: 'Informelle Vereinbarungen mit Migrationsbezug',
   },
 
   frontexCooperation: {
@@ -36,11 +36,11 @@ export default {
   },
 
   detentionCenter: {
-    de: 'Detention Center',
+    de: 'Anzahl Internierungslager',
   },
 
   departureLegality: {
-    de: 'departureLegality',
+    de: 'Straftat illegale Ausreise',
   },
 
   Countries: {

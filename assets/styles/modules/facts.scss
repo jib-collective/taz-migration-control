@@ -14,7 +14,9 @@
 
   &__term,
   &__value {
-    @include typo('text');
+    font-family: $font-family-serif;
+    font-size: 1.2rem;
+    font-weight: $weight-serif-regular;
     padding: .5rem 1rem;
   }
 

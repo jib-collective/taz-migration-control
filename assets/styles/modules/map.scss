@@ -3,13 +3,20 @@
   position: relative;
 
   &__title {
-    @include typo('headline-bold');
-    left: 0;
+    color: $text-color-bright;
+    font-family: $font-family-serif;
+    font-size: 2.1rem;
+    font-weight: $weight-serif-bold;
+    left: 50%;
+    line-height: 1.2;
     margin-bottom: 0;
     margin-top: 0;
+    max-width: 90%;
     padding-top: 0;
     position: absolute;
+    text-align: center;
     top: 0;
+    transform: translateX(-50%);
     width: 100%;
     z-index: 500;
   }

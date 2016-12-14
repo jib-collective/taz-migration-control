@@ -1,12 +1,16 @@
 .read-more {
-  @include typo('tag-small');
   color: $color-attention;
   cursor: pointer;
   display: block;
+  font-family: $font-family-sans-serif;
+  font-size: .85rem;
+  font-weight: $weight-sans-serif-bold;
+  letter-spacing: .05rem;
   margin-top: .5rem;
   padding: 0;
   text-align: center;
   text-decoration: none;
+  text-transform: uppercase;
   width: 100%;
 
   &:hover,

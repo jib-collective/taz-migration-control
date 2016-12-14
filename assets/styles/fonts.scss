@@ -1,12 +1,12 @@
 @font-face {
   font-family: 'TisaPro';
-  font-weight: 500;
-  src: url('../fonts/TisaPro-Medium.eot?#iefix');
+  font-weight: 400;
+  src: url('../fonts/TisaPro-Regular.eot?#iefix');
   src:
-    url('../fonts/TisaPro-Medium?#iefix') format('eot'),
-    url('../fonts/TisaPro-Medium.woff2') format('woff2'),
-    url('../fonts/TisaPro-Medium.woff') format('woff'),
-    url('../fonts/TisaPro-Medium.ttf') format('truetype');
+    url('../fonts/TisaPro-Regular?#iefix') format('eot'),
+    url('../fonts/TisaPro-Regular.woff2') format('woff2'),
+    url('../fonts/TisaPro-Regular.woff') format('woff'),
+    url('../fonts/TisaPro-Regular.ttf') format('truetype');
 }
 
 @font-face {
@@ -18,6 +18,19 @@
     url('../fonts/TisaPro-Bold.woff2') format('woff2'),
     url('../fonts/TisaPro-Bold.woff') format('woff'),
     url('../fonts/TisaPro-Bold.ttf') format('truetype');
+}
+
+/* MarkOT */
+
+@font-face {
+  font-family: 'MarkOT';
+  font-weight: 400;
+  src: url('../fonts/MarkOT-Regular.eot?#iefix');
+  src:
+    url('../fonts/MarkOT-Regular?#iefix') format('eot'),
+    url('../fonts/MarkOT-Regular.woff2') format('woff2'),
+    url('../fonts/MarkOT-Regular.woff') format('woff'),
+    url('../fonts/MarkOT-Regular.ttf') format('truetype');
 }
 
 @font-face {
@@ -33,11 +46,11 @@
 
 @font-face {
   font-family: 'MarkOT';
-  font-weight: 900;
-  src: url('../fonts/MarkOT-Black.eot?#iefix');
+  font-weight: 700;
+  src: url('../fonts/MarkOT-Bold.eot?#iefix');
   src:
-    url('../fonts/MarkOT-Black?#iefix') format('eot'),
-    url('../fonts/MarkOT-Black.woff2') format('woff2'),
-    url('../fonts/MarkOT-Black.woff') format('woff'),
-    url('../fonts/MarkOT-Black.ttf') format('truetype');
+    url('../fonts/MarkOT-Bold?#iefix') format('eot'),
+    url('../fonts/MarkOT-Bold.woff2') format('woff2'),
+    url('../fonts/MarkOT-Bold.woff') format('woff'),
+    url('../fonts/MarkOT-Bold.ttf') format('truetype');
 }

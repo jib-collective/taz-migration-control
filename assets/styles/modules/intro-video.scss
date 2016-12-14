@@ -1,0 +1,13 @@
+.intro-video {
+  height: 100vh;
+  width: 100%;
+
+  > .video-js {
+    height: 100vh;
+    width: 100%;
+  }
+
+  .vjs-loading-spinner {
+    display: none !important;
+  }
+}

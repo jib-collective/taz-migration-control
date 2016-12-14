@@ -39,6 +39,9 @@
     "leaflet": "^1.0.2",
     "limax": "^1.4.1",
     "sanitize.css": "^4.1.0",
+    "video.js": "^5.12.6",
+    "videojs-vimeo": "^2.0.2",
+    "videojs-youtube": "^2.2.0",
     "webfontloader": "^1.6.27"
   }
 }

@@ -1,7 +1,9 @@
 .background {
   &__title {
-    @include typo('tag');
     background-color: $color-app-dark;
+    font-family: $font-family-serif;
+    font-size: 1.9rem;
+    font-weight: $weight-serif-bold;
     margin-bottom: 2rem;
     margin-top: 2rem;
     padding: .5rem;
@@ -9,7 +11,9 @@
   }
 
   &__lead {
-    @include typo('text');
+    font-family: $font-family-serif;
+    font-size: 1.2rem;
+    font-weight: $weight-serif-regular;
     margin-bottom: 0;
   }
 }

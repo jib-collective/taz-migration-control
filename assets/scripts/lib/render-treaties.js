@@ -14,12 +14,14 @@ const COUNTRY_TREATIES = _.template(`
              rel="noopener noreferrer">
             <%= icon('file-text', 'treaties__contract-icon') %>
             <span class="treaties__contract-title">
-              <%= treaty.name %> <%= treaty.country %> – <%= treaty.partner %>
+              <%= treaty.name %> <%= treaty.country %> <% if(treaty.partner) { %>– <%= treaty.partner %> <% } %>
             </span>
 
-            <span class="treaties__contract-date">
-              01.05.2011
-            </span>
+            <% if (treaty.date) { %>
+              <span class="treaties__contract-date">
+                <% if (treaty.date.day) { %><%= treaty.date.day %>.<% } %><% if (treaty.date.month) { %><%= treaty.date.month %>.<% } %><% if (treaty.date.year) { %><%= treaty.date.year %><% } %>
+              </span>
+            <% } %>
           </a>
         </li>
       <% }) %>

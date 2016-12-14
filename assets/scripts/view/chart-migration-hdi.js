@@ -36,7 +36,18 @@ export default Chart.extend({
           'rgb(128, 127, 128)',
           'rgb(255, 253, 56)',
         ],
-      }
+      },
+      tooltip: {
+        format: {
+          value: function (value, ratio, id) {
+            if (id === 'EU Geld') {
+              return (Math.round(value * 100)/100).toFixed(2) + ' Dollar/Kopf';
+            }
+
+            return value;
+          }
+        }
+      },
     };
 
     data.forEach(country => {

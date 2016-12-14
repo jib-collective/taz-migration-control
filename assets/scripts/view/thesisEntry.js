@@ -17,7 +17,7 @@ export default Backbone.View.extend({
         views.push(new ChartHDIView({
           api: this.options.api,
           countries: [
-            'Tschad',
+            'Senegal',
           ],
         }));
         break;

@@ -38,6 +38,13 @@ export default Chart.extend({
           show: false,
         },
       },
+      tooltip: {
+        format: {
+          value: function (value, ratio, id) {
+            return (Math.round(value * 100)/100).toFixed(2) + ' Dollar/Kopf';
+          }
+        }
+      },
     };
 
     data.forEach(country => {

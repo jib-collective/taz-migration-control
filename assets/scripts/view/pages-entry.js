@@ -1,4 +1,5 @@
 import _ from 'underscore';
+import $ from 'jquery';
 import Backbone from 'backbone';
 import Page from 'model/pages-entry';
 import {setPageTitle} from 'lib/title';
@@ -23,10 +24,16 @@ export default Backbone.View.extend({
     return this;
   },
 
+  scrollIntoView() {
+    $('html').scrollTop(this.$el.offset().top - 20);
+  },
+
   render() {
     this.$el.html(this.template({
       model: this.model,
     }));
+
+    this.scrollIntoView();
 
     return this;
   },

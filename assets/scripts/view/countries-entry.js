@@ -176,6 +176,10 @@ export default CountryBaseView.extend({
     </div>
   `),
 
+  scrollIntoView() {
+    $('html').scrollTop(this.$el.offset().top - 120);
+  },
+
   initialize(options) {
     const slug = options.application.get('entry');
 

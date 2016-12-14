@@ -72,6 +72,7 @@ gulp.task('styles', () => {
   const staticAssets = gulp.src([
     './node_modules/sanitize.css/sanitize.css',
     './node_modules/leaflet/dist/leaflet.css',
+    './node_modules/video.js/dist/video-js.css',
     './node_modules/c3/c3.css',
   ]);
 

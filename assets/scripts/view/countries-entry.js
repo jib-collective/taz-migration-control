@@ -113,7 +113,48 @@ export default CountryBaseView.extend({
                 <%= i18n(index) %>
               </dt>
               <dd class="facts__value">
-                <%= item %>
+                <% switch (index) {
+                  case 'frontexCooperation':
+                    if (item.state) {
+                      print(i18n(item.state));
+                    }
+
+                    if (item.description) {
+                      print(', ' + item.description)
+                    }
+                    break;
+
+                  case 'detentionCenter':
+                    if (item.count !== -1) {
+                      print(item.count);
+
+                      if (item.description) {
+                        print(', ' + item.description);
+                      }
+                    } else {
+                      print('-');
+                    }
+                    break;
+
+                  case 'departureLegality':
+                    if (item.isIllegal === true) {
+                      print(i18n('yes'));
+
+                      if (item.description) {
+                        print(item.description);
+                      }
+                    } else {
+                      print('-');
+                    }
+                    break;
+
+                  default:
+                    if (item) {
+                      print(item);
+                    } else {
+                      print('-');
+                    }
+                } %>
               </dd>
             <% }) %>
           </dl>

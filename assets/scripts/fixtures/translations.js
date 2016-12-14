@@ -213,4 +213,12 @@ export default {
   'Skip Video': {
     de: 'Video überspringen',
   },
+
+  yes: {
+    de: 'ja',
+  },
+
+  no: {
+    de: 'nein',
+  },
 };

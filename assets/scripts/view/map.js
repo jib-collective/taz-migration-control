@@ -25,13 +25,14 @@ export default Backbone.View.extend({
   createMap() {
     const options = this.model.get('mapOptions');
     const tileLayer = this.model.get('tileLayer');
+    const tileOptions = this.model.get('tileLayerOptions');
     const view = this.model.get('view');
     const zoom = this.model.get('zoom');
     const targetContainer = this.$el.find('.map__container').get(0);
 
     const map = L.map(targetContainer, options);
 
-    L.tileLayer(tileLayer).addTo(map);
+    L.tileLayer(tileLayer, tileOptions).addTo(map);
 
     map.setView(view);
     map.setZoom(zoom);

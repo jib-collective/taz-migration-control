@@ -148,7 +148,7 @@ export default Backbone.View.extend({
     </p>
 
     <% if (this.model.get('contextualisation')) { %>
-      <p class="thesis__item-context">
+      <p class="thesis__item-text">
         <%= this.model.get('contextualisation') %>
       </p>
     <% } %>

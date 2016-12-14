@@ -13,30 +13,7 @@ export default Backbone.View.extend({
   initialize() {
     this.model = new Slider();
     this.listenTo(this.model, 'change', this.updateRangeSlider);
-    this.start();
     return this;
-  },
-
-  start() {
-    this.inverval = setInterval(() => {
-      let value = this.model.get('value');
-
-      if (value + 1 <= this.model.get('max')) {
-        value += 1;
-        this.model.set({value});
-      } else {
-        this.stop();
-      }
-
-    }, this.model.get('interval'));
-  },
-
-  stop() {
-    if (this.interval) {
-      clearInterval(this.interval);
-    }
-
-    return this
   },
 
   updateValue(event) {

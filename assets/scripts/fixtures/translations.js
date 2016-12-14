@@ -134,6 +134,10 @@ export default {
     de: 'Weiter lesen',
   },
 
+  'Show less': {
+    de: 'Einklappen',
+  },
+
   Information: {
     de: 'Infos',
   },

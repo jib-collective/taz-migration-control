@@ -13,16 +13,18 @@ export default CountryBaseView.extend({
     event.preventDefault();
 
     const $target = $(event.currentTarget);
+    const $next = $target.prev('.article__corpus, .features__item-corpus');
+    const toggleText = $target.data('toggle');
+    let currentText;
 
-    $target
-      .next('.article__corpus')
-      .addClass('article__corpus--open');
+    if ($next.css('display') === 'none') {
+      $next.css('display', 'block');
+    } else {
+      $next.css('display', 'none');
+    }
 
-    $target
-      .next('.features__item-corpus')
-      .addClass('features__item-corpus--open');
-
-    $target.remove();
+    currentText = $target.text();
+    $target.text(toggleText);
   },
 
   template: _.template(`
@@ -41,15 +43,17 @@ export default CountryBaseView.extend({
             <%= this.model.getFinding('lead') %>
           </p>
 
-          <button type="button"
-                  data-module="read-more"
-                  class="read-more">
-            <%= i18n('Read More') %>
-          </button>
-
           <div class="article__corpus">
             <%= this.model.getFinding('corpus') %>
           </div>
+
+          <button type="button"
+                  data-module="read-more"
+                  class="read-more"
+                  data-toggle="<%= i18n('Show less') %>">
+            <%= i18n('Read More') %>
+          </button>
+
         </div>
       <% } %>
 
@@ -86,15 +90,16 @@ export default CountryBaseView.extend({
                   <%= feature.lead %>
                 </p>
 
-                <button type="button"
-                        data-module="read-more"
-                        class="read-more">
-                  <%= i18n('Read More') %>
-                </button>
-
                 <div class="features__item-corpus">
                   <%= feature.corpus %>
                 </div>
+
+                <button type="button"
+                        data-module="read-more"
+                        class="read-more"
+                        data-toggle="<%= i18n('Show less') %>">
+                  <%= i18n('Read More') %>
+                </button>
               </li>
             <% }); %>
           </ul>

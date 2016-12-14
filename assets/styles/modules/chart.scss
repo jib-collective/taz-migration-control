@@ -11,7 +11,7 @@
     width: 10%;
 
     .c3-chart-arc path {
-      stroke: $color-app;
+      stroke: transparent;
     }
 
     .country-legend {
@@ -25,9 +25,40 @@
     }
   }
 
-  .c3-area {
-    opacity: .95;
+  &--hdi {
+    .c3-chart-lines {
+      // Intensity
+      > .c3-chart-line:first-child {
+        .c3-lines {
+          display: none;
+        }
+
+        .c3-circles {
+          display: none;
+        }
+
+        .c3-areas {
+          opacity: 1 !important;
+        }
+      }
+
+      // EU Money
+      > .c3-chart-line:last-child {
+        .c3-lines {
+          display: none;
+        }
+
+        .c3-circles {
+          display: none;
+        }
+
+        .c3-areas > path {
+          opacity: .7;
+        }
+      }
+    }
   }
+
 
   .c3-legend-item {
     font-family: $font-family-sans-serif;

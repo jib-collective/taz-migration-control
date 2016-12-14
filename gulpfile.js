@@ -3,6 +3,7 @@ const concat = require('gulp-concat');
 const cssnano = require('gulp-cssnano');
 const gulp = require('gulp');
 const gulpif = require('gulp-if');
+const imagemin = require('gulp-imagemin');
 const merge = require('merge-stream');
 const path = require('path');
 const replace = require('gulp-replace');
@@ -115,8 +116,8 @@ gulp.task('styles', () => {
     .pipe(gulp.dest('./dist/styles/'));
 });
 
-gulp.task('images', () => {
-  return gulp.src('assets/images/*')
+gulp.task('svg', () => {
+  return gulp.src('assets/images/**/*.svg')
     .pipe(svgMin())
     .pipe(svgSprite({
       mode: {
@@ -133,9 +134,21 @@ gulp.task('images', () => {
     .pipe(gulp.dest('dist/images'));
 });
 
+gulp.task('images', () => {
+  return gulp.src('assets/images/**/*')
+    .pipe(imagemin({
+      plugins: [
+        imagemin.jpegtran(),
+        imagemin.optipng(),
+      ],
+    }))
+    .pipe(gulp.dest('dist/images'));
+})
+
 gulp.task('watch', () => {
   gulp.watch('./assets/scripts/**/*', ['scripts']);
   gulp.watch('./assets/styles/**/*', ['styles']);
+  gulp.watch('./assets/images/**/*.svg', ['svg']);
   gulp.watch('./assets/images/**/*', ['images']);
 });
 
@@ -143,5 +156,6 @@ gulp.task('default', [
   'fonts',
   'scripts',
   'styles',
+  'svg',
   'images',
 ]);

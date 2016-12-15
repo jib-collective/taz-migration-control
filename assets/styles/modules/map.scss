@@ -9,7 +9,7 @@
   &__title {
     color: $text-color-bright;
     font-family: $font-family-serif;
-    font-size: 2.1rem;
+    font-size: 1.2rem;
     font-weight: $weight-serif-bold;
     left: 50%;
     line-height: 1.2;
@@ -19,10 +19,15 @@
     padding-top: 0;
     position: absolute;
     text-align: center;
-    top: 0;
+    top: 1rem;
     transform: translateX(-50%);
     width: 100%;
     z-index: 500;
+
+    @include small {
+      font-size: 2.1rem;
+      top: 0;
+    }
   }
 
   &__container.leaflet-container {

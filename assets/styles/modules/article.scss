@@ -1,27 +1,42 @@
 .article {
   &__title {
     font-family: $font-family-serif;
-    font-size: 1.9rem;
+    font-size: 1.4rem;
     font-weight: $weight-serif-bold;
     letter-spacing: .05rem;
+    line-height: 1.2;
     margin-bottom: 0;
     margin-top: .2rem;
     text-align: center;
+
+    @include small {
+      font-size: 1.6rem;
+    }
+
+    @include medium {
+      font-size: 1.9rem;
+    }
+  }
+
+  &__lead,
+  &__corpus {
+    font-family: $font-family-serif;
+    font-size: 1.1rem;
+    font-weight: $weight-serif-regular;
+    line-height: 1.4;
+
+    @include small {
+      font-size: 1.25rem;
+    }
   }
 
   &__lead {
-    font-family: $font-family-serif;
-    font-size: 1.25rem;
-    font-weight: $weight-serif-regular;
     margin-bottom: 0;
     margin-top: .5rem;
   }
 
   &__corpus {
     display: none;
-    font-family: $font-family-serif;
-    font-size: 1.25rem;
-    font-weight: $weight-serif-regular;
 
     &--open {
       display: block;

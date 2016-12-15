@@ -15,9 +15,13 @@
   &__term,
   &__value {
     font-family: $font-family-serif;
-    font-size: 1.2rem;
+    font-size: 1rem;
     font-weight: $weight-serif-regular;
     padding: .5rem 1rem;
+
+    @include small {
+      font-size: 1.2rem;
+    }
   }
 
   &__value {

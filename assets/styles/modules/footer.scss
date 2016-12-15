@@ -1,7 +1,11 @@
 .footer {
   background-color: $color-app-dark;
   color: $text-color;
-  margin-top: 10rem;
+  margin-top: 6rem;
+
+  @include small {
+    margin-top: 10rem;
+  }
 
   &__item {
     color: currentColor;
@@ -30,8 +34,12 @@
   }
 
   &__list-item {
-    padding: .8rem;
+    padding: .5rem;
     text-align: center;
+
+    @include small {
+      padding: .8rem;
+    }
   }
 
   &__list-item + &__list-item {
@@ -39,10 +47,17 @@
   }
 
   &__taz-logo.icon {
+    display: table;
     height: 4.5rem;
     margin-bottom: -1.5rem;
-    margin-left: -1rem;
+    margin-left: auto;
+    margin-right: auto;
     margin-top: -1.5rem;
     width: 15rem;
+
+    @include small {
+      display: inline-block;
+      margin-left: -1rem;
+    }
   }
 }

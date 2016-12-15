@@ -32,7 +32,7 @@
   &__item {
     color: $text-color;
     font-family: $font-family-sans-serif;
-    font-size: 1.25rem;
+    font-size: 1rem;
     font-weight: $weight-sans-serif-bold;
     letter-spacing: .1rem;
     line-height: 1;
@@ -43,6 +43,7 @@
     width: 100%;
 
     @include small {
+      font-size: 1.25rem;
       padding-left: 4rem;
       padding-right: 4rem;
     }

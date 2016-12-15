@@ -38,9 +38,13 @@
 
   &__item-text {
     font-family: $font-family-serif;
-    font-size: 1.25rem;
+    font-size: 1.1rem;
     font-weight: $weight-serif-regular;
     line-height: 1.4;
+
+    @include small {
+      font-size: 1.25rem;
+    }
   }
 
   &__item-context {

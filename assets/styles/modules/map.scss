@@ -1,5 +1,4 @@
 .map {
-  min-height: 82vh;
   position: relative;
 
   @include small {
@@ -32,10 +31,7 @@
 
   &__container.leaflet-container {
     background-color: lighten($color-app, 5%);
-    height: 100%;
-    left: 0;
-    position: absolute;
-    top: 0;
+    min-height: 82vh;
     width: 100%;
   }
 
@@ -54,7 +50,6 @@
   }
 
   &__layer-control {
-    display: none;
     z-index: 1000;
 
     @include small {

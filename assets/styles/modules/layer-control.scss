@@ -1,9 +1,12 @@
 .layer-control {
   background-color: $color-app-dark;
-  border-radius: .5rem;
   list-style: none;
   margin: 0;
   padding-left: 0;
+
+  @include small {
+    border-radius: .5rem;
+  }
 
   &__item {
     cursor: pointer;
@@ -37,13 +40,17 @@
   }
 
   > *:first-child > * {
-    border-top-left-radius: .5rem;
-    border-top-right-radius: .5rem;
+    @include small {
+      border-top-left-radius: .5rem;
+      border-top-right-radius: .5rem;
+    }
   }
 
   > *:last-child > * {
-    border-bottom-left-radius: .5rem;
-    border-bottom-right-radius: .5rem;
+    @include small {
+      border-bottom-left-radius: .5rem;
+      border-bottom-right-radius: .5rem;
+    }
   }
 
   &__item + &__item {

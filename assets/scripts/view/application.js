@@ -110,7 +110,7 @@ export default Backbone.View.extend({
       this.views[`_${item}`].render().$el.prependTo(this.$el);
     });
 
-    //this.views._video.render().$el.prependTo(this.$el);
+    this.views._video.render().$el.prependTo(this.$el);
     this.views._footer.render().$el.appendTo(this.$el);
 
     return this;

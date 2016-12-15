@@ -233,4 +233,12 @@ export default {
   Photo: {
     de: 'Foto',
   },
+
+  singlePayments: {
+    de: 'Migrationskontrollgelder',
+  },
+
+  migrationIntensity: {
+    de: 'Migrationsintensität',
+  },
 };

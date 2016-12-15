@@ -17,8 +17,8 @@ export default Backbone.View.extend({
     this.$el.html(this.template());
 
     [
-      'oda',
       'migrationIntensity',
+      'singlePayments',
       'detentionCenter',
     ].forEach((key, index) => {
       let attrs;

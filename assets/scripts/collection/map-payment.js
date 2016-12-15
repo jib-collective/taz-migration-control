@@ -9,10 +9,12 @@ export default BaseCollection.extend({
   initialize(data, options) {
     this.options = options;
 
-    this.on('add', (model) => {
-      model.set({
-        layerScale: this._getDataRange('singlePayments'),
-        year: 2016,
+    this.on('sync', () => {
+      this.models.forEach(model => {
+        model.set({
+          layerScale: this._getDataRange('singlePayments'),
+          year: 2016,
+        });
       });
     });
 

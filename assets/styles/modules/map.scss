@@ -1,6 +1,10 @@
 .map {
-  height: 82vh;
+  min-height: 82vh;
   position: relative;
+
+  @include small {
+    height: 82vh;
+  }
 
   &__title {
     color: $text-color-bright;
@@ -32,17 +36,27 @@
 
   &__slider {
     bottom: 1.5rem;
+    display: none;
     left: 50%;
     position: absolute;
     transform: translateX(-50%);
     width: 50%;
     z-index: 1000;
+
+    @include small {
+      display: block;
+    }
   }
 
   &__layer-control {
-    bottom: 1.5rem;
-    position: absolute;
-    right: 1.5rem;
+    display: none;
     z-index: 1000;
+
+    @include small {
+      bottom: 1.5rem;
+      display: block;
+      position: absolute;
+      right: .5rem;
+    }
   }
 }

@@ -49,4 +49,42 @@
   &__item + &__item {
     border-top: 1px solid $color-app-medium-dark;
   }
+
+  &__scale {
+    font-family: $font-family-sans-serif;
+    font-size: .7rem;
+    font-weight: $weight-sans-serif-medium;
+    letter-spacing: .05rem;
+    padding: .5rem;
+    text-align: center;
+  }
+
+  &__scale-label {
+    &--min {
+      margin-right: 1rem;
+    }
+
+    &--max {
+      margin-left: 1rem;
+    }
+  }
+
+  &__scale-item--singlePayments {
+    background-color: rgb(255, 253, 56);
+    border-radius: 50%;
+    display: inline-block;
+    vertical-align: middle;
+  }
+
+  &__scale-item--migrationIntensity {
+    background-color: rgb(255, 253, 56);
+    display: inline-block;
+    height: 2rem;
+    vertical-align: middle;
+    width: 2rem;
+
+    & + & {
+      margin-left: .3rem;
+    }
+  }
 }

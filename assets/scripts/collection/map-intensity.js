@@ -9,7 +9,7 @@ export default BaseCollection.extend({
     this.on('add', (model) => {
       model.set({
         layerScale: this._getDataRange('migrationIntensity'),
-        year: 2016,
+        year: 2015,
       });
     });
 

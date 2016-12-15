@@ -40,10 +40,8 @@ export default MapContryBase.extend({
   },
 
   getScale(year) {
-    const type = 'migrationIntensity';
-    const scale = this.get('layerScale');
-    const range = d3.scale.linear().domain(scale).range([0, 1]);
-    const value = this._getDataValueForYear(type, year);
+    const range = this.getRange();
+    const value = this._getDataValueForYear('migrationIntensity', year);
 
     return range(value);
   },

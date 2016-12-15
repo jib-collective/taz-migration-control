@@ -38,7 +38,9 @@ export default Backbone.Collection.extend({
 
   setYear(year) {
     this.models.forEach(model => {
-      model.set({year});
+      model.set({
+        year,
+      });
     });
   },
 

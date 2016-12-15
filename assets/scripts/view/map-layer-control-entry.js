@@ -49,11 +49,21 @@ export default Backbone.View.extend({
     return this.render();
   },
 
+  renderScale() {
+    if (!this.collection.models || !this.collection.models.length > 0) {
+      return this;
+    }
+
+    const range = this.collection.models[0].getRange();
+    return range.ticks(5);
+  },
+
   render() {
     this.$el.html(this.template({
       i18n,
       key: this.model.get('key'),
       active: this.model.get('active'),
+      scale: this.renderScale(),
     }));
 
     if (this.model.get('active') && this.model.get('key') !== 'detentionCenter') {
@@ -93,5 +103,43 @@ export default Backbone.View.extend({
 
       <%= i18n(this.model.get('key')) %>
     </label>
+
+    <% if (active) { %>
+      <div class="layer-control__scale">
+        <span class="layer-control__scale-label layer-control__scale-label--min">
+          <%= _.min(scale) %>
+        </span>
+
+        <% if (key === 'singlePayments') {
+          _.each(scale, function(value) {
+        %>
+          <div class="layer-control__scale-item layer-control__scale-item--singlePayments"
+               style="width: <%= value/2000 %>rem; height: <%= value/2000 %>rem;">
+            <span class="visually-hidden">
+              <%= value %>
+            </span>
+          </div>
+        <%
+          })
+        } %>
+
+        <% if (key === 'migrationIntensity') {
+          _.each(scale, function(value) {
+        %>
+          <div class="layer-control__scale-item layer-control__scale-item--migrationIntensity"
+               style="opacity: <%= value/_.max(scale) %>">
+            <span class="visually-hidden">
+              <%= value %>
+            </span>
+          </div>
+        <%
+          })
+        } %>
+
+        <span class="layer-control__scale-label layer-control__scale-label--max">
+          <%= _.max(scale) %>
+        </span>
+      </div>
+    <% } %>
   `),
 });

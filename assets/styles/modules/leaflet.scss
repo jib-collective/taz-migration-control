@@ -20,6 +20,27 @@
     opacity: .8;
   }
 
+  &-payment-label {
+    background: transparent !important;
+    border: none !important;
+    border-radius: 0 !important;
+    box-shadow: none !important;
+    font-family: $font-family-sans-serif;
+    font-size: 1.4rem;
+    font-weight: $weight-sans-serif-bold;
+    letter-spacing: .02rem;
+    line-height: 1;
+    opacity: 1 !important;
+    text-align: center;
+    text-shadow: 0 0 1px white;
+
+    > small {
+      display: block;
+      font-size: .7rem;
+      font-weight: $weight-sans-serif-medium;
+    }
+  }
+
   &-popup-content-wrapper {
     background-color: $color-app-dark !important;
     border-radius: 0 !important;

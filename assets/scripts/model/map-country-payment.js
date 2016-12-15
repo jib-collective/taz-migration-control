@@ -58,19 +58,9 @@ export default MapContryBase.extend({
       });
   },
 
-  getRange() {
-    const scale = this.get('layerScale');
-
-    if (!scale) {
-      return;
-    }
-
-    return d3.scale.linear().domain(scale).range([25, 150]);
-  },
-
   /* calculate radius for an oda bubble for a single year */
   getRadius(year) {
-    const range = this.getRange();
+    const range = this.getRange([25, 150]);
     const value = this._getDataValueForYear('singlePayments', year);
 
     if (!value) {

@@ -20,6 +20,11 @@ export default Backbone.Model.extend({
 
   getRange() {
     const scale = this.get('layerScale');
+
+    if (!scale) {
+      return;
+    }
+
     return d3.scale.linear().domain(scale).range([0, 1]);
   },
 

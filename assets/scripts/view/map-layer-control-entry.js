@@ -55,6 +55,11 @@ export default Backbone.View.extend({
     }
 
     const range = this.collection.models[0].getRange();
+
+    if (!range) {
+      return;
+    }
+
     return range.ticks(5);
   },
 
@@ -104,7 +109,7 @@ export default Backbone.View.extend({
       <%= i18n(this.model.get('key')) %>
     </label>
 
-    <% if (active) { %>
+    <% if (active && scale && _.isArray(scale)) { %>
       <div class="layer-control__scale">
         <span class="layer-control__scale-label layer-control__scale-label--min">
           <%= _.min(scale) %>

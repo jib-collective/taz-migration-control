@@ -45,6 +45,15 @@ export default CountryBaseView.extend({
 
           <div class="article__corpus">
             <%= this.model.getFinding('corpus') %>
+
+            <% if (this.model.getFinding('authors')) { %>
+              <small class="features__item-authors-container">
+                <strong>
+                  <%= i18n('Authors') %>:
+                </strong>
+                <%= renderAuthors(this.model.getFinding('authors')) %>
+              </small>
+            <% } %>
           </div>
 
           <button type="button"

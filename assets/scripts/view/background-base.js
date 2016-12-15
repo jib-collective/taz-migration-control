@@ -1,6 +1,7 @@
 import _ from 'underscore';
 import i18n from 'lib/i18n';
 import {renderTreatyList} from 'lib/render-treaties';
+import {renderAuthors} from 'lib/render-authors';
 
 export default Backbone.View.extend({
   className: 'background',
@@ -13,6 +14,7 @@ export default Backbone.View.extend({
         this,
         i18n,
         renderTreatyList,
+        renderAuthors,
       }));
     }
 

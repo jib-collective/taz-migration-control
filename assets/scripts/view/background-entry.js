@@ -46,6 +46,10 @@ export default BaseView.extend({
         </h1>
       <% } %>
 
+      <% if (this.model.get('authors')) { %>
+        <%= renderAuthors(this.model.get('authors')) %>
+      <% } %>
+
       <% if (this.model.get('lead')) { %>
         <p class="article__lead">
           <%= this.model.get('lead') %>

@@ -151,6 +151,17 @@ export default CountryBaseView.extend({
                     }
                     break;
 
+                  case 'countriesRepatriationAgreement':
+                  case 'otherMigrationAgreements':
+                    if (_.isArray(item)) {
+                      print(item.join(', '));
+                    } else if (item) {
+                      print(item);
+                    } else {
+                      print('-');
+                    }
+                    break;
+
                   case 'departureLegality':
                     if (item.isIllegal === true) {
                       print(i18n('yes'));

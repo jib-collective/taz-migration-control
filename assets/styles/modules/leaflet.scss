@@ -1,39 +1,7 @@
 .leaflet {
-  &-control-attribution {
-    background-color: $color-app-dark;
-    color: $text-color;
-
-    a {
-      color: currentColor;
-    }
-  }
-
   &-map-pane {
     path {
       transition: all .3s ease;
-    }
-  }
-
-  &-valetta-label {
-    &#{&} {
-      background: transparent;
-      border: none;
-      box-shadow: none;
-      font-family: 'TisaPro';
-      font-size: 1rem;
-      line-height: 1.2;
-      text-align: center;
-    }
-
-    &__bold {
-      display: block;
-      font-size: 1.3rem;
-    }
-  }
-
-  &-country-overlay {
-    &#{&} {
-      //fill: red;
     }
   }
 
@@ -46,5 +14,29 @@
         color: currentColor;
       }
     }
+  }
+
+  &-marker-icon {
+    opacity: .8;
+  }
+
+  &-popup-content-wrapper {
+    background-color: $color-app-dark !important;
+    border-radius: 0 !important;
+    box-shadow: none !important;
+    color: $text-color !important;
+    font-family: $font-family-sans-serif;
+    font-size: .65rem;
+    font-weight: $weight-sans-serif-bold;
+    letter-spacing: .02rem;
+    text-transform: uppercase;
+  }
+
+  &-popup-tip {
+    background-color: $color-app-dark !important;
+  }
+
+  &-popup-close-button {
+    display: none;
   }
 }

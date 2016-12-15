@@ -6,7 +6,10 @@
   padding-left: 0;
 
   &__item {
+    cursor: pointer;
+
     &-title {
+      cursor: pointer;
       display: block;
       font-family: $font-family-sans-serif;
       font-size: .7rem;
@@ -19,24 +22,28 @@
       > input {
         display: none;
       }
-    }
 
-    &:hover,
-    &:focus {
-      background-color: $color-attention;
-      color: $text-color-inverse;
-      cursor: pointer;
+      &--active {
+        background-color: $color-attention;
+        color: $text-color-inverse;
+      }
+
+      &:hover,
+      &:focus {
+        background-color: $color-attention;
+        color: $text-color-inverse;
+      }
     }
   }
 
-  > *:first-child {
+  > *:first-child > * {
     border-top-left-radius: .5rem;
     border-top-right-radius: .5rem;
   }
 
-  > *:last-child {
+  > *:last-child > * {
     border-bottom-left-radius: .5rem;
-    border-top-right-radius: .5rem;
+    border-bottom-right-radius: .5rem;
   }
 
   &__item + &__item {

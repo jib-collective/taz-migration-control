@@ -10,8 +10,8 @@ export default Backbone.View.extend({
     'change [data-slider]': 'updateValue',
   },
 
-  initialize() {
-    this.model = new Slider();
+  initialize(options) {
+    this.model = new Slider(options);
     this.listenTo(this.model, 'change', this.updateRangeSlider);
     return this;
   },

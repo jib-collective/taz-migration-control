@@ -15,12 +15,6 @@ export default Backbone.Model.extend({
 
   initialize() {
     this.on('change:year', (model, value) => this.updateLayer(value));
-
-    this.drawLayer()
-      .then(layer => {
-        this.updateLayer();
-      });
-
     return this;
   },
 

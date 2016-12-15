@@ -12,7 +12,7 @@ export default MapContryBase.extend({
     layerStyle: {
       stroke: false,
       fill: true,
-      fillColor: 'rgb(255, 255, 255)',
+      fillColor: 'rgb(255, 253, 56)',
       fillOpacity: .95,
     },
     data: {},
@@ -25,11 +25,32 @@ export default MapContryBase.extend({
     return this;
   },
 
+  addLayer() {
+    const fetchGeoData = () => {
+      const slug = i18n(limax(this.get('name')), 'de');
+      return $.getJSON(`/data/geo/${slug}.geojson`);
+    };
+
+    return fetchGeoData()
+      .then(data => {
+        const geoJSON = L.geoJson(data);
+        const center = geoJSON.getBounds().getCenter();
+        const style = this.get('layerStyle');
+        const radius = this.getRadius(this.get('year'));
+        const layer = L.circle(center, radius, style);
+
+        this.set('layer', layer);
+        this.updateLayer();
+
+        return MapContryBase.prototype.addLayer.call(this);
+      });
+  },
+
   /* calculate radius for an oda bubble for a single year */
-  getOdaRadius(year) {
+  getRadius(year) {
     const scale = this.get('layerScale');
     const range = d3.scale.linear().domain(scale).range([0, 1]);
-    const value = this._getDataValueForYear('oda', year);
+    const value = this._getDataValueForYear('singlePayments', year);
 
     if (!value) {
       return 1;
@@ -44,24 +65,12 @@ export default MapContryBase.extend({
     return 1;
   },
 
-  /* draw oda layer */
-  drawLayer() {
-    const center = this.get('layer').getBounds().getCenter();
-    const style = this.get('layerStyle');
-    const radius = this.getScale(this.get('year'));
-    const layer = L.circle(center, radius, style);
-
-    this.set('layer', layer);
-
-    return this.addLayer();
-  },
-
   /* update ODA layer */
   setLayerYear(year) {
     const layer = this.get('layer');
 
     if (layer) {
-      layer.setRadius(this.getScale(year))
+      layer.setRadius(this.getRadius(year))
     }
 
     return this;

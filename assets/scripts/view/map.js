@@ -1,23 +1,15 @@
 import _ from 'underscore';
-import $ from 'jquery';
-import d3 from 'd3';
 import i18n from 'lib/i18n';
 import L from 'leaflet';
 import LayerControl from 'view/map-layer-control';
 import MapModel from 'model/map';
-import SliderView from 'view/slider';
 
 export default Backbone.View.extend({
   className: 'map',
 
   initialize(options) {
     this.options = options;
-    this.slider = new SliderView();
     this.model = new MapModel();
-
-    //this.listenTo(this.slider.model, 'change:value', (model, value) => {
-    //  this.countries.setYear(value);
-    //});
 
     return this;
   },
@@ -51,12 +43,11 @@ export default Backbone.View.extend({
     }));
 
     this.map = this.createMap();
-    this.slider.render().$el.appendTo(this.$el);
 
     this.layerControl = new LayerControl(Object.assign(this.options, {
-      slider: this.slider,
       map: this.map,
     }));
+
     this.layerControl.$el.appendTo(this.$el);
 
     return this;

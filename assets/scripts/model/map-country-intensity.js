@@ -19,7 +19,7 @@ export default MapContryBase.extend({
   },
 
   /* draw intensity layer */
-  drawLayer() {
+  addLayer() {
     const fetchGeoData = () => {
       const slug = i18n(limax(this.get('name')), 'de');
       return $.getJSON(`/data/geo/${slug}.geojson`);
@@ -33,7 +33,9 @@ export default MapContryBase.extend({
         const layer = L.geoJson(data, opts);
 
         this.set('layer', layer);
-        return this.addLayer();
+        this.updateLayer();
+
+        return MapContryBase.prototype.addLayer.call(this);
       });
   },
 

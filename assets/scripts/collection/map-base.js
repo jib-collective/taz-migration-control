@@ -1,15 +1,21 @@
 import _ from 'underscore';
+import $ from 'jquery';
 import Backbone from 'backbone';
 
 export default Backbone.Collection.extend({
   initialize(data, options) {
     this.options = options;
+    return this;
+  },
 
-    this.options.api.fetch('countriesoverview')
+  load() {
+    return this.options.api.fetch('countriesoverview')
       .then(data => {
+        const promises = [];
+
         _.forEach(data, item => {
           _.forEach(item.entries, overviewCountry => {
-            this.options.api.fetch(`country/${overviewCountry.id}`)
+            const promise = this.options.api.fetch(`country/${overviewCountry.id}`)
               .then(country => {
                 if (country.isDonorCountry === false) {
                   const attrs = country;
@@ -17,11 +23,17 @@ export default Backbone.Collection.extend({
                   this.add(attrs);
                 }
               });
+
+            promises.push(promise);
           });
         });
-      });
 
-    return this;
+        return $.when.apply($, promises)
+          .then(data => {
+            this.trigger('sync');
+            return data;
+          });
+      });
   },
 
   setYear(year) {
@@ -57,5 +69,31 @@ export default Backbone.Collection.extend({
       min,
       max,
     ];
+  },
+
+  getStartYear(type) {
+    const years = [];
+
+    _.forEach(this.models, model => {
+      const data = model.get('data');
+      _.forEach(data[type], item => {
+        years.push(parseInt(_.keys(item)[0], 10));
+      })
+    });
+
+    return _.min(years);
+  },
+
+  getEndYear(type) {
+    const years = [];
+
+    _.forEach(this.models, model => {
+      const data = model.get('data');
+      _.forEach(data[type], item => {
+        years.push(parseInt(_.keys(item)[0], 10));
+      })
+    });
+
+    return _.max(years);
   },
 });

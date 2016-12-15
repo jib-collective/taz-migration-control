@@ -1,6 +1,6 @@
 export default Backbone.Model.extend({
   defaults: {
-    tileLayer: 'https://cartocdn-ashbu.global.ssl.fastly.net/migrationskontrolle/api/v1/map/migrationskontrolle@d88cc80b@0f46a528a621a1d369fb4c2df8d41e27:1481735928967/1,2,3/{z}/{x}/{y}.png',
+    tileLayer: 'https://cartocdn-ashbu.global.ssl.fastly.net/migrationskontrolle/api/v1/map/a4a2bc7ec0f1a17022631b4ddbc94823:1481771515861/0,1,2/{z}/{x}/{y}.png?api_key=c504dfadacd341caffd425b61c0266e0ccfeeeb2',
 
     tileLayerOptions: {
       attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> | &copy; <a href="https://carto.com/attributions">CARTO</a>',

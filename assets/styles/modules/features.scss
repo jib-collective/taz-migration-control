@@ -65,8 +65,11 @@
     }
 
     &-image {
-      filter: grayscale(100%);
       margin: 0;
+
+      > img {
+        filter: grayscale(100%);
+      }
     }
 
     &-caption {
@@ -85,7 +88,12 @@
     }
 
     &-credit {
-      margin-left: 1rem;
+      margin-left: .3rem;
+
+      &:before {
+        color: $color-attention;
+        content: '❯';
+      }
     }
   }
 

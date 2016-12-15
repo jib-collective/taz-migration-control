@@ -46,10 +46,6 @@ export default BaseView.extend({
         </h1>
       <% } %>
 
-      <% if (this.model.get('authors')) { %>
-        <%= renderAuthors(this.model.get('authors')) %>
-      <% } %>
-
       <% if (this.model.get('lead')) { %>
         <p class="article__lead">
           <%= this.model.get('lead') %>
@@ -59,6 +55,15 @@ export default BaseView.extend({
       <% if (this.model.get('corpus')) { %>
         <div class="article__corpus article__corpus--open">
           <%= this.model.get('corpus') %>
+
+          <% if (this.model.get('authors')) { %>
+            <small class="article__authors-container">
+              <strong>
+                <%= i18n('Authors') %>:
+              </strong>
+              <%= renderAuthors(this.model.get('authors')) %>
+            </small>
+          <% } %>
         </div>
       <% } %>
 

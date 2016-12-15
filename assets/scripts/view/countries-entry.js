@@ -74,10 +74,6 @@ export default CountryBaseView.extend({
                   <%= feature.headline %>
                 </h3>
 
-                <% if (feature.authors) { %>
-                  <%= renderAuthors(feature.authors) %>
-                <% } %>
-
                 <% _.forEach(feature.images, function(image) { %>
                   <figure class="features__item-image">
                     <img src="<%= image.src %>"
@@ -102,6 +98,15 @@ export default CountryBaseView.extend({
 
                 <div class="features__item-corpus">
                   <%= feature.corpus %>
+
+                  <% if (feature.authors) { %>
+                    <small class="features__item-authors-container">
+                      <strong>
+                        <%= i18n('Authors') %>:
+                      </strong>
+                      <%= renderAuthors(feature.authors) %>
+                    </small>
+                  <% } %>
                 </div>
 
                 <button type="button"

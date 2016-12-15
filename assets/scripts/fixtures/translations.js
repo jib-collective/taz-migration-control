@@ -241,4 +241,8 @@ export default {
   migrationIntensity: {
     de: 'Migrationsintensität',
   },
+
+  Authors: {
+    de: 'AutorInnen',
+  },
 };

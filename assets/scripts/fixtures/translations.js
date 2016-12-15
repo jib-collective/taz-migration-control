@@ -235,7 +235,7 @@ export default {
   },
 
   singlePayments: {
-    de: 'Migrationskontrollgelder',
+    de: 'Gelder irregulärer Migration',
   },
 
   migrationIntensity: {

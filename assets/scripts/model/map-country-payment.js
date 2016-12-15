@@ -48,7 +48,7 @@ export default MapContryBase.extend({
           });
 
           layer.bindTooltip(tooltip);
-          layer.setTooltipContent(title + '<small>Millionen</small>');
+          layer.setTooltipContent(title + '<small>Mio</small>');
         }
 
         this.set('layer', layer);
@@ -104,7 +104,7 @@ export default MapContryBase.extend({
         layer.setStyle(this.get('layerStyle'));
         layer.setRadius(radius);
         layer.openTooltip();
-        layer.setTooltipContent(title + '<small>Millionen</small>');
+        layer.setTooltipContent(title + '<small>Mio</small>');
       } else {
         layer.setStyle({fillOpacity: 0});
         layer.closeTooltip();

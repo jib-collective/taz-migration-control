@@ -36,7 +36,7 @@ export default {
   },
 
   detentionCenter: {
-    de: 'Anzahl Internierungslager',
+    de: 'Internierungslager',
   },
 
   departureLegality: {

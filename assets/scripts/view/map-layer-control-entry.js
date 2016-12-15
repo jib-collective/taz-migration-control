@@ -12,10 +12,9 @@ export default Backbone.View.extend({
   initialize(options) {
     this.options = options;
     this.model = new MapControlItem(options);
-    this.listenTo(this.model, 'change:active', () => {
-      this.render();
-    });
+    this.listenTo(this.model, 'change:active', () => this.render());
 
+    // initialize the slider
     this.listenTo(this.options.collection, 'sync', () => {
       if (this.model.get('key') === 'detentionCenter') {
         return;

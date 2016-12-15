@@ -6,10 +6,12 @@ export default BaseCollection.extend({
   model: Country,
 
   initialize(data, options) {
-    this.on('add', (model) => {
-      model.set({
-        layerScale: this._getDataRange('migrationIntensity'),
-        year: 2015,
+    this.on('sync', () => {
+      _.forEach(this.models, model => {
+        model.set({
+          layerScale: this._getDataRange('migrationIntensity'),
+          year: 2015,
+        });
       });
     });
 

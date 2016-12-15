@@ -95,7 +95,7 @@ export default Backbone.View.extend({
       },
 
       {
-        label: i18n('EU Money'),
+        label: i18n('International aid'),
         color: 'rgb(255, 253, 56)',
       },
     ].forEach(item => {

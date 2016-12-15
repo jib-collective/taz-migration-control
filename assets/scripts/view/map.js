@@ -1,4 +1,5 @@
 import _ from 'underscore';
+import $ from 'jquery';
 import i18n from 'lib/i18n';
 import L from 'leaflet';
 import LayerControl from 'view/map-layer-control';
@@ -12,6 +13,21 @@ export default Backbone.View.extend({
     this.model = new MapModel();
 
     return this;
+  },
+
+  events: {
+    'click [data-module="page"]': 'navigateTo',
+  },
+
+  navigateTo(event) {
+    if (event) {
+      event.preventDefault();
+    }
+
+    const $target = $(event.target);
+    const href = $target.attr('href');
+
+    this.options._router.navigate(href, {trigger: true});
   },
 
   createMap() {

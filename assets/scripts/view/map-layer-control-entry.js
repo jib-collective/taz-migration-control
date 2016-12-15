@@ -111,39 +111,44 @@ export default Backbone.View.extend({
 
     <% if (active && scale && _.isArray(scale)) { %>
       <div class="layer-control__scale">
-        <span class="layer-control__scale-label layer-control__scale-label--min">
-          <%= _.min(scale) %>
-        </span>
+        <% if (key === 'singlePayments') { %>
+          <span class="layer-control__scale-label layer-control__scale-label--min">
+            0.5 Mio.
+          </span>
 
-        <% if (key === 'singlePayments') {
-          _.each(scale, function(value) {
-        %>
-          <div class="layer-control__scale-item layer-control__scale-item--singlePayments"
-               style="width: <%= value/2000 %>rem; height: <%= value/2000 %>rem;">
-            <span class="visually-hidden">
-              <%= value %>
-            </span>
-          </div>
-        <%
-          })
-        } %>
+          <% _.each(scale, function(value) { %>
+            <div class="layer-control__scale-item layer-control__scale-item--singlePayments"
+                 style="width: <%= value/2000 %>rem; height: <%= value/2000 %>rem;">
+              <span class="visually-hidden">
+                <%= value %>
+              </span>
+            </div>
+          <% }) %>
 
-        <% if (key === 'migrationIntensity') {
-          _.each(scale, function(value) {
-        %>
-          <div class="layer-control__scale-item layer-control__scale-item--migrationIntensity"
-               style="opacity: <%= value/_.max(scale) %>">
-            <span class="visually-hidden">
-              <%= value %>
-            </span>
-          </div>
-        <%
-          })
-        } %>
+          <span class="layer-control__scale-label layer-control__scale-label--max">
+            <%= _.max(scale) %> Mio.
+          </span>
+        <% } %>
 
-        <span class="layer-control__scale-label layer-control__scale-label--max">
-          <%= _.max(scale) %>
-        </span>
+        <% if (key === 'migrationIntensity') { %>
+          <span class="layer-control__scale-label layer-control__scale-label--min">
+            <%= _.min(scale) %>
+          </span>
+
+          <% _.each(scale, function(value) { %>
+            <div class="layer-control__scale-item layer-control__scale-item--migrationIntensity"
+                 style="opacity: <%= value/_.max(scale) %>">
+              <span class="visually-hidden">
+                <%= value %>
+              </span>
+            </div>
+          <% }) %>
+
+          <span class="layer-control__scale-label layer-control__scale-label--max">
+            <%= _.max(scale) %>
+          </span>
+
+        <% } %>
       </div>
     <% } %>
   `),

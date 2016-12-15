@@ -48,7 +48,7 @@ export default MapContryBase.extend({
           });
 
           layer.bindTooltip(tooltip);
-          layer.setTooltipContent(title + '<small>Mio</small>');
+          layer.setTooltipContent(`${title}`);
         }
 
         this.set('layer', layer);
@@ -56,6 +56,16 @@ export default MapContryBase.extend({
 
         return MapContryBase.prototype.addLayer.call(this);
       });
+  },
+
+  getRange() {
+    const scale = this.get('layerScale');
+
+    if (!scale) {
+      return;
+    }
+
+    return d3.scale.linear().domain(scale).range([25, 150]);
   },
 
   /* calculate radius for an oda bubble for a single year */
@@ -67,29 +77,7 @@ export default MapContryBase.extend({
       return 0;
     }
 
-    const radiusFactor = range(value);
-
-    if (radiusFactor > 0.6) {
-      return 120 * radiusFactor;
-    } else if (radiusFactor > 0.4) {
-      return 100 * radiusFactor;
-    } else if (radiusFactor > 0.2) {
-      return 150 * radiusFactor;
-    } else if (radiusFactor > 0.1) {
-      return 170 * radiusFactor;
-    } else if (radiusFactor > 0.05 ) {
-      return 300 * radiusFactor;
-    } else if (radiusFactor > 0.025 ) {
-      return 400 * radiusFactor;
-    } else if (radiusFactor > 0.004 ) {
-      return 2000 * radiusFactor;
-    } else if (radiusFactor > 0.002 ) {
-      return 6500 * radiusFactor;
-    } else {
-      return 10000 * radiusFactor;
-    }
-
-    return 0;
+    return range(value);
   },
 
   /* update ODA layer */
@@ -104,7 +92,7 @@ export default MapContryBase.extend({
         layer.setStyle(this.get('layerStyle'));
         layer.setRadius(radius);
         layer.openTooltip();
-        layer.setTooltipContent(title + '<small>Mio</small>');
+        layer.setTooltipContent(`${title}`);
       } else {
         layer.setStyle({fillOpacity: 0});
         layer.closeTooltip();

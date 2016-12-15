@@ -40,7 +40,7 @@ export default Chart.extend({
       tooltip: {
         format: {
           value: function (value, ratio, id) {
-            if (id === 'EU Geld') {
+            if (id === i18n('EU Money', 'de')) {
               return (Math.round(value * 100)/100).toFixed(2) + ' Dollar/Kopf';
             }
 

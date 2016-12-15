@@ -239,10 +239,22 @@ export default {
   },
 
   migrationIntensity: {
-    de: 'Migrationsintensität',
+    de: 'Index Migrationsintensität',
   },
 
   Authors: {
     de: 'AutorInnen',
+  },
+
+  'International aid': {
+    de: 'Internationale Hilfe aus EU-Staaten',
+  },
+
+  unknown: {
+    de: 'unbekannt',
+  },
+
+  sources: {
+    de: 'Quellen',
   },
 };

@@ -17,7 +17,7 @@ export default Chart.extend({
       data: {
         columns: [
           [i18n('Remittances')],
-          [i18n('EU Money')],
+          [i18n('International aid')],
         ],
         type : 'pie',
       },

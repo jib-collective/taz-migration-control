@@ -37,7 +37,7 @@ export default Backbone.View.extend({
     const options =  {
       autoplay: true,
       controls: false,
-      muted: true,
+      muted: false,
       sources: [
         {
           type: 'video/youtube',

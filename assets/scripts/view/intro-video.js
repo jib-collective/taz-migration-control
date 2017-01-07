@@ -41,7 +41,13 @@ export default Backbone.View.extend({
       sources: [
         {
           type: 'video/youtube',
-          src: 'https://www.youtube.com/watch?v=sOG3EhX6feY?modestbranding=1&&title=&controls=0&hd=1'
+          src: 'https://www.youtube.com/watch?v=sOG3EhX6feY',
+          youtube: {
+            controls: '0',
+            hd: '1',
+            modestbranding: '1',
+            title: '',
+          }
         }
       ],
       techOrder: [

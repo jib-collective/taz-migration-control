@@ -235,7 +235,7 @@ export default {
   },
 
   singlePayments: {
-    de: 'Gelder irregulärer Migration',
+    de: 'Zahlungen zur Verhinderung irregulärer Migration',
   },
 
   migrationIntensity: {

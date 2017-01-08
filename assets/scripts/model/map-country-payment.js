@@ -15,7 +15,6 @@ export default MapContryBase.extend({
       fillColor: 'rgb(255, 253, 56)',
       fillOpacity: .95,
     },
-    data: {},
   },
 
   /* update all country layers for a single year */
@@ -37,20 +36,14 @@ export default MapContryBase.extend({
         const center = geoJSON.getBounds().getCenter();
         const style = this.get('layerStyle');
         const radius = this.getRadius(this.get('year'));
-        const title = this._getDataValueForYear('singlePayments', this.get('year'));
         const layer = L.circleMarker(center, Object.assign(style, {radius}));
+        const tooltip = L.tooltip({
+          className: 'leaflet-payment-label',
+          direction: 'center',
+          permanent: true,
+        });
 
-        if (title) {
-          const tooltip = L.tooltip({
-            className: 'leaflet-payment-label',
-            direction: 'center',
-            permanent: true,
-          });
-
-          layer.bindTooltip(tooltip);
-          layer.setTooltipContent(`${title}`);
-        }
-
+        layer.bindTooltip(tooltip);
         this.set('layer', layer);
         this.updateLayer();
 
@@ -70,24 +63,65 @@ export default MapContryBase.extend({
     return range(value);
   },
 
+  getFontSize(type, year) {
+    let range = this.getRange([.9, 4]);
+    const value = this._getDataValueForYear('singlePayments', year);
+
+    if (type === 'unit') {
+      range = this.getRange([.6, .8]);
+    }
+
+    return range(value);
+  },
+
+  getTooltipContent(year) {
+    const title = this._getDataValueForYear('singlePayments', year);
+
+    if (!title) {
+      return false;
+    }
+
+    const titleFontSize = this.getFontSize('title', year);
+    const unitFontSize = this.getFontSize('unit', year);
+
+    const $title = $('<span/>')
+                    .addClass('leaflet-payment-label__value')
+                    .css('fontSize', `${titleFontSize}em`)
+                    .text(title);
+    const $unit = $('<span/>')
+                    .addClass('leaflet-payment-label__unit')
+                    .css('fontSize', `${unitFontSize}em`)
+                    .text('Mio');
+
+    $unit.appendTo($title);
+
+    return $title.get(0);
+  },
+
   /* update ODA layer */
   setLayerYear(year) {
     const layer = this.get('layer');
-    const title = this._getDataValueForYear('singlePayments', year);
 
-    if (layer) {
-      const radius = this.getRadius(year);
-
-      if (radius !== 0) {
-        layer.setStyle(this.get('layerStyle'));
-        layer.setRadius(radius);
-        layer.openTooltip();
-        layer.setTooltipContent(`${title}`);
-      } else {
-        layer.setStyle({fillOpacity: 0});
-        layer.closeTooltip();
-      }
+    if (!layer) {
+      return this;
     }
+
+    const content = this.getTooltipContent(year);
+    const radius = this.getRadius(year);
+
+    if (radius === 0 || content === false) {
+      layer.setStyle({fillOpacity: 0});
+      layer.closeTooltip();
+      return this;
+    }
+
+    if (!layer.isTooltipOpen()) {
+      layer.setStyle(this.get('layerStyle'));
+      layer.openTooltip();
+    }
+
+    layer.setRadius(radius);
+    layer.setTooltipContent(content);
 
     return this;
   },

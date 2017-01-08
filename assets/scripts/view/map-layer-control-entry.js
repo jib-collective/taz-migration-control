@@ -54,12 +54,13 @@ export default Backbone.View.extend({
     }
 
     const range = this.collection.models[0].getRange();
+    let ticks = 5;
 
     if (!range) {
       return;
     }
 
-    return range.ticks(5);
+    return range.ticks(ticks);
   },
 
   render() {

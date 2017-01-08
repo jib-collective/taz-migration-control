@@ -31,9 +31,14 @@ export default Backbone.Model.extend({
   /* get dataset for a single year */
   _getDataValueForYear(type, year) {
     const data = this.get('data');
+    const scoped = data[type] || undefined;
     let response;
 
-    _.forEach(data[type], item => {
+    if (!scoped) {
+      return false;
+    }
+
+    scoped.forEach(item => {
       if (_.keys(item)[0] == year) {
         response = item[year];
       }

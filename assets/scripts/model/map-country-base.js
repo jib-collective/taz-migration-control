@@ -32,19 +32,13 @@ export default Backbone.Model.extend({
   _getDataValueForYear(type, year) {
     const data = this.get('data');
     const scoped = data[type] || undefined;
-    let response;
 
-    if (!scoped) {
-      return false;
+    if (scoped === undefined) {
+      return;
     }
 
-    scoped.forEach(item => {
-      if (_.keys(item)[0] == year) {
-        response = item[year];
-      }
-    });
-
-    return response;
+    const result = scoped.find(item => Object.keys(item)[0] == year)
+    return Object.values(result)[0];
   },
 
   getMap() {

@@ -41,7 +41,8 @@ export default Chart.extend({
       tooltip: {
         format: {
           value: function (value, ratio, id) {
-            return (Math.round(value * 100)/100).toFixed(2) + ' Dollar/Kopf';
+            const dollar = (Math.round(value * 100)/100).toFixed(2);
+            return `${dollar} i18n('Dollar per capita')`;
           }
         }
       },

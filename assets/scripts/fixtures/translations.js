@@ -257,4 +257,12 @@ export default {
   sources: {
     de: 'Quellen',
   },
+
+  'Payments from EU countries': {
+    de: 'Zahlungen aus EU-Staaten',
+  },
+
+  'Dollar per capita': {
+    de: 'Dollar/ Kopf',
+  },
 };

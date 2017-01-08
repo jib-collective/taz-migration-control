@@ -27,7 +27,7 @@ export default Chart.extend({
         axes: {},
         columns: [
           [i18n('Migrationintensity')],
-          [i18n('EU Money')],
+          [i18n('Payments from EU countries')],
         ],
         types: {},
       },
@@ -40,8 +40,10 @@ export default Chart.extend({
       tooltip: {
         format: {
           value: function (value, ratio, id) {
-            if (id === i18n('EU Money', 'de')) {
-              return (Math.round(value * 100)/100).toFixed(2) + ' Dollar/Kopf';
+            if (id === i18n('Payments from EU countries')) {
+              const dollar = (Math.round(value * 100)/100).toFixed(2);
+              const label = i18n('Dollar per capita');
+              return  `${dollar} ${label}`;
             }
 
             return value;

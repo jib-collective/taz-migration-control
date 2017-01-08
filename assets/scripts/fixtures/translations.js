@@ -239,7 +239,7 @@ export default {
   },
 
   migrationIntensity: {
-    de: 'Index Migrationsintensität',
+    de: 'Migrationsintensität',
   },
 
   Authors: {

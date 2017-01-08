@@ -7,11 +7,17 @@
 
   &-control-attribution {
     &#{&} {
-      background: $color-app !important;
-      color: $text-color;
+      background: $color-app-medium-dark !important;
+      color: rgb(90, 90, 90);
+      opacity: .6;
 
       a {
         color: currentColor;
+
+        &:hover,
+        &:focus {
+          color: $text-color;
+        }
       }
     }
   }

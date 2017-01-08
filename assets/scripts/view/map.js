@@ -34,6 +34,7 @@ export default Backbone.View.extend({
     const options = this.model.get('mapOptions');
     const tileLayer = this.model.get('tileLayer');
     const tileOptions = this.model.get('tileLayerOptions');
+    const attribution = L.control.attribution();
     const view = this.model.get('view');
     const zoom = this.model.get('zoom');
     const targetContainer = this.$el.find('.map__container').get(0);
@@ -42,13 +43,18 @@ export default Backbone.View.extend({
 
     L.tileLayer(tileLayer, tileOptions).addTo(map);
 
+    attribution
+      .setPrefix('')
+      .addAttribution('<a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>')
+      .addAttribution('<a href="https://carto.com/attributions">CARTO</a>')
+      .addAttribution('<a href="/de/pages/quellen" data-module="page">' + i18n('sources') + '</a>');
+
+    attribution.addTo(map);
+
     map.setView(view);
     map.setZoom(zoom);
 
-    // todo: try to get rid of this
-    setTimeout(() => {
-      map.invalidateSize();
-    }, 20);
+    setTimeout(() => map.invalidateSize(), 20);
 
     return map;
   },

@@ -28,21 +28,25 @@ export default Backbone.View.extend({
     const min = this.model.get('min');
     const value = this.model.get('value');
     const ticks = _.range(min, max, 1);
+    const ticks_labels = _.times(max - min, index => {
+      if (index % 3 === 0) {
+        return min + index;
+      }
+
+      return '';
+    });
+
     this.range = new Range(this.$el.children('input').get(0), {
       min,
       max,
       ticks,
-      ticks_labels: ticks,
-      ticks_snap_bounds: 50,
-      tooltip: 'hide',
+      ticks_labels,
       value,
     });
 
     setTimeout(() => {
       this.range.refresh();
     }, 50);
-
-    this.delegateEvents();
 
     return this;
   },

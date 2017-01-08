@@ -13,7 +13,7 @@
   }
 
   &-handle {
-    background-color: $color-app-medium;
+    background-color: $color-attention;
     border-radius: 50%;
     height: 2rem;
     margin-left: -1rem;
@@ -41,5 +41,39 @@
 
   .hide {
     display: none;
+  }
+
+  // Tooltip
+  .tooltip {
+    background-color: $color-attention;
+    border-radius: 3px;
+    color: $text-color-inverse;
+    font-family: $font-family-sans-serif;
+    font-size: .7rem;
+    font-weight: $weight-sans-serif-bold;
+    letter-spacing: .02rem;
+    opacity: 0;
+    padding: .3rem;
+    position: absolute;
+    text-transform: uppercase;
+    top: -3.2rem;
+    z-index: 100;
+
+    &-arrow {
+      border-color: transparent;
+      border-style: solid;
+      border-top-color: $color-attention;
+      border-width: .35rem .35rem 0;
+      bottom: -.35rem;
+      height: .35rem;
+      left: 50%;
+      position: absolute;
+      transform: translateX(-50%);
+      width: .35rem;
+    }
+
+    &.in {
+      opacity: 1;
+    }
   }
 }

@@ -1,7 +1,20 @@
 .layer-control-toggle {
-  background-color: $color-attention;
+  background-color: rgba(red($color-attention),
+                         green($color-attention),
+                         blue($color-attention),
+                         .8);
   border-radius: 0 0 .4rem .4rem;
   color: $text-color-inverse;
-  padding: .3rem 1rem;
+  cursor: pointer;
+  left: 50%;
+  margin-top: -1px; // todo: why is that?
+  padding: 0 .8rem .3rem .8rem;
+  position: relative;
   text-align: center;
+  transform: translateX(-50%);
+
+  &__icon {
+    height: .8rem;
+    width: 1rem;
+  }
 }

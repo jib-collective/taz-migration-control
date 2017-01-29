@@ -3,12 +3,11 @@
   margin: 0;
   padding-left: 0;
 
-  @include small {
-    border-radius: .5rem;
-  }
-
   &__item {
-    background-color: $color-attention;
+    background-color: rgba(red($color-attention),
+                           green($color-attention),
+                           blue($color-attention),
+                           .8);
     cursor: pointer;
     display: none;
     user-select: none;
@@ -22,10 +21,10 @@
       cursor: pointer;
       display: block;
       font-family: $font-family-sans-serif;
-      font-size: .7rem;
-      font-weight: $weight-sans-serif-medium;
+      font-size: .8rem;
+      font-weight: $weight-sans-serif-bold;
       letter-spacing: .05rem;
-      padding: .3rem 1.5rem;
+      padding: .45rem 1rem;
       text-align: center;
       text-transform: uppercase;
 

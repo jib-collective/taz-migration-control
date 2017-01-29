@@ -1,5 +1,6 @@
 import _ from 'underscore';
 import $ from 'jquery';
+import {icon, toggle} from 'lib/icon';
 import Backbone from 'backbone';
 import DetentionCollection from 'collection/map-detention';
 import MigrationIntensityCollection from 'collection/map-intensity';
@@ -40,7 +41,9 @@ export default Backbone.View.extend({
   },
 
   render() {
-    this.$el.html(this.template());
+    this.$el.html(this.template({
+      icon,
+    }));
 
     [
       'singlePayments',
@@ -88,7 +91,7 @@ export default Backbone.View.extend({
     <ul class="layer-control"></ul>
     <button type="button"
             class="layer-control-toggle">
-      // Icon
+      <%= icon('chevron-down', 'layer-control-toggle__icon') %>
       <span class="visually-hidden">Toggle map layer</span>
     </button>
   `)

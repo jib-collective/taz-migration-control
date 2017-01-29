@@ -48,27 +48,11 @@ export default Backbone.View.extend({
     return this.render();
   },
 
-  renderScale() {
-    if (!this.collection.models || !this.collection.models.length > 0) {
-      return this;
-    }
-
-    const range = this.collection.models[0].getRange();
-    let ticks = 5;
-
-    if (!range) {
-      return;
-    }
-
-    return range.ticks(ticks);
-  },
-
   render() {
     this.$el.html(this.template({
       i18n,
       key: this.model.get('key'),
       active: this.model.get('active'),
-      scale: this.renderScale(),
     }));
 
     this.$el.toggleClass('layer-control__item--active', this.model.get('active'));
@@ -86,18 +70,11 @@ export default Backbone.View.extend({
 
   addLayer() {
     return this.collection.load()
-      .then(() => {
-        this.collection.models.forEach(model => {
-          model.addLayer();
-        });
-      });
+      .then(() => this.collection.models.forEach(model => model.addLayer()));
   },
 
   removeLayer() {
-    this.collection.models.forEach(model => {
-      model.removeLayer();
-    });
-
+    this.collection.models.forEach(model => model.removeLayer());
     return this;
   },
 

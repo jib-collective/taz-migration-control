@@ -94,15 +94,15 @@ export default Backbone.View.extend({
       }, attrs);
 
       const view = new LayerControlItem(viewAttrs);
-      view.$el.appendTo(this.$el.children('.layer-control'));
 
       // reset open states, when selecting a layer
       view.listenTo(view.model, 'change:active', (model, value) => {
         if (value === true) {
-          this.$el.find('.layer-control').children().removeClass(ITEM_OPEN_CLASS);
+          _.forEach(this.layer, layer => layer.$el.removeClass(ITEM_OPEN_CLASS));
         }
       });
 
+      view.$el.appendTo(this.$el.children('.layer-control'));
       this.layer[key] = view;
     });
 

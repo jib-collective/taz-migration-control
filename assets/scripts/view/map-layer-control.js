@@ -7,11 +7,14 @@ import MigrationIntensityCollection from 'collection/map-intensity';
 import PaymentCollection from 'collection/map-payment';
 import LayerControlItem from 'view/map-layer-control-entry';
 
+const ITEM_OPEN_CLASS = 'layer-control__item--open';
+
 export default Backbone.View.extend({
   className: 'map__layer-control',
 
   events: {
     'change input[type="radio"]': 'toggleLayer',
+    'click [data-toggle]': 'toggleLayerView',
   },
 
   toggleLayer(event) {
@@ -20,6 +23,15 @@ export default Backbone.View.extend({
     const name = $target.attr('value');
 
     return this._setActiveAllLayer(name);
+  },
+
+  toggleLayerView(event) {
+    event.preventDefault();
+
+    const $target = $(event.target);
+    const $items = $target.prev().children();
+
+    $items.toggleClass(ITEM_OPEN_CLASS);
   },
 
   _setActiveAllLayer(name) {
@@ -47,7 +59,7 @@ export default Backbone.View.extend({
 
     [
       'singlePayments',
-      'migrationIntensity',
+      'indexMigrationIntensity',
       'detentionCenter',
     ].forEach((key, index) => {
       let attrs;
@@ -60,7 +72,7 @@ export default Backbone.View.extend({
           };
           break;
 
-        case 'migrationIntensity':
+        case 'indexMigrationIntensity':
           attrs = {
             collection: new MigrationIntensityCollection([], collectionAttrs),
           };
@@ -73,6 +85,8 @@ export default Backbone.View.extend({
           break;
       }
 
+      attrs.index = index + 1;
+
       const viewAttrs = Object.assign({
         map: this.options.map,
         key,
@@ -81,6 +95,14 @@ export default Backbone.View.extend({
 
       const view = new LayerControlItem(viewAttrs);
       view.$el.appendTo(this.$el.children('.layer-control'));
+
+      // reset open states, when selecting a layer
+      view.listenTo(view.model, 'change:active', (model, value) => {
+        if (value === true) {
+          this.$el.find('.layer-control').children().removeClass(ITEM_OPEN_CLASS);
+        }
+      });
+
       this.layer[key] = view;
     });
 
@@ -89,8 +111,10 @@ export default Backbone.View.extend({
 
   template: _.template(`
     <ul class="layer-control"></ul>
+
     <button type="button"
-            class="layer-control-toggle">
+            class="layer-control-toggle"
+            data-toggle>
       <%= icon('chevron-down', 'layer-control-toggle__icon') %>
       <span class="visually-hidden">Toggle map layer</span>
     </button>

@@ -12,7 +12,8 @@
     display: none;
     user-select: none;
 
-    &--active {
+    &--active,
+    &--open {
       display: block;
     }
 
@@ -21,16 +22,29 @@
       cursor: pointer;
       display: block;
       font-family: $font-family-sans-serif;
-      font-size: .8rem;
+      font-size: .9rem;
       font-weight: $weight-sans-serif-bold;
       letter-spacing: .05rem;
-      padding: .45rem 1rem;
+      padding: .4rem 1rem;
       text-align: center;
       text-transform: uppercase;
 
       > input {
         display: none;
       }
+    }
+
+    &-index {
+      border: 2px solid currentColor;
+      border-radius: 50%;
+      display: inline-block;
+      font-size: .75em;
+      height: 1.2rem;
+      line-height: 1;
+      margin-right: .2rem;
+      padding: .2rem .1rem .1rem .1rem;
+      vertical-align: middle;
+      width: 1.2rem;
     }
   }
 
@@ -49,7 +63,7 @@
   }
 
   &__item + &__item {
-    border-top: 1px solid $color-app-medium-dark;
+    border-top: 2px solid $color-app-medium-dark;
   }
 
   &__scale {

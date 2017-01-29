@@ -234,8 +234,8 @@ export default {
     de: 'Zahlungen zur Verhinderung irregulärer Migration',
   },
 
-  migrationIntensity: {
-    de: 'Migrationsintensität',
+  indexMigrationIntensity: {
+    de: 'Index Migrationsintensität',
   },
 
   Authors: {

@@ -53,6 +53,7 @@ export default Backbone.View.extend({
       i18n,
       key: this.model.get('key'),
       active: this.model.get('active'),
+      index: this.model.get('index'),
     }));
 
     this.$el.toggleClass('layer-control__item--active', this.model.get('active'));
@@ -84,6 +85,10 @@ export default Backbone.View.extend({
              name="layer-control"
              value="<%= key %>"
              <% if (active) { %> selected <% }%> />
+
+      <span class="layer-control__item-index">
+        <%= index %>
+      </span>
 
       <%= i18n(this.model.get('key')) %>
     </label>

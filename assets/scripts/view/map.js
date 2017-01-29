@@ -51,7 +51,7 @@ export default Backbone.View.extend({
     .addTo(map);
 
     map
-    .setView(view);
+    .setView(view)
     .setZoom(zoom);
 
     setTimeout(() => map.invalidateSize(), 20);

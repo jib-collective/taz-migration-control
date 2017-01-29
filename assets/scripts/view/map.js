@@ -44,15 +44,15 @@ export default Backbone.View.extend({
     L.tileLayer(tileLayer, tileOptions).addTo(map);
 
     attribution
-      .setPrefix('')
-      .addAttribution('<a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>')
-      .addAttribution('<a href="https://carto.com/attributions">CARTO</a>')
-      .addAttribution('<a href="/de/pages/quellen" data-module="page">' + i18n('sources') + '</a>');
+    .setPrefix('')
+    .addAttribution('<a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>')
+    .addAttribution('<a href="https://carto.com/attributions">CARTO</a>')
+    .addAttribution(`<a href="/de/pages/quellen" data-module="page">${i18n('sources')}</a>`)
+    .addTo(map);
 
-    attribution.addTo(map);
-
-    map.setView(view);
-    map.setZoom(zoom);
+    map
+    .setView(view);
+    .setZoom(zoom);
 
     setTimeout(() => map.invalidateSize(), 20);
 

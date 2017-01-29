@@ -86,5 +86,10 @@ export default Backbone.View.extend({
 
   template: _.template(`
     <ul class="layer-control"></ul>
+    <button type="button"
+            class="layer-control-toggle">
+      // Icon
+      <span class="visually-hidden">Toggle map layer</span>
+    </button>
   `)
 });

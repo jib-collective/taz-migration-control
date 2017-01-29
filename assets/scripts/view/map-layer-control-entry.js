@@ -71,6 +71,8 @@ export default Backbone.View.extend({
       scale: this.renderScale(),
     }));
 
+    this.$el.toggleClass('layer-control__item--active', this.model.get('active'));
+
     if (this.model.get('active') && this.model.get('key') !== 'detentionCenter') {
       if (this.slider) {
         this.slider.render().$el.appendTo(this.options.map.getContainer());
@@ -100,7 +102,7 @@ export default Backbone.View.extend({
   },
 
   template: _.template(`
-    <label class="layer-control__item-title <% if (active) { %> layer-control__item-title--active <% }%>">
+    <label class="layer-control__item-title">
       <input type="radio"
              name="layer-control"
              value="<%= key %>"

@@ -108,48 +108,5 @@ export default Backbone.View.extend({
 
       <%= i18n(this.model.get('key')) %>
     </label>
-
-    <% if (active && scale && _.isArray(scale)) { %>
-      <div class="layer-control__scale">
-        <% if (key === 'singlePayments') { %>
-          <span class="layer-control__scale-label layer-control__scale-label--min">
-            0.5 Mio.
-          </span>
-
-          <% _.each(scale, function(value) { %>
-            <div class="layer-control__scale-item layer-control__scale-item--singlePayments"
-                 style="width: <%= value/2000 %>rem; height: <%= value/2000 %>rem;">
-              <span class="visually-hidden">
-                <%= value %>
-              </span>
-            </div>
-          <% }) %>
-
-          <span class="layer-control__scale-label layer-control__scale-label--max">
-            <%= _.max(scale) %> Mio.
-          </span>
-        <% } %>
-
-        <% if (key === 'migrationIntensity') { %>
-          <span class="layer-control__scale-label layer-control__scale-label--min">
-            <%= _.min(scale) %>
-          </span>
-
-          <% _.each(scale, function(value) { %>
-            <div class="layer-control__scale-item layer-control__scale-item--migrationIntensity"
-                 style="opacity: <%= value/_.max(scale) %>">
-              <span class="visually-hidden">
-                <%= value %>
-              </span>
-            </div>
-          <% }) %>
-
-          <span class="layer-control__scale-label layer-control__scale-label--max">
-            <%= _.max(scale) %>
-          </span>
-
-        <% } %>
-      </div>
-    <% } %>
   `),
 });

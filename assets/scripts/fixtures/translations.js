@@ -150,10 +150,6 @@ export default {
     de: 'Einleitung',
   },
 
-  'Who gets paid to stop the worlds refugees?': {
-    de: 'Wer wird bezahlt, um die Geflüchteten der Welt zu stoppen?'
-  },
-
   egypt: {
     de: 'aegypten',
   },

@@ -5,30 +5,6 @@
     height: 82vh;
   }
 
-  &__title {
-    color: $text-color-bright;
-    font-family: $font-family-serif;
-    font-size: 1.2rem;
-    font-weight: $weight-serif-bold;
-    left: 50%;
-    line-height: 1.2;
-    margin-bottom: 0;
-    margin-top: 0;
-    max-width: 90%;
-    padding-top: 0;
-    position: absolute;
-    text-align: center;
-    top: 1rem;
-    transform: translateX(-50%);
-    width: 100%;
-    z-index: 500;
-
-    @include small {
-      font-size: 2.1rem;
-      top: 0;
-    }
-  }
-
   &__container.leaflet-container {
     background-color: lighten($color-app, 5%);
     min-height: 82vh;

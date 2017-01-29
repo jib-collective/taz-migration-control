@@ -76,9 +76,6 @@ export default Backbone.View.extend({
   },
 
   template: _.template(`
-    <h1 class="map__title">
-      <%= i18n('Who gets paid to stop the worlds refugees?') %>
-    </h1>
     <div class="map__container"></div>
   `),
 });

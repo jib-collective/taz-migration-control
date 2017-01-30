@@ -3,11 +3,11 @@
                          green($color-attention),
                          blue($color-attention),
                          .8);
+  border: none;
   border-radius: 0 0 .4rem .4rem;
   color: $text-color-inverse;
   cursor: pointer;
   left: 50%;
-  margin-top: -2px; // todo: why is that?
   padding: 0 .8rem .3rem .8rem;
   position: relative;
   text-align: center;

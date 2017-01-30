@@ -12,38 +12,51 @@ export default Backbone.View.extend({
   initialize(options) {
     this.options = options;
     this.model = new MapControlItem(options);
-    this.listenTo(this.model, 'change:active', () => this.render());
+    this.listenTo(this.model, 'change:active', this.render);
+    this.listenTo(this.options.collection, 'sync', () => this.addSlider());
 
-    // initialize the slider
-    this.listenTo(this.options.collection, 'sync', () => {
-      if (this.model.get('key') === 'detentionCenter') {
-        return;
-      }
-
-      const key = this.model.get('key');
-      const min = this.collection.getStartYear(key);
-      const max = this.collection.getEndYear(key);
-
-      this.slider = new SliderView({
-        min: min,
-        max: max,
-        value: max,
-      });
-
-      // set initial year
-      this.collection.setYear(this.slider.model.get('value'));
-
-      // listen for year changes
-      this.listenTo(this.slider.model, 'change:value', (model, value) => {
-        this.collection.setYear(value);
-      });
-
-      this.render();
-    });
-
-    if (this.model.get('active')) {
+    if (this.isActive()) {
       this.addLayer();
     }
+
+    return this.render();
+  },
+
+  isDetentionCenter() {
+    return this.model.get('key') === 'detentionCenter';
+  },
+
+  isActive() {
+    return this.model.get('active') === true;
+  },
+
+  addSlider() {
+    if (this.isDetentionCenter()) {
+      return;
+    }
+
+    // cleanup previously created sliders
+    if (this.slider) {
+      this.slider.remove();
+    }
+
+    const key = this.model.get('key');
+    const min = this.collection.getStartYear(key);
+    const max = this.collection.getEndYear(key);
+
+    this.slider = new SliderView({
+      min,
+      max,
+      value: max,
+    });
+
+    // set initial year
+    this.collection.setYear(max);
+
+    // listen for year changes
+    this.listenTo(this.slider.model, 'change:value', (model, value) => {
+      this.collection.setYear(value);
+    });
 
     return this.render();
   },
@@ -56,9 +69,9 @@ export default Backbone.View.extend({
       index: this.model.get('index'),
     }));
 
-    this.$el.toggleClass('layer-control__item--active', this.model.get('active'));
+    this.$el.toggleClass('layer-control__item--active', this.isActive());
 
-    if (this.model.get('active') && this.model.get('key') !== 'detentionCenter') {
+    if (this.isActive() && !this.isDetentionCenter()) {
       if (this.slider) {
         this.slider.render().$el.appendTo(this.options.map.getContainer());
       }
@@ -70,11 +83,13 @@ export default Backbone.View.extend({
   },
 
   addLayer() {
+    this.model.set('active', true);
     return this.collection.load()
       .then(() => this.collection.models.forEach(model => model.addLayer()));
   },
 
   removeLayer() {
+    this.model.set('active', false);
     this.collection.models.forEach(model => model.removeLayer());
     return this;
   },

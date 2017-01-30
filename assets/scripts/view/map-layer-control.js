@@ -18,10 +18,7 @@ export default Backbone.View.extend({
   },
 
   toggleLayer(event) {
-    const $target = $(event.target);
-    const active = $target.prop('selected');
-    const name = $target.attr('value');
-
+    const name = $(event.target).attr('value');
     return this._setActiveAllLayer(name);
   },
 
@@ -36,13 +33,7 @@ export default Backbone.View.extend({
 
   _setActiveAllLayer(name) {
     return _.forEach(this.layer, (view, index) => {
-      if (index === name) {
-        return view.addLayer()
-          .then(() => view.model.set('active', true));
-      } else {
-        view.removeLayer();
-        view.model.set('active', false)
-      }
+      index === name ? view.addLayer() : view.removeLayer();
     });
   },
 

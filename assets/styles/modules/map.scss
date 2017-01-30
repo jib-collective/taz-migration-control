@@ -12,13 +12,16 @@
   }
 
   &__slider {
-    bottom: 1.5rem;
+    background-color: rgba(0, 0, 0, .7);
+    bottom: 0;
     display: none;
-    left: 50%;
+    left: 0;
+    padding-left: 2rem;
+    padding-right: 2rem;
+    padding-top: 1.5rem;
     position: absolute;
-    transform: translateX(-50%);
-    width: 40%;
-    z-index: 1000;
+    width: 100%;
+    z-index: 800;
 
     @include small {
       display: block;
@@ -33,5 +36,11 @@
     top: 0;
     width: 100%;
     z-index: 1000;
+  }
+
+  &__attribution {
+    bottom: 16rem !important;
+    transform: rotate(-90deg) translateY(-100%);
+    transform-origin: 100% 0;
   }
 }

@@ -73,7 +73,8 @@ export default Backbone.View.extend({
 
     if (this.isActive() && !this.isDetentionCenter()) {
       if (this.slider) {
-        this.slider.render().$el.appendTo(this.options.map.getContainer());
+        const sliderTarget = this.options.map.getContainer().parentNode;
+        this.slider.render().$el.appendTo(sliderTarget);
       }
     } else if (this.slider) {
       this.slider.remove();

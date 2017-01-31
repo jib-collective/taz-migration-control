@@ -89,7 +89,7 @@ export default Backbone.View.extend({
   template: _.template(`
     <button class="sub-navigation__title"
             data-module="toggle">
-      <span>Lorem ipsum</span>
+      <span></span>
       <%= icon('chevron-down', 'sub-navigation__toggle-icon') %>
     </button>
     <div class="sub-navigation__list-container"></div>

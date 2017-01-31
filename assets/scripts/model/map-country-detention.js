@@ -19,7 +19,7 @@ export default MapContryBase.extend({
 
     layer.bindPopup(title);
 
-    this.set('layer', layer);
+    this.set({layer});
     return MapContryBase.prototype.addLayer.call(this);
   },
 });

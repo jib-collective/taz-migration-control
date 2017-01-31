@@ -20,12 +20,7 @@ export default Backbone.Model.extend({
 
   getRange(range = [0, 1]) {
     const scale = this.get('layerScale');
-
-    if (!scale) {
-      return;
-    }
-
-    return d3.scale.linear().domain(scale).range(range);
+    return scale ? d3.scale.linear().domain(scale).range(range) : undefined;
   },
 
   /* get dataset for a single year */

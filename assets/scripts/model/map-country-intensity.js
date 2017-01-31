@@ -21,7 +21,8 @@ export default MapContryBase.extend({
   /* draw intensity layer */
   addLayer() {
     const fetchGeoData = () => {
-      const slug = i18n(limax(this.get('name')), 'de');
+      const name = this.get('name');
+      const slug = i18n(limax(name), 'de');
       return $.getJSON(`/data/geo/${slug}.geojson`);
     };
 
@@ -32,7 +33,7 @@ export default MapContryBase.extend({
         const opts = Object.assign(style, {className});
         const layer = L.geoJson(data, opts);
 
-        this.set('layer', layer);
+        this.set({layer});
         this.updateLayer();
 
         return MapContryBase.prototype.addLayer.call(this);
@@ -40,8 +41,9 @@ export default MapContryBase.extend({
   },
 
   getScale(year) {
+    const type = 'migrationIntensity';
     const range = this.getRange();
-    const value = this._getDataValueForYear('migrationIntensity', year);
+    const value = this._getDataValueForYear(type, year);
 
     return range(value);
   },

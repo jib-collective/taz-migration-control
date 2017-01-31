@@ -26,7 +26,8 @@ export default MapContryBase.extend({
 
   addLayer() {
     const fetchGeoData = () => {
-      const slug = i18n(limax(this.get('name')), 'de');
+      const name = this.get('name');
+      const slug = i18n(limax(name), 'de');
       return $.getJSON(`/data/geo/${slug}.geojson`);
     };
 
@@ -53,8 +54,9 @@ export default MapContryBase.extend({
 
   /* calculate radius for an oda bubble for a single year */
   getRadius(year) {
+    const type = 'singlePayments';
     const range = this.getRange([25, 150]);
-    const value = this._getDataValueForYear('singlePayments', year);
+    const value = this._getDataValueForYear(type, year);
 
     if (!value) {
       return 0;
@@ -64,13 +66,9 @@ export default MapContryBase.extend({
   },
 
   getFontSize(type, year) {
-    let range = this.getRange([.9, 4]);
+    const scaling = type === 'unit' ? [.6, .8] : [.9, 4];
+    const range = this.getRange(scaling);
     const value = this._getDataValueForYear('singlePayments', year);
-
-    if (type === 'unit') {
-      range = this.getRange([.6, .8]);
-    }
-
     return range(value);
   },
 

@@ -24,13 +24,13 @@ export default Backbone.View.extend({
   render() {
     this.$el.html(this.template(this));
 
-    const max = this.model.get('max') + 1;
+    const max = this.model.get('max');
     const min = this.model.get('min');
     const value = this.model.get('value');
-    const ticks = _.range(min, max, 1);
-    const ticks_labels = _.times(max - min, index => {
-      if (index % 3 === 0) {
-        return min + index;
+    const ticks = _.range(min, max + 1, 1);
+    const ticks_labels = ticks.map(tick => {
+      if (tick === min || tick === max) {
+        return tick;
       }
 
       return '';

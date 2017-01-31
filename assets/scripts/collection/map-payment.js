@@ -10,12 +10,13 @@ export default BaseCollection.extend({
     this.options = options;
     this._cache = {};
 
+    const dataType = 'singlePayments';
+
     this.on('sync', () => {
       this.models.forEach(model => {
-        model.set({
-          layerScale: this._getDataRange('singlePayments'),
-          year: 2016,
-        });
+        const layerScale = this._getDataRange(dataType);
+        const year = this.getEndYear(dataType);
+        model.set({layerScale, year});
       });
     });
 

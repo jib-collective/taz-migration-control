@@ -8,12 +8,13 @@ export default BaseCollection.extend({
   initialize(data, options) {
     this._cache = {};
 
+    const dataType = 'migrationIntensity';
+
     this.on('sync', () => {
       _.forEach(this.models, model => {
-        model.set({
-          layerScale: this._getDataRange('migrationIntensity'),
-          year: 2015,
-        });
+        const layerScale = this._getDataRange(dataType);
+        const year = this.getEndYear(dataType);
+        model.set({layerScale, year});
       });
     });
 

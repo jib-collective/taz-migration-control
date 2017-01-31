@@ -5,6 +5,7 @@ import Backbone from 'backbone';
 export default Backbone.Collection.extend({
   initialize(data, options) {
     this.options = options;
+    this._cache = {};
     return this;
   },
 
@@ -37,40 +38,24 @@ export default Backbone.Collection.extend({
   },
 
   setYear(year) {
-    this.models.forEach(model => {
-      model.set({
-        year,
-      });
-    });
+    this.models.forEach(model => model.set({year}));
   },
 
   _getDataRange(type) {
-    let max = 0;
-    let min;
+    // if data was cached, just return it
+    if (this._cache[`data-${type}`]) {
+      return this._cache[`data-${type}`];
+    }
 
-    this.models.forEach(country => {
-      const data = country.get('data');
-      const dataSet = data[type] || {};
-
-      _.forEach(dataSet, item => {
-        const value = _.values(item)[0];
-
-        if (!min) {
-          min = value
-        } else if (value < min) {
-          min = value;
-        }
-
-        if (value > max) {
-          max = value;
-        }
-      });
+    let values = this.models.map(country => {
+      const data = country.get('data')[type] || {};
+      return _.map(data, item => _.values(item)[0]);
     });
 
-    return [
-      min,
-      max,
-    ];
+    values = _.flatten(values);
+
+    // cache results
+    return this._cache[`data-${type}`] = [_.min(values), _.max(values)];
   },
 
   getStartYear(type) {

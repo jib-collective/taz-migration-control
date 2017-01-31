@@ -8,6 +8,7 @@ export default BaseCollection.extend({
 
   initialize(data, options) {
     this.options = options;
+    this._cache = {};
 
     this.on('sync', () => {
       this.models.forEach(model => {

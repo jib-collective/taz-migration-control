@@ -6,6 +6,8 @@ export default BaseCollection.extend({
   model: Country,
 
   initialize(data, options) {
+    this._cache = {};
+
     this.on('sync', () => {
       _.forEach(this.models, model => {
         model.set({

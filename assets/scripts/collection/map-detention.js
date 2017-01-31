@@ -7,6 +7,7 @@ export default Backbone.Collection.extend({
 
   initialize(data, options) {
     this.options = options;
+    this._cache = {};
     return this;
   },
 

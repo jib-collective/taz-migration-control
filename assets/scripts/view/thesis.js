@@ -29,15 +29,17 @@ export default Backbone.View.extend({
         api: this.options.api,
         model
       });
-      view.render().$el.appendTo(this.$el);
+      view.render().$el.appendTo(this.$el.children('.app__content'));
     });
 
     return this;
   },
 
   template: _.template(`
-    <h1 class="visually-hidden">
-      <%= i18n('Theses') %>
-    </h1>
+    <div class="app__content">
+      <h1 class="visually-hidden">
+        <%= i18n('Theses') %>
+      </h1>
+    </div>
   `),
 });

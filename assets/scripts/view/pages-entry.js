@@ -39,12 +39,14 @@ export default Backbone.View.extend({
   },
 
   template: _.template(`
-    <h1 class="article__title">
-      <%= model.getTitle() %>
-    </h1>
+    <div class="app__content">
+      <h1 class="article__title">
+        <%= model.getTitle() %>
+      </h1>
 
-    <div class="article__corpus article__corpus--open">
-      <%= model.getText() %>
+      <div class="article__corpus article__corpus--open">
+        <%= model.getText() %>
+      </div>
     </div>
   `),
 });

@@ -39,40 +39,42 @@ export default BaseView.extend({
   },
 
   template: _.template(`
-    <div class="article">
-      <% if (this.model.get('headline')) { %>
-        <h1 class="article__title">
-          <%= this.model.get('headline') %>
-        </h1>
-      <% } %>
+    <div class="app__content">
+      <div class="article">
+        <% if (this.model.get('headline')) { %>
+          <h1 class="article__title">
+            <%= this.model.get('headline') %>
+          </h1>
+        <% } %>
 
-      <% if (this.model.get('lead')) { %>
-        <p class="article__lead">
-          <%= this.model.get('lead') %>
-        </p>
-      <% } %>
+        <% if (this.model.get('lead')) { %>
+          <p class="article__lead">
+            <%= this.model.get('lead') %>
+          </p>
+        <% } %>
 
-      <% if (this.model.get('corpus')) { %>
-        <div class="article__corpus article__corpus--open">
-          <%= this.model.get('corpus') %>
+        <% if (this.model.get('corpus')) { %>
+          <div class="article__corpus article__corpus--open">
+            <%= this.model.get('corpus') %>
 
-          <% if (this.model.get('authors')) { %>
-            <small class="article__authors-container">
-              <strong>
-                <%= i18n('Authors') %>:
-              </strong>
-              <%= renderAuthors(this.model.get('authors')) %>
-            </small>
-          <% } %>
-        </div>
-      <% } %>
+            <% if (this.model.get('authors')) { %>
+              <small class="article__authors-container">
+                <strong>
+                  <%= i18n('Authors') %>:
+                </strong>
+                <%= renderAuthors(this.model.get('authors')) %>
+              </small>
+            <% } %>
+          </div>
+        <% } %>
 
-      <% if (this.model.get('treaties')) { %>
-        <h2 class="visually-hidden">
-          <%= i18n('Treaties') %>
-        </h2>
-        <%= renderTreatyList(this.model.get('treaties')) %>
-      <% } %>
+        <% if (this.model.get('treaties')) { %>
+          <h2 class="visually-hidden">
+            <%= i18n('Treaties') %>
+          </h2>
+          <%= renderTreatyList(this.model.get('treaties')) %>
+        <% } %>
+      </div>
     </div>
   `),
 

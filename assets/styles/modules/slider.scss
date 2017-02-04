@@ -6,7 +6,7 @@
   position: relative;
   user-select: none;
   vertical-align: middle;
-  width: 85%;
+  width: 80%;
 
   @include small {
     width: 70%;
@@ -45,7 +45,30 @@
   &-tick-label {
     cursor: pointer;
     display: inline-block;
+    position: relative;
     text-align: center;
+  }
+
+  &-tick-label:empty {
+    &:before {
+      border-left: 2px solid $text-color;
+      content: ' ';
+      height: .75rem;
+      left: 50%;
+      position: absolute;
+      top: -2rem;
+      transform: translateX(-50%);
+    }
+  }
+
+  &-tick-label:empty:nth-child(odd) {
+    &:before {
+      display: none;
+
+      @include small {
+        display: block;
+      }
+    }
   }
 
   .hide {

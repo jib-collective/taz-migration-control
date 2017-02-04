@@ -22,12 +22,16 @@
       cursor: pointer;
       display: block;
       font-family: $font-family-sans-serif;
-      font-size: .9rem;
+      font-size: .7rem;
       font-weight: $weight-sans-serif-bold;
       letter-spacing: .05rem;
       padding: .4rem 1rem;
       text-align: center;
       text-transform: uppercase;
+
+      @include small {
+        font-size: .9rem;
+      }
 
       > input {
         display: none;
@@ -35,16 +39,23 @@
     }
 
     &-index {
-      border: 2px solid currentColor;
+      border: 1px solid currentColor;
       border-radius: 50%;
       display: inline-block;
       font-size: .75em;
-      height: 1.2rem;
+      font-weight: $weight-sans-serif-bold;
+      height: 1rem;
       line-height: 1;
       margin-right: .2rem;
       padding: .2rem .1rem .1rem .1rem;
       vertical-align: middle;
-      width: 1.2rem;
+      width: 1rem;
+
+      @include small {
+        border-width: 2px;
+        height: 1.2rem;
+        width: 1.2rem;
+      }
     }
   }
 

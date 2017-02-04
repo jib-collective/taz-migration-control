@@ -1,4 +1,10 @@
 .article {
+  &--finding {
+    background-color: $color-app-medium-dark;
+    padding-bottom: 2rem;
+    padding-top: 2rem;
+  }
+
   &__title {
     font-family: $font-family-serif;
     font-size: 1.4rem;

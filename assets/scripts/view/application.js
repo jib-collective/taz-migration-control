@@ -150,9 +150,10 @@ export default Backbone.View.extend({
       });
       const options = Object.assign({collection}, this._globalCtx);
       const subnav = new SubNavigation(options);
+      const $target = this.$el.find('.app__subnav-container');
 
       this.model.set('subnav', subnav);
-      subnav.$el.prependTo(this.$el.find('.app__main'));
+      subnav.$el.appendTo($target);
     }
 
     return this;
@@ -180,8 +181,9 @@ export default Backbone.View.extend({
 
     /* build content view */
     const view = new this.views[viewName](this._globalCtx);
+    const $target = this.$el.find('.app__main');
     this.model.set('activeView', view);
-    view.$el.appendTo(this.$el.find('.app__main'));
+    view.$el.appendTo($target);
 
     /* build content subnavigation */
     this.buildSubnav(view);
@@ -190,6 +192,10 @@ export default Backbone.View.extend({
   },
 
   template: _.template(`
-    <main class="app__main"></main>
+    <main class="app__main">
+      <div class="app__content">
+        <div class="app__subnav-container"></div>
+      </div>
+    </main>
   `),
 });

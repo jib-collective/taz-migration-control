@@ -6,7 +6,11 @@
   position: relative;
   user-select: none;
   vertical-align: middle;
-  width: 70%;
+  width: 85%;
+
+  @include small {
+    width: 70%;
+  }
 
   &-track {
     background-color: $text-color;

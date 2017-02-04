@@ -14,18 +14,11 @@
   &__slider {
     background-color: rgba(0, 0, 0, .7);
     bottom: 0;
-    display: none;
     left: 0;
-    padding-left: 2rem;
-    padding-right: 2rem;
     padding-top: 1.5rem;
     position: absolute;
     width: 100%;
     z-index: 800;
-
-    @include small {
-      display: block;
-    }
   }
 
   &__layer-control {

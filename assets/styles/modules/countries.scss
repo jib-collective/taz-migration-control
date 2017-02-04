@@ -15,6 +15,11 @@
       @include small {
         font-size: 1.4rem;
       }
+
+      &--no-spacing {
+        margin-bottom: 0;
+        margin-top: 0;
+      }
     }
   }
 }

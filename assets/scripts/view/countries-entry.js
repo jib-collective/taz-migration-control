@@ -32,40 +32,48 @@ export default CountryBaseView.extend({
       <%= i18n('Introduction') %>
     </h2>
 
-    <div class="article">
-      <% if (this.model.attributes.finding) { %>
-        <div class="countries__block">
-          <h3 class="article__title">
-            <%= this.model.getFinding('headline') %>
-          </h3>
+    <% if (this.model.attributes.finding) { %>
+      <article class="article article--finding">
+        <div class="app__content">
+          <h2 class="countries__block-title countries__block-title--no-spacing">
+            <%= i18n('Finding') %>
+          </h2>
 
-          <p class="article__lead">
-            <%= this.model.getFinding('lead') %>
-          </p>
+          <div class="countries__block">
+            <h3 class="article__title">
+              <%= this.model.getFinding('headline') %>
+            </h3>
 
-          <div class="article__corpus">
-            <%= this.model.getFinding('corpus') %>
+            <p class="article__lead">
+              <%= this.model.getFinding('lead') %>
+            </p>
 
-            <% if (this.model.getFinding('authors')) { %>
-              <small class="features__item-authors-container">
-                <strong>
-                  <%= i18n('Authors') %>:
-                </strong>
-                <%= renderAuthors(this.model.getFinding('authors')) %>
-              </small>
-            <% } %>
+            <div class="article__corpus">
+              <%= this.model.getFinding('corpus') %>
+
+              <% if (this.model.getFinding('authors')) { %>
+                <small class="features__item-authors-container">
+                  <strong>
+                    <%= i18n('Authors') %>:
+                  </strong>
+                  <%= renderAuthors(this.model.getFinding('authors')) %>
+                </small>
+              <% } %>
+            </div>
+
+            <button type="button"
+                    data-module="read-more"
+                    class="read-more"
+                    data-toggle="<%= i18n('Show less') %>">
+              <%= i18n('Read More') %>
+            </button>
+
           </div>
-
-          <button type="button"
-                  data-module="read-more"
-                  class="read-more"
-                  data-toggle="<%= i18n('Show less') %>">
-            <%= i18n('Read More') %>
-          </button>
-
         </div>
-      <% } %>
+      </article>
+    <% } %>
 
+    <div class="app__content">
       <% if (this.model.getFeatures()) { %>
         <div class="countries__block">
           <h2 class="countries__block-title">

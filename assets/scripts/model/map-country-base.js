@@ -66,4 +66,11 @@ export default Backbone.Model.extend({
 
     return layer;
   },
+
+  updateLayer() {
+    const rawYear = this.get('year');
+    const year = parseInt(rawYear, 10);
+    this.setLayerYear(year);
+    return this;
+  },
 });

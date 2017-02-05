@@ -17,13 +17,6 @@ export default MapContryBase.extend({
     },
   },
 
-  /* update all country layers for a single year */
-  updateLayer() {
-    const year = parseInt(this.get('year'), 10);
-    this.setLayerYear(year);
-    return this;
-  },
-
   addLayer() {
     const fetchGeoData = () => {
       const name = this.get('name');

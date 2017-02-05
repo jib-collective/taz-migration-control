@@ -60,10 +60,4 @@ export default MapContryBase.extend({
 
     return this;
   },
-
-  updateLayer() {
-    const year = parseInt(this.get('year'), 10);
-    this.setLayerYear(year);
-    return this;
-  },
 });

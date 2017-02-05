@@ -77,10 +77,6 @@ export default Backbone.View.extend({
     });
   },
 
-  introIsVisible() {
-    return this.views._intro.model.get('visible') === true;
-  },
-
   getViewName(slug, entry) {
     let viewName = slug;
 

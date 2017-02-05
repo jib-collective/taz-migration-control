@@ -24,16 +24,10 @@ export default Backbone.View.extend({
     return this;
   },
 
-  scrollIntoView() {
-    $('html').scrollTop(this.$el.offset().top - 20);
-  },
-
   render() {
     this.$el.html(this.template({
       model: this.model,
     }));
-
-    this.scrollIntoView();
 
     return this;
   },

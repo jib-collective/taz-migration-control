@@ -18,10 +18,6 @@ export default Backbone.View.extend({
       }));
     }
 
-    if (this.scrollIntoView) {
-      this.scrollIntoView();
-    }
-
     return this;
   },
 });

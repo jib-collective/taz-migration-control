@@ -95,16 +95,6 @@ export default Backbone.View.extend({
     return viewName;
   },
 
-  scrollToContent() {
-    if (slug && entry) {
-      return this;
-    }
-
-    const $content = $('.app__main');
-    const contentTop = $content.offset().top;
-    $(window).scrollTop(contentTop);
-  },
-
   buildInterface() {
     ['navigation', 'map', 'header',].forEach(item => {
       this.views[`_${item}`].render().$el.prependTo(this.$el);

@@ -24,12 +24,6 @@
     }
   }
 
-  &__list-item + &__list-item {
-    @include small {
-      margin-left: 1rem;
-    }
-  }
-
   &__item {
     color: $text-color;
     font-family: $font-family-sans-serif;
@@ -50,8 +44,8 @@
     }
 
     @include medium {
-      padding-left: 7rem;
-      padding-right: 7rem;
+      padding-left: 6rem;
+      padding-right: 6rem;
     }
 
     &--active {

@@ -1,14 +1,14 @@
 .map {
   position: relative;
 
-  @include small {
-    height: 82vh;
-  }
-
   &__container.leaflet-container {
     background-color: lighten($color-app, 5%);
-    min-height: 82vh;
+    min-height: 70vh;
     width: 100%;
+
+    @include small {
+      min-height: 82vh;
+    }
   }
 
   &__slider {

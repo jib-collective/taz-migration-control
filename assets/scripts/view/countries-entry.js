@@ -44,6 +44,26 @@ export default CountryBaseView.extend({
               <%= this.model.getFinding('headline') %>
             </h3>
 
+            <% if (this.model.attributes.finding.images) { %>
+              <% _.forEach(this.model.attributes.finding.images, function(image) { %>
+                <figure class="article__image">
+                  <img src="<%= image.src %>"
+                       alt="<%= image.alt %>"
+                        class="fluid-image" />
+
+                  <figcaption class="article__image-caption">
+                    <%= image.caption %>
+
+                    <% if (image.credit) { %>
+                      <span class="article__image-credit">
+                        <%= i18n('Photo') %>: <%= image.credit %>
+                      </span>
+                    <% } %>
+                  </figcaption>
+                </figure>
+              <% }) %>
+            <% } %>
+
             <p class="article__lead">
               <%= this.model.getFinding('lead') %>
             </p>

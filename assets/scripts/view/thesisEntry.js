@@ -1,7 +1,6 @@
 import _ from 'underscore';
 import $ from 'jquery';
 import ChartHDIView from 'view/chart-migration-hdi';
-import ChartPaymentView from 'view/chart-payment';
 import i18n from 'lib/i18n';
 import RemittancesView from 'view/chart-remittances';
 import ThesisCollection from 'collection/thesis';
@@ -18,18 +17,6 @@ export default Backbone.View.extend({
           api: this.options.api,
           countries: [
             'sn',
-          ],
-        }));
-        break;
-
-      case 'hdi':
-        views.push(new ChartPaymentView({
-          api: this.options.api,
-          countries: [
-            'ss',
-            'td',
-            'ma',
-            'cv',
           ],
         }));
         break;

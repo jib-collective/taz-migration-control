@@ -39,13 +39,7 @@
     border: none;
     cursor: pointer;
     display: none;
-    font-family: $font-family-sans-serif;
-    font-size: .8rem;
-    font-weight: $weight-sans-serif-medium;
-    letter-spacing: .05rem;
-    line-height: 1;
     padding: 0;
-    text-transform: uppercase;
 
     &--visible {
       display: inline-block;
@@ -54,12 +48,6 @@
     &-icon.icon {
       height: 2rem;
       width: 2rem;
-    }
-
-    &-title {
-      bottom: .25rem;
-      position: relative;
-      vertical-align: bottom;
     }
   }
 }

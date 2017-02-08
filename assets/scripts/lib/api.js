@@ -70,15 +70,13 @@ export default class API {
 
     return this.fetch('countriesoverview')
       .then(data => {
-        let id;
-
-        _.forEach(data, item => {
-          _.forEach(item.entries, country => {
-            if (code === country.countryCode) {
-              id = country.id;
-            }
+        let results = data.map(item => {
+          return item.entries.find(country => {
+            return country.countryCode === code;
           });
         });
+
+        let {id} = _.compact(results)[0];
 
         return this.findCountryById(id);
       });
@@ -107,15 +105,13 @@ export default class API {
 
     return this.fetch('countriesoverview')
       .then(data => {
-        let id;
-
-        _.forEach(data, item => {
-          _.forEach(item.entries, country => {
-            if (slug === limax(country.name)) {
-              id = country.id;
-            }
-          })
+        let results = data.map(item => {
+          return item.entries.find(country => {
+            return limax(country.name) === slug;
+          });
         });
+
+        let {id} = _.compact(results)[0];
 
         return this.findCountryById(id);
       });
@@ -128,15 +124,13 @@ export default class API {
 
     return this.fetch('backgroundoverview')
       .then(data => {
-        let id;
-
-        _.forEach(data, item => {
-          _.forEach(item.entries, background => {
-            if (slug === limax(background.name)) {
-              id = background.id;
-            }
-          })
+        let results = data.map(item => {
+          return item.entries.find(background => {
+            return limax(background.name) === slug;
+          });
         });
+
+        let {id} = _.compact(results)[0];
 
         return this.findBackgroundById(id);
       });
@@ -148,17 +142,7 @@ export default class API {
     }
 
     return this.fetch('imprint')
-      .then(data => {
-        let res;
-
-        _.forEach(data, page => {
-          if (slug === limax(page.name)) {
-            res = page;
-          }
-        });
-
-        return res;
-      });
+      .then(data => data.find(page => slug === limax(page.name)));
   }
 
   findBackgroundByName(name) {
@@ -168,15 +152,13 @@ export default class API {
 
     return this.fetch('backgroundoverview')
       .then(data => {
-        let id;
-
-        _.forEach(data, item => {
-          _.forEach(item.entries, background => {
-            if (name === background.name) {
-              id = background.id;
-            }
-          })
+        let results = data.map(item => {
+          return item.entries.find(background => {
+            return background.name === name;
+          });
         });
+
+        let {id} = _.compact(results)[0];
 
         return this.findBackgroundById(id);
       });
@@ -188,17 +170,7 @@ export default class API {
     }
 
     return this.fetch('imprint')
-      .then(data => {
-        let res;
-
-        _.forEach(data, page => {
-          if (name === page.name) {
-            res = page;
-          }
-        });
-
-        return res;
-      });
+      .then(data => data.find(page => slug === page.name));
   }
 };
 

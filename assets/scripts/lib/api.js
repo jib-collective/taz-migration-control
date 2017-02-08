@@ -63,6 +63,27 @@ export default class API {
     return this.fetch(`country/${id}`);
   }
 
+  findCountryByISOCode(code) {
+    if (code === undefined) {
+      return emptyResponse();
+    }
+
+    return this.fetch('countriesoverview')
+      .then(data => {
+        let id;
+
+        _.forEach(data, item => {
+          _.forEach(item.entries, country => {
+            if (code === country.countryCode) {
+              id = country.id;
+            }
+          });
+        });
+
+        return this.findCountryById(id);
+      });
+  }
+
   findBackgroundById(id) {
     if (id === undefined) {
       return emptyResponse();
@@ -137,27 +158,6 @@ export default class API {
         });
 
         return res;
-      });
-  }
-
-  findCountryByName(name) {
-    if (name === undefined) {
-      return emptyResponse();
-    }
-
-    return this.fetch('countriesoverview')
-      .then(data => {
-        let id;
-
-        _.forEach(data, item => {
-          _.forEach(item.entries, country => {
-            if (name === country.name) {
-              id = country.id;
-            }
-          })
-        });
-
-        return this.findCountryById(id);
       });
   }
 

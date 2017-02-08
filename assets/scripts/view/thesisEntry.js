@@ -17,7 +17,7 @@ export default Backbone.View.extend({
         views.push(new ChartHDIView({
           api: this.options.api,
           countries: [
-            'Senegal',
+            'sn',
           ],
         }));
         break;
@@ -26,11 +26,10 @@ export default Backbone.View.extend({
         views.push(new ChartPaymentView({
           api: this.options.api,
           countries: [
-            'Südsudan',
-            'Tschad',
-            //'Tunesien',
-            'Marokko',
-            'Kap Verde',
+            'ss',
+            'td',
+            'ma',
+            'cv',
           ],
         }));
         break;
@@ -39,27 +38,26 @@ export default Backbone.View.extend({
         let charts = [];
 
         [
-          'Ägpten',
-          'Algerien',
-          'Äthiopien',
-          'Benin',
-          'Burkina Faso',
-          'Dschibuti',
-          'Elfenbeinküste',
-          'Gambia',
-          'Ghana',
-          'Guinea',
-          'Kamerun',
-          'Kap Verde',
-          'Kenia',
-          'Mali',
-          'Marokko',
-          'Niger',
-          'Nigeria',
-          'Senegal',
-          'Sierra Leone',
-          'Sudan',
-          'Uganda'
+          'eg',
+          'dz',
+          'et',
+          'bj',
+          'bf',
+          'dj',
+          'ci',
+          'gm',
+          'gh',
+          'gn',
+          'cm',
+          'cv',
+          'ke',
+          'ml',
+          'ma',
+          'ne',
+          'ng',
+          'sn',
+          'sd',
+          'ug',
         ].forEach(country => views.push(
           new RemittancesView({
             api: this.options.api,

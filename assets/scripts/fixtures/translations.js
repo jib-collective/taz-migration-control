@@ -262,7 +262,7 @@ export default {
     de: 'Dollar/ Kopf',
   },
 
-  'Map': {
-    de: 'Karte',
+  'Show map': {
+    de: 'Karte<br/>öffnen',
   },
 };

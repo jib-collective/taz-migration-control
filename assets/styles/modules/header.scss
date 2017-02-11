@@ -48,15 +48,40 @@
     border: none;
     cursor: pointer;
     display: none;
+    font-family: $font-family-sans-serif;
+    font-size: .6rem;
+    font-weight: $weight-sans-serif-medium;
+    letter-spacing: .03rem;
+    line-height: 1.2;
     padding: 0;
+    text-transform: uppercase;
 
     &--visible {
       display: inline-block;
     }
 
     &-icon.icon {
+      color: $color-attention;
       height: 2rem;
+      margin-right: .3rem;
       width: 2rem;
+    }
+
+    &-title {
+      bottom: .15rem;
+      display: none;
+      position: relative;
+      text-align: left;
+      vertical-align: bottom;
+
+      @include small {
+        display: inline-block;
+      }
+    }
+
+    &:hover,
+    &:focus {
+      color: $color-attention;
     }
   }
 }

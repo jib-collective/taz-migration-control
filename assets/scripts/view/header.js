@@ -65,8 +65,8 @@ export default Backbone.View.extend({
             type="button"
             data-toggle-map>
       <%= icon('map-o', 'header__map-toggle-icon') %>
-      <span class="visually-hidden">
-        <%= i18n('Map') %>
+      <span class="header__map-toggle-title">
+        <%= i18n('Show map') %>
       </span>
     </button>
 

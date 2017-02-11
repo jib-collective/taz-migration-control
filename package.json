@@ -30,6 +30,7 @@
     "gulp-svgmin": "^1.2.3",
     "gulp-uglify": "^2.0.0",
     "merge-stream": "^1.0.1",
+    "webpack": "^2.2.1",
     "webpack-stream": "^3.2.0"
   },
   "dependencies": {

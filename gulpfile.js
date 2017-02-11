@@ -11,7 +11,8 @@ const sass = require('gulp-sass');
 const svgMin = require('gulp-svgmin');
 const svgSprite = require('gulp-svg-sprite');
 const uglify = require('gulp-uglify');
-const webpack = require('webpack-stream');
+const webpack = require('webpack');
+const webpackStream = require('webpack-stream');
 
 let API_HOST = 'http://localhost:8080';
 let ENV = 'development';
@@ -30,16 +31,16 @@ gulp.task('fonts', () => {
 
 gulp.task('scripts', () => {
   return gulp.src('assets/scripts/common.js')
-    .pipe(webpack({
+    .pipe(webpackStream({
       devtool: process.env.ENV === 'production' ? false : 'source-map',
       entry: './assets/scripts/common.js',
       module: {
-        loaders: [
+        rules: [
           {
             test: /\.js$/,
             exclude: path.resolve(__dirname, 'node_modules'),
-            loader: 'babel',
-            query: {
+            loader: 'babel-loader',
+            options: {
               presets: [
                 'es2015',
               ],
@@ -53,15 +54,13 @@ gulp.task('scripts', () => {
       output: {
         filename: 'common.js',
       },
-      resolveLoader: {
-        root: path.resolve('./node_modules'),
-      },
       resolve: {
-        root: [
+        modules: [
+          path.resolve('./node_modules/'),
           path.resolve('./assets/scripts/'),
         ]
       }
-    }))
+    }, webpack))
     .pipe(replace('{{API_HOST}}', API_HOST))
     .pipe(replace('{{ENV}}', ENV))
     .pipe(gulpif(process.env.ENV === 'production', uglify()))

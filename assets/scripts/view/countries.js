@@ -5,7 +5,7 @@ export default CountryBaseView.extend({
   subnav: false,
 
   initialize(options) {
-    options.api.findCountryByISOCode('eu')
+    options.api.findItemByFirstPosition('countriesoverview', 'Country')
       .then(country => {
         const slug = limax(country.name);
         const lang = options.application.get('language');

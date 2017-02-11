@@ -90,14 +90,6 @@ export default class API {
     return this.fetch(`background/${id}`);
   }
 
-  findPageById(id) {
-    if (id === undefined) {
-      return emptyResponse();
-    }
-
-    return this.fetch(`imprint/${id}`);
-  }
-
   findCountryBySlug(slug) {
     if (slug === undefined) {
       return emptyResponse();
@@ -145,25 +137,6 @@ export default class API {
       .then(data => data.find(page => slug === limax(page.name)));
   }
 
-  findBackgroundByName(name) {
-    if (name === undefined) {
-      return emptyResponse();
-    }
-
-    return this.fetch('backgroundoverview')
-      .then(data => {
-        let results = data.map(item => {
-          return item.entries.find(background => {
-            return background.name === name;
-          });
-        });
-
-        let {id} = _.compact(results)[0];
-
-        return this.findBackgroundById(id);
-      });
-  }
-
   findPageByName(name) {
     if (name === undefined) {
       return emptyResponse();
@@ -171,6 +144,17 @@ export default class API {
 
     return this.fetch('imprint')
       .then(data => data.find(page => slug === page.name));
+  }
+
+  findItemByFirstPosition(collection, type) {
+    if (collection === undefined) {
+      return emptyResponse();
+    }
+
+    return this.fetch(collection)
+      .then(data => data.find(item => item.columnIndex === 0))
+      .then(column => column.entries[0])
+      .then(item => this[`find${type}ById`](item.id));
   }
 };
 

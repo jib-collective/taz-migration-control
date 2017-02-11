@@ -14,10 +14,10 @@
 
   &-track {
     background-color: $text-color;
-    height: .3rem;
+    height: .25rem;
     left: 0;
     position: absolute;
-    top: .05rem;
+    top: 0;
     width: 100%;
   }
 
@@ -53,10 +53,10 @@
     &:before {
       border-left: 2px solid $text-color;
       content: ' ';
-      height: .75rem;
+      height: .8rem;
       left: 50%;
       position: absolute;
-      top: -2rem;
+      top: -2.1rem;
       transform: translateX(-50%);
     }
   }

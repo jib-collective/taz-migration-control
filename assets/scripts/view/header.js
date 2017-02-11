@@ -1,4 +1,5 @@
 import _ from 'underscore';
+import $ from 'jquery';
 import {icon} from 'lib/icon';
 import i18n from 'lib/i18n';
 import LanguagesCollection from 'collection/language';
@@ -11,6 +12,7 @@ export default Backbone.View.extend({
 
   events: {
     'click [data-toggle-map]': '_showMap',
+    'click [data-back-to]': '_backToIndex',
   },
 
   initialize(options) {
@@ -27,6 +29,7 @@ export default Backbone.View.extend({
     this.$el.html(this.template({
       icon,
       i18n,
+      language: this.options.application.get('language'),
     }));
 
     /* create language switch */
@@ -39,6 +42,16 @@ export default Backbone.View.extend({
   _showMap(event) {
     event.preventDefault();
     this.options.application.set('map-shown', true);
+  },
+
+  _backToIndex(event) {
+    event.preventDefault();
+
+    const target = $(event.target).attr('href');
+
+    // TODO: hacky, refactor
+    this.options.application.set('slugChanges', 0);
+    this.options._router.navigate(target, {trigger: true});
   },
 
   toggleMapToggle(show) {
@@ -57,8 +70,10 @@ export default Backbone.View.extend({
       </span>
     </button>
 
-    <strong class="header__title">
+    <a href="/<%= language %>"
+       class="header__title"
+       data-back-to>
       <%= i18n('Migration Control') %>
-    </strong>
+    </a>
   `),
 });

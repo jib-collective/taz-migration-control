@@ -93,9 +93,11 @@ export default Backbone.View.extend({
                       .text(item.label);
       const $container = $('<span />')
                           .addClass('chart__label');
+      const $wrapper = $('<div/>');
 
       $container.append($color, $label);
-      this.$el.find('.thesis__chart').append($container);
+      $wrapper.append($container);
+      this.$el.find('.thesis__chart').append($wrapper);
     })
   },
 

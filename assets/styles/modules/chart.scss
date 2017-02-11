@@ -77,26 +77,12 @@
       }
     }
 
-    .c3-axis-y > .tick:nth-child(odd),
-    .c3-axis-y2 > .tick:nth-child(odd) {
+    .c3-axis > .tick:nth-child(odd) {
       display: none;
 
       @include small {
         display: block;
       }
-    }
-
-    .c3-axis-x > .tick {
-      display: none;
-
-      @include small {
-        display: block;
-      }
-    }
-
-    .c3-axis-x > .tick:first-of-type,
-    .c3-axis-x > .tick:last-of-type {
-      display: block;
     }
   }
 

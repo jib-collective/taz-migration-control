@@ -137,15 +137,6 @@ export default class API {
       .then(data => data.find(page => slug === limax(page.name)));
   }
 
-  findPageByName(name) {
-    if (name === undefined) {
-      return emptyResponse();
-    }
-
-    return this.fetch('imprint')
-      .then(data => data.find(page => slug === page.name));
-  }
-
   findItemByFirstPosition(collection, type) {
     if (collection === undefined) {
       return emptyResponse();
@@ -155,6 +146,11 @@ export default class API {
       .then(data => data.find(item => item.columnIndex === 0))
       .then(column => column.entries[0])
       .then(item => this[`find${type}ById`](item.id));
+  }
+
+  findFirstPageOfCollection() {
+    return this.fetch('imprint')
+      .then(data => data[0]);
   }
 };
 

@@ -1,10 +1,9 @@
 .map {
   overflow: hidden;
   position: relative;
-  transition: height 300ms ease;
 
   &--hidden {
-    height: 0;
+    display: none;
   }
 
   &__container.leaflet-container {

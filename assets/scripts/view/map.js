@@ -41,7 +41,7 @@ export default Backbone.View.extend({
     const tileOptions = this.model.get('tileLayerOptions');
     const attribution = L.control.attribution();
     const view = this.model.get('view');
-    const zoom = this.model.get('zoom');
+    let zoom = this.model.get('zoom');
     const targetContainer = this.$el.find('.map__container').get(0);
 
     const map = L.map(targetContainer, options);
@@ -58,6 +58,10 @@ export default Backbone.View.extend({
     $(attribution.getContainer())
       .parent()
       .addClass('map__attribution');
+
+    if ($(window).width() > 768) {
+      zoom = 4;
+    }
 
     map
     .setView(view)

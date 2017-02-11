@@ -15,12 +15,21 @@ export default CountryBaseView.extend({
     const $target = $(event.currentTarget);
     const $next = $target.prev('.article__corpus, .features__item-corpus');
     const toggleText = $target.data('toggle');
+    const displayValue = $next.css('display');
     let currentText;
 
-    if ($next.css('display') === 'none') {
+    if (displayValue === 'none') {
       $next.css('display', 'block');
     } else {
       $next.css('display', 'none');
+
+      // calculate new position of toggle element and force scroll
+      // see https://trello.com/c/pKUynkoZ/26-einklappen-button-erzeugt-springen
+      setTimeout(() => {
+        const updatedTopOffset = $target.offset().top;
+        const offsetTop = 150;
+        $(window).scrollTop(updatedTopOffset - offsetTop);
+      }, 150);
     }
 
     currentText = $target.text();

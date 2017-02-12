@@ -7,23 +7,8 @@ export default BaseCollection.extend({
   model: Country,
 
   initialize(data, options) {
-    this.options = options;
-    this._cache = {};
-
-    const dataType = 'singlePayments';
-
-    this.on('sync', () => {
-      this.models.forEach(model => {
-        const layerScale = this._getDataRange(dataType);
-        const year = this.getEndYear(dataType);
-
-        if (model.getData(dataType).length > 0) {
-          model.set({layerScale, year});
-        }
-      });
-    });
-
-    return this;
+    this.dataType = 'singlePayments';
+    return BaseCollection.prototype.initialize.call(this, data, options);
   },
 
   load() {

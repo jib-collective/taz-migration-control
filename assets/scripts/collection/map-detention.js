@@ -1,14 +1,9 @@
 import Backbone from 'backbone';
+import BaseCollection from 'collection/map-base';
 import DetentionCenter from 'model/map-country-detention';
 
-export default Backbone.Collection.extend({
+export default BaseCollection.extend({
   model: DetentionCenter,
-
-  initialize(data, options) {
-    this.options = options;
-    this._cache = {};
-    return this;
-  },
 
   load() {
     return this.options.api.fetch('detentioncenters')

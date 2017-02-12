@@ -1,4 +1,3 @@
-import _ from 'underscore';
 import Backbone from 'backbone';
 import DetentionCenter from 'model/map-country-detention';
 
@@ -14,10 +13,9 @@ export default Backbone.Collection.extend({
   load() {
     return this.options.api.fetch('detentioncenters')
       .then(data => {
-        _.forEach(data, center => {
-          const attrs = center;
-          attrs.map = this.options.map;
-          this.add(attrs);
+        data.forEach(detentionCenter => {
+          detentionCenter.map = this.options.map;
+          this.add(detentionCenter);
         });
 
         this.trigger('sync');

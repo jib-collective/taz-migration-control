@@ -1,7 +1,6 @@
 import _ from 'underscore';
 import $ from 'jquery';
 import ChartHDIView from 'view/chart-migration-hdi';
-import ChartPaymentView from 'view/chart-payment';
 import i18n from 'lib/i18n';
 import RemittancesView from 'view/chart-remittances';
 import ThesisCollection from 'collection/thesis';
@@ -17,20 +16,7 @@ export default Backbone.View.extend({
         views.push(new ChartHDIView({
           api: this.options.api,
           countries: [
-            'Senegal',
-          ],
-        }));
-        break;
-
-      case 'hdi':
-        views.push(new ChartPaymentView({
-          api: this.options.api,
-          countries: [
-            'Südsudan',
-            'Tschad',
-            //'Tunesien',
-            'Marokko',
-            'Kap Verde',
+            'sn',
           ],
         }));
         break;
@@ -39,27 +25,26 @@ export default Backbone.View.extend({
         let charts = [];
 
         [
-          'Ägpten',
-          'Algerien',
-          'Äthiopien',
-          'Benin',
-          'Burkina Faso',
-          'Dschibuti',
-          'Elfenbeinküste',
-          'Gambia',
-          'Ghana',
-          'Guinea',
-          'Kamerun',
-          'Kap Verde',
-          'Kenia',
-          'Mali',
-          'Marokko',
-          'Niger',
-          'Nigeria',
-          'Senegal',
-          'Sierra Leone',
-          'Sudan',
-          'Uganda'
+          'eg',
+          'dz',
+          'et',
+          'bj',
+          'bf',
+          'dj',
+          'ci',
+          'gm',
+          'gh',
+          'gn',
+          'cm',
+          'cv',
+          'ke',
+          'ml',
+          'ma',
+          'ne',
+          'ng',
+          'sn',
+          'sd',
+          'ug',
         ].forEach(country => views.push(
           new RemittancesView({
             api: this.options.api,
@@ -72,7 +57,8 @@ export default Backbone.View.extend({
     }
 
     if (views.length > 0) {
-      views.forEach(view => view.$el.appendTo(this.$el.find('.thesis__chart')));
+      const $target = this.$el.find('.thesis__chart');
+      views.forEach(view => view.$el.appendTo($target));
 
       if (this.model.get('diagramType') === 'remittances') {
         this.addRemittancesLabels();
@@ -107,9 +93,11 @@ export default Backbone.View.extend({
                       .text(item.label);
       const $container = $('<span />')
                           .addClass('chart__label');
+      const $wrapper = $('<div/>');
 
       $container.append($color, $label);
-      this.$el.find('.thesis__chart').append($container);
+      $wrapper.append($container);
+      this.$el.find('.thesis__chart').append($wrapper);
     })
   },
 

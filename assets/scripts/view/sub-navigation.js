@@ -1,4 +1,5 @@
 import _ from 'underscore';
+import $ from 'jquery';
 import i18n from 'lib/i18n';
 import {icon, toggle} from 'lib/icon';
 import SubNavigationColumn from 'view/sub-navigation-column';
@@ -82,6 +83,11 @@ export default Backbone.View.extend({
       this.columns.push(view);
       view.$el.appendTo(this.$el.find('.sub-navigation__list-container'));
     });
+
+    // open menu by default on bigger screens
+    if ($(window).width() > 768) {
+      this.openMenu();
+    }
 
     return this;
   },

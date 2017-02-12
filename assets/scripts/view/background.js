@@ -5,7 +5,7 @@ export default BaseView.extend({
   subnav: false,
 
   initialize(options) {
-    options.api.findBackgroundByName('Abkommen')
+    options.api.findItemByFirstPosition('backgroundoverview', 'Background')
       .then(background => {
         const slug = limax(background.name);
         const lang = options.application.get('language');

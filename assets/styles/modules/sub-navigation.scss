@@ -11,12 +11,6 @@
     width: 100%;
     z-index: 10;
 
-    @include small {
-      display: flex;
-      flex-direction: row;
-      flex-wrap: nowrap;
-    }
-
     &--open {
       display: flex;
       flex-direction: column;
@@ -115,7 +109,6 @@
     width: 1rem;
 
     @include small {
-      display: none;
       height: 1.5rem;
       width: 1.5rem;
     }

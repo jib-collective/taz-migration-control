@@ -1,6 +1,7 @@
 .header {
   align-items: center;
   background-color: $color-app-dark;
+  color: $text-color;
   display: flex;
   justify-content: center;
   padding: .5rem 1.5rem;
@@ -12,15 +13,28 @@
 
   &__title {
     align-self: center;
+    color: currentColor;
     font-family: $font-family-sans-serif;
-    font-size: 1rem;
+    font-size: .8rem;
     font-weight: $weight-sans-serif-medium;
-    letter-spacing: .2rem;
+    letter-spacing: .1rem;
     line-height: 1;
     margin: .5rem auto;
+    text-decoration: none;
     text-transform: uppercase;
 
+    &:hover,
+    &:focus {
+      color: $color-attention;
+      text-decoration: none;
+    }
+
     @include small {
+      font-size: 1rem;
+      letter-spacing: .2rem;
+    }
+
+    @include medium {
       font-size: 1.15rem;
     }
   }
@@ -40,10 +54,10 @@
     cursor: pointer;
     display: none;
     font-family: $font-family-sans-serif;
-    font-size: .8rem;
+    font-size: .6rem;
     font-weight: $weight-sans-serif-medium;
-    letter-spacing: .05rem;
-    line-height: 1;
+    letter-spacing: .03rem;
+    line-height: 1.2;
     padding: 0;
     text-transform: uppercase;
 
@@ -52,14 +66,27 @@
     }
 
     &-icon.icon {
+      color: $color-attention;
       height: 2rem;
+      margin-right: .3rem;
       width: 2rem;
     }
 
     &-title {
-      bottom: .25rem;
+      bottom: .15rem;
+      display: none;
       position: relative;
+      text-align: left;
       vertical-align: bottom;
+
+      @include small {
+        display: inline-block;
+      }
+    }
+
+    &:hover,
+    &:focus {
+      color: $color-attention;
     }
   }
 }

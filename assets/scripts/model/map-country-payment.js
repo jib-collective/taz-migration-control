@@ -1,6 +1,7 @@
 import $ from 'jquery';
 import _ from 'underscore';
 import d3 from 'd3';
+import {fetchGeoData} from 'lib/fetch-geojson';
 import i18n from 'lib/i18n';
 import L from 'leaflet';
 import limax from 'limax';
@@ -18,14 +19,14 @@ export default MapContryBase.extend({
   },
 
   addLayer() {
-    const fetchGeoData = () => {
-      const name = this.get('name');
-      const slug = i18n(limax(name), 'de');
-      return $.getJSON(`/data/geo/${slug}.geojson`);
-    };
+    const countryName = this.get('name');
 
-    return fetchGeoData()
+    return fetchGeoData(countryName)
       .then(data => {
+        if (!data) {
+          return;
+        }
+
         const geoJSON = L.geoJson(data);
         const center = geoJSON.getBounds().getCenter();
         const style = this.get('layerStyle');
@@ -48,7 +49,14 @@ export default MapContryBase.extend({
   /* calculate radius for an oda bubble for a single year */
   getRadius(year) {
     const type = 'singlePayments';
-    const range = this.getRange([25, 150]);
+    const windowWidth = $(window).width();
+    let rangeValues = [20, 120];
+
+    if (windowWidth > 768 ) {
+      rangeValues = [25, 150];
+    }
+
+    const range = this.getRange(rangeValues);
     const value = this._getDataValueForYear(type, year);
 
     if (!value) {
@@ -59,7 +67,16 @@ export default MapContryBase.extend({
   },
 
   getFontSize(type, year) {
-    const scaling = type === 'unit' ? [.6, .8] : [.9, 4];
+    let titleRangeValue = [.7, 2.5];
+    let unitRangeValue = [.4, .7];
+    const windowWidth = $(window).width();
+
+    if (windowWidth > 768) {
+      titleRangeValue = [.9, 4];
+      unitRangeValue = [.6, .8];
+    }
+
+    const scaling = type === 'unit' ? unitRangeValue : titleRangeValue;
     const range = this.getRange(scaling);
     const value = this._getDataValueForYear('singlePayments', year);
     return range(value);

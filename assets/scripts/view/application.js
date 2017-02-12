@@ -28,7 +28,9 @@ export default Backbone.View.extend({
     this._globalCtx = {
       application: this.model,
       _router: options._router,
-      api: new API(),
+      api: new API({
+        application: this.model,
+      }),
     };
 
     this.views = {
@@ -61,7 +63,10 @@ export default Backbone.View.extend({
 
     // handle global map-hidden/ map-visible state
     this.listenTo(this.model, 'change:slug', (model, slug) => {
-      return this.model.set('map-shown', slug === 'index');
+      const slugChanges = this.model.get('slugChanges');
+
+      this.model.set('map-shown', !slugChanges >= 1);
+      this.model.set('slugChanges', slugChanges + 1);
     });
 
     this.loadWebfonts();

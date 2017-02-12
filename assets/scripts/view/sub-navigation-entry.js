@@ -31,7 +31,9 @@ export default Backbone.View.extend({
     let target = $(event.target).attr('href');
 
     /* close Subnav container */
-    this.options.subnav.closeMenu();
+    if ($(window).width() <= 768) {
+      this.options.subnav.closeMenu();
+    }
 
     if (target) {
       this.options._router.navigate(target, {trigger: true});

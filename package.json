@@ -1,6 +1,6 @@
 {
   "name": "migration-control-client",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "description": "Client application for the taz project",
   "repository": {
     "type": "git",

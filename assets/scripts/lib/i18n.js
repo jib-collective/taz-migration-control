@@ -3,7 +3,16 @@ import translations from 'fixtures/translations';
 
 export default class I18n {
   constructor(language) {
-    this.language = language;
+    this.setLanguage(language);
+    return this;
+  }
+
+  getLanguage() {
+    return this._language;
+  }
+
+  setLanguage(language) {
+    this._language = language;
   }
 
   load(str) {

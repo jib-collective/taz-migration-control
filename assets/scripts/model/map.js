@@ -7,6 +7,8 @@ export default Backbone.Model.extend({
       scrollWheelZoom: false,
       zoomControl: false,
       doubleClickZoom: false,
+      touchZoom: false,
+      tap: false,
     },
 
     view: [25.36, 17],

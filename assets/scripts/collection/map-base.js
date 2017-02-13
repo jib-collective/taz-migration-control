@@ -26,10 +26,10 @@ export default Backbone.Collection.extend({
 
   load() {
     return this.options.api.fetch('countriesoverview')
-      .then(data => {
-        const promises = data.map(item => {
-          return item.entries.map(overview => {
-            return this.options.api.findCountryById(overview.id)
+      .then(res => {
+        const promises = res.map(column => {
+          return column.entries.map(country => {
+            return this.options.api.findCountryById(country.id)
               .then(country => this.addItem(country));
           });
         });

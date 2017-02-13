@@ -1,18 +1,30 @@
 import _ from 'underscore';
-import TRANSLATIONS from 'fixtures/translations';
+import translations from 'fixtures/translations';
 
-export default function i18n(str, sourceLanguage) {
-  const language = sourceLanguage || 'de';
-  const entity = TRANSLATIONS[str] || undefined;
-  let translation;
-
-  if (sourceLanguage) {
-    const opts = {};
-    opts[sourceLanguage] = str;
-    translation = _.findKey(TRANSLATIONS, opts);
-  } else if (entity) {
-    translation = entity[language] || undefined;
+export default class I18n {
+  constructor(language) {
+    this.language = language;
   }
 
-  return translation || str;
-};
+  load(str) {
+    if (!this.language) {
+      console.log('translation', this.language, str, translations[str][this.language] || str);
+    }
+
+    const entity = translations[str];
+
+    if (!entity) {
+      console.log('missing:', str);
+      return str;
+    }
+
+    return entity[this.language] || str;
+  }
+
+  loadFrom(str, language)  {
+    let opts = {};
+    opts[language] = str;
+
+    return _.findKey(translations, opts) || str;
+  }
+}

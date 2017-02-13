@@ -55,31 +55,12 @@ export default {
     de: 'Thesen',
   },
 
-  theses: {
-    de: 'thesen',
-    en: 'theses',
-  },
-
-  countries: {
-    de: 'laender',
-    en: 'countries',
-  },
-
-  background: {
-    de: 'hintergrund',
-    en: 'background',
-  },
-
   Background: {
     de: 'Hintergrund',
   },
 
   'Migration Control': {
     de: 'Migrationskontrolle',
-  },
-
-  Partners: {
-    de: 'Partners',
   },
 
   'Follow on Facebook': {
@@ -90,28 +71,12 @@ export default {
     de: 'Auf twitter folgen',
   },
 
-  Imprint: {
-    de: 'Impressum',
-  },
-
-  Sources: {
-    de: 'Quellen',
-  },
-
-  Funding: {
-    de: 'Finanzierung',
-  },
-
   'A project of': {
     de: 'Ein Projekt von',
   },
 
   'taz, the daily newspaper': {
     de: 'taz, die Tageszeitung',
-  },
-
-  laender: {
-    en: 'countries',
   },
 
   'Human Development Index': {

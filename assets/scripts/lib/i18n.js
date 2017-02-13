@@ -3,22 +3,15 @@ import translations from 'fixtures/translations';
 
 export default class I18n {
   constructor(language) {
-    this.setLanguage(language);
+    this.language = language;
     return this;
-  }
-
-  getLanguage() {
-    return this._language;
-  }
-
-  setLanguage(language) {
-    this._language = language;
   }
 
   load(str) {
     const entity = translations[str];
 
     if (!entity) {
+      //console.log('i18n: missing', entity);
       return str;
     }
 

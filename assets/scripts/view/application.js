@@ -51,7 +51,7 @@ export default Backbone.View.extend({
     };
 
     this.listenTo(this.model, 'change:language', (model, value) => {
-      this._globalCtx.i18n.setLanguage(value);
+      this._globalCtx.i18n.language = value;
       this.render('complete');
     });
 

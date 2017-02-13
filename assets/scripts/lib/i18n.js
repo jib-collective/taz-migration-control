@@ -7,24 +7,12 @@ export default class I18n {
   }
 
   load(str) {
-    if (!this.language) {
-      console.log('translation', this.language, str, translations[str][this.language] || str);
-    }
-
     const entity = translations[str];
 
     if (!entity) {
-      console.log('missing:', str);
       return str;
     }
 
     return entity[this.language] || str;
-  }
-
-  loadFrom(str, language)  {
-    let opts = {};
-    opts[language] = str;
-
-    return _.findKey(translations, opts) || str;
   }
 }

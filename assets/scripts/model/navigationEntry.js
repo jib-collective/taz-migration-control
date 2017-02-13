@@ -10,7 +10,7 @@ export default Backbone.Model.extend({
     let label = this.get('label').toLowerCase();
     const i18n = new I18n();
 
-    if (i18n.loadFrom(label, 'en') === 'theses') {
+    if (label === 'theses') {
       return '';
     }
 

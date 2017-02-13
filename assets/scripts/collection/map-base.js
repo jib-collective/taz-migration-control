@@ -1,4 +1,5 @@
 import _ from 'underscore';
+import $ from 'jquery';
 import Backbone from 'backbone';
 
 export default Backbone.Collection.extend({
@@ -19,6 +20,40 @@ export default Backbone.Collection.extend({
         });
       });
     }
+
+    return this;
+  },
+
+  load() {
+    return this.options.api.fetch('countriesoverview')
+      .then(res => {
+        const promises = res.map(column => {
+          return column.entries.map(country => {
+            return this.options.api.findCountryById(country.id)
+              .then(country => this.addItem(country));
+          });
+        });
+
+        return $.when.apply($, _.flatten(promises))
+          .then(data => {
+            this.trigger('sync');
+            return data;
+          });
+      });
+  },
+
+  shouldAddItem(item) {
+    return true;
+  },
+
+  addItem(item) {
+    if (!this.shouldAddItem(item)) {
+      return this;
+    }
+
+    // save map reference to every one of those
+    item.map = this.options.map;
+    this.add(item);
 
     return this;
   },

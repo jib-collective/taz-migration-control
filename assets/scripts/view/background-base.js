@@ -1,5 +1,4 @@
 import _ from 'underscore';
-import i18n from 'lib/i18n';
 import {renderTreatyList} from 'lib/render-treaties';
 import {renderAuthors} from 'lib/render-authors';
 
@@ -8,11 +7,16 @@ export default Backbone.View.extend({
 
   subnav: 'background',
 
+  initialize(options) {
+    this.options = options;
+    return this;
+  },
+
   render() {
     if (this.template) {
       this.$el.html(this.template({
-        this,
-        i18n,
+        model: this.model,
+        i18n: this.options.i18n,
         renderTreatyList,
         renderAuthors,
       }));

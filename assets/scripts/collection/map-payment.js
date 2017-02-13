@@ -11,20 +11,17 @@ export default BaseCollection.extend({
     return BaseCollection.prototype.initialize.call(this, data, options);
   },
 
+  shouldAddItem(country) {
+    return country.data && country.data.singlePayments;
+  },
+
   load() {
     return this.options.api.fetch('countriesoverview')
       .then(data => {
         const promises = data.map(item => {
           return item.entries.map(overview => {
             return this.options.api.findCountryById(overview.id)
-              .then(country => {
-                if (!country.data || !country.data.singlePayments) {
-                  return undefined;
-                }
-
-                country.map = this.options.map;
-                this.add(country);
-              });
+              .then(country => this.addItem(country));
           });
         });
 

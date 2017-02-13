@@ -23,6 +23,22 @@ export default Backbone.Collection.extend({
     return this;
   },
 
+  shouldAddItem(item) {
+    return true;
+  },
+
+  addItem(item) {
+    if (!this.shouldAddItem(item)) {
+      return this;
+    }
+
+    // save map reference to every one of those
+    item.map = this.options.map;
+    this.add(item);
+
+    return this;
+  },
+
   setYear(year) {
     this.models.forEach(model => model.set({year}));
   },

@@ -8,11 +8,7 @@ export default BaseCollection.extend({
   load() {
     return this.options.api.fetch('detentioncenters')
       .then(data => {
-        data.forEach(detentionCenter => {
-          detentionCenter.map = this.options.map;
-          this.add(detentionCenter);
-        });
-
+        data.forEach(detentionCenter => this.addItem(detentionCenter));
         this.trigger('sync');
       });
   },

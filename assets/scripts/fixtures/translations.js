@@ -79,7 +79,7 @@ export default {
   },
 
   Partners: {
-    de: 'Partner',
+    de: 'Partners',
   },
 
   'Follow on Facebook': {

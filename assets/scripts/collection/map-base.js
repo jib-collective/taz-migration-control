@@ -1,4 +1,5 @@
 import _ from 'underscore';
+import $ from 'jquery';
 import Backbone from 'backbone';
 
 export default Backbone.Collection.extend({
@@ -21,6 +22,24 @@ export default Backbone.Collection.extend({
     }
 
     return this;
+  },
+
+  load() {
+    return this.options.api.fetch('countriesoverview')
+      .then(data => {
+        const promises = data.map(item => {
+          return item.entries.map(overview => {
+            return this.options.api.findCountryById(overview.id)
+              .then(country => this.addItem(country));
+          });
+        });
+
+        return $.when.apply($, _.flatten(promises))
+          .then(data => {
+            this.trigger('sync');
+            return data;
+          });
+      });
   },
 
   shouldAddItem(item) {

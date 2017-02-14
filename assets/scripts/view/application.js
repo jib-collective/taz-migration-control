@@ -31,7 +31,9 @@ export default Backbone.View.extend({
       api: new API({
         application: this.model,
       }),
-      i18n: new I18n(this.model.get('language')),
+      i18n: new I18n({
+        application: this.model,
+      }),
     };
 
     this.views = {
@@ -50,10 +52,7 @@ export default Backbone.View.extend({
       pages_entry: PagesEntryView,
     };
 
-    this.listenTo(this.model, 'change:language', (model, value) => {
-      this._globalCtx.i18n.language = value;
-      this.render('complete');
-    });
+    this.listenTo(this.model, 'change:language', () => this.render('complete'));
 
     this.listenTo(this.model, 'change:slug change:entry', () => {
       let type = 'content';

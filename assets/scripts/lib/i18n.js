@@ -2,8 +2,16 @@ import _ from 'underscore';
 import translations from 'fixtures/translations';
 
 export default class I18n {
-  constructor(language) {
-    this.language = language;
+  constructor(options) {
+    this.options = options;
+
+    if (this.options.application) {
+      this.options.application.on('change:language', (model, value) => {
+        this.language = value;
+      });
+    }
+
+    this.language = this.options.application.get('language');
     return this;
   }
 

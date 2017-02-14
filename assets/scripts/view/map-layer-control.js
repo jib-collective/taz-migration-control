@@ -54,7 +54,7 @@ export default Backbone.View.extend({
       'detentionCenter',
     ].forEach((key, index) => {
       let attrs;
-      let collectionAttrs = _.pick(this.options, 'api', 'map');
+      let collectionAttrs = _.pick(this.options, 'api', 'map', 'i18n');
 
       switch (key) {
         case 'singlePayments':

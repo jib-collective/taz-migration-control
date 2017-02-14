@@ -55,10 +55,39 @@
     box-shadow: none !important;
     color: $text-color !important;
     font-family: $font-family-sans-serif;
-    font-size: .65rem;
+    font-size: .75rem;
     font-weight: $weight-sans-serif-bold;
     letter-spacing: .02rem;
     text-transform: uppercase;
+  }
+
+  &-popup-content {
+    padding-right: .5rem;
+
+    @include small {
+      padding-right: 1rem;
+    }
+
+    @include medium {
+      padding-right: 1.5rem;
+    }
+  }
+
+  &-popup__title {
+    color: $color-attention;
+  }
+
+  &-popup__value {
+    display: block;
+    font-size: 1.6rem;
+    font-weight: $weight-sans-serif-bold;
+    margin-bottom: -.1rem;
+    margin-top: .6rem;
+
+    @include small {
+      font-size: 2.2rem;
+      margin-top: 1.2rem;
+    }
   }
 
   &-popup-tip {

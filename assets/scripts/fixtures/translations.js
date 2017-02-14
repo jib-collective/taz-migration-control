@@ -178,4 +178,8 @@ export default {
   Features: {
     de: 'Features',
   },
+
+  Index: {
+    de: 'Index',
+  },
 };

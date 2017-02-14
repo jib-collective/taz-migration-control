@@ -57,9 +57,33 @@ export default MapContryBase.extend({
     let fillOpacity = this.getScale(year) || 0;
 
     if (layer) {
-      layer.setStyle({fillOpacity})
+      const popup = layer.getPopup();
+      const popupContent = this.getPopupContent(year);
+
+      layer.setStyle({fillOpacity});
+
+      if (popup && popupContent !== false) {
+        layer.setPopupContent(popupContent);
+      }
     }
 
     return this;
+  },
+
+  getPopupContent(year) {
+    if (year === undefined) {
+      return '';
+    }
+
+    const type = 'migrationIntensity';
+    const title = this.get('name');
+    const label = this.options.i18n.load('Index');
+    const value = this._getDataValueForYear(type, year);
+
+    return `
+      <span class="leaflet-popup__title">${title}</span>
+      <span class="leaflet-popup__value">${value}</span>
+      <span class="leaflet-popup__label">${label}</span>
+    `;
   },
 });

@@ -17,6 +17,12 @@ export default Backbone.Collection.extend({
           if (model.getData(type).length > 0) {
             model.set({layerScale, year});
           }
+
+          if (!model.options) {
+            model.options = {};
+          }
+
+          model.options.i18n = this.options.i18n;
         });
       });
     }

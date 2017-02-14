@@ -1,4 +1,3 @@
-import I18n from 'lib/i18n';
 import limax from 'limax';
 
 export default Backbone.Model.extend({
@@ -8,8 +7,8 @@ export default Backbone.Model.extend({
 
   getSlug() {
     let label = this.get('label').toLowerCase();
-    const i18n = new I18n();
 
+    // index page
     if (label === 'theses') {
       return '';
     }

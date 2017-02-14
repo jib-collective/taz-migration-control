@@ -39,7 +39,6 @@ export default MapContryBase.extend({
 
         layer.bindTooltip(tooltip);
         this.set('layer', layer);
-        this.updateLayer();
 
         return MapContryBase.prototype.addLayer.call(this);
       });

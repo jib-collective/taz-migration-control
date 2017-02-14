@@ -9,16 +9,21 @@ export default MapContryBase.extend({
   addLayer() {
     const lat = this.get('lat');
     const long = this.get('lon');
-    const title = this.get('name');
     const icon = L.icon({
       iconUrl: '/dist/images/detention-center-marker.svg',
       iconSize: [28, 28],
     });
     const layer = L.marker([lat, long], {icon});
 
-    layer.bindPopup(title);
-
     this.set({layer});
     return MapContryBase.prototype.addLayer.call(this);
+  },
+
+  getPopupContent() {
+    return this.get('name');
+  },
+
+  updateLayer() {
+    return this;
   },
 });

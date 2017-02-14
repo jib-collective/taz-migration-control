@@ -34,7 +34,6 @@ export default MapContryBase.extend({
         const layer = L.geoJson(data, opts);
 
         this.set({layer});
-        this.updateLayer();
 
         return MapContryBase.prototype.addLayer.call(this);
       });

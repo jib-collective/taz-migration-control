@@ -48,6 +48,10 @@ export default Backbone.Model.extend({
     return Object.values(result)[0];
   },
 
+  getPopupContent() {
+    return false;
+  },
+
   getMap() {
     return this.get('map');
   },
@@ -55,16 +59,25 @@ export default Backbone.Model.extend({
   /* draw a layer on the map */
   addLayer() {
     const layer = this.get('layer');
+    const popupContent = this.getPopupContent();
+    const map = this.getMap();
 
-    layer.addTo(this.getMap());
+    if (popupContent !== false) {
+      layer.bindPopup(popupContent);
+    }
+
+    layer.addTo(map);
+    this.updateLayer();
+
     return layer;
   },
 
   removeLayer() {
     const layer = this.get('layer');
+    const map = this.getMap();
 
     if (layer) {
-      layer.removeFrom(this.getMap());
+      layer.removeFrom(map);
     }
 
     return layer;

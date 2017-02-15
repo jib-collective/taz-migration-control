@@ -89,6 +89,7 @@ export default MapContryBase.extend({
 
     const titleFontSize = this.getFontSize('title', year);
     const unitFontSize = this.getFontSize('unit', year);
+    const unitText = this.options.i18n.load('Mio');
 
     const $title = $('<span/>')
                     .addClass('leaflet-payment-label__value')
@@ -97,7 +98,7 @@ export default MapContryBase.extend({
     const $unit = $('<span/>')
                     .addClass('leaflet-payment-label__unit')
                     .css('fontSize', `${unitFontSize}em`)
-                    .text('Mio');
+                    .text(unitText);
 
     $unit.appendTo($title);
 

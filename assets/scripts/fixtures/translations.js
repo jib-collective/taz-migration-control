@@ -182,4 +182,8 @@ export default {
   Index: {
     de: 'Index',
   },
+
+  Mio: {
+    de: 'Mio',
+  },
 };

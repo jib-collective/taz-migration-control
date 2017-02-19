@@ -105,7 +105,14 @@ export default Backbone.View.extend({
   render() {
     this.$el.html(this.template({
       this,
+      chartType: this.model.get('diagramType'),
+      context: this.model.get('contextualisation'),
+      count: this.model.get('count'),
+      imageUrl: this.model.get('imageUrl'),
+      source: this.model.get('sourceinfo'),
       suffix: this.options.i18n.load('Thesis'),
+      text: this.model.get('text'),
+      title: this.model.get('name'),
     }));
 
     if (this.model.has('diagramType')) {
@@ -118,33 +125,33 @@ export default Backbone.View.extend({
   template: _.template(`
     <h2 class="thesis__item-title">
       <span class="thesis__item-count">
-        <%= suffix %> <%= this.model.get('count') %>
+        <%= suffix %> <%= count %>
         <span class="visually-hidden">:</span>
       </span>
 
-      <%= this.model.get('name') %>
+      <%= title %>
     </h2>
 
-    <% if (this.model.get('diagramType')) { %>
+    <% if (chartType) { %>
       <div class="thesis__chart"></div>
-    <% } else if (this.model.get('imageUrl')) { %>
-      <img src="<%= this.model.get('imageUrl') %>"
+    <% } else if (imageUrl) { %>
+      <img src="<%= imageUrl %>"
            class="fluid-image thesis__image" />
     <% } %>
 
     <p class="thesis__item-text">
-      <%= this.model.get('text') %>
+      <%= text %>
     </p>
 
-    <% if (this.model.get('contextualisation')) { %>
+    <% if (context) { %>
       <p class="thesis__item-text">
-        <%= this.model.get('contextualisation') %>
+        <%= context %>
       </p>
     <% } %>
 
-    <% if (this.model.get('sourceinfo')) { %>
+    <% if (source) { %>
       <p class="thesis__item-context">
-        <%= this.model.get('sourceinfo') %>
+        <%= source %>
       </p>
     <% } %>
   `),

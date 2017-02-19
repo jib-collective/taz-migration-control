@@ -76,7 +76,18 @@ export default class API {
           });
         });
 
-        let {id} = _.compact(results)[0];
+        // Country wasn't found
+        if (results.length === 0) {
+          return emptyResponse();
+        }
+
+        let {id} = _.compact(results);
+
+        if (id) {
+          id = id[0];
+        } else {
+          return emptyResponse();
+        }
 
         return this.findCountryById(id);
       });

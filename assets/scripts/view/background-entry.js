@@ -45,34 +45,38 @@ export default BaseView.extend({
           <h1 class="article__title">
             <%= model.get('headline') %>
           </h1>
-        <% } %>
 
-        <% if (model.get('lead')) { %>
-          <p class="article__lead">
-            <%= model.get('lead') %>
-          </p>
-        <% } %>
+          <% if (model.get('lead')) { %>
+            <p class="article__lead">
+              <%= model.get('lead') %>
+            </p>
+          <% } %>
 
-        <% if (model.get('corpus')) { %>
-          <div class="article__corpus article__corpus--open">
-            <%= model.get('corpus') %>
+          <% if (model.get('corpus')) { %>
+            <div class="article__corpus article__corpus--open">
+              <%= model.get('corpus') %>
 
-            <% if (model.get('authors')) { %>
-              <small class="article__authors-container">
-                <strong>
-                  <%= i18n.load('Authors') %>:
-                </strong>
-                <%= renderAuthors(model.get('authors')) %>
-              </small>
-            <% } %>
-          </div>
-        <% } %>
+              <% if (model.get('authors')) { %>
+                <small class="article__authors-container">
+                  <strong>
+                    <%= i18n.load('Authors') %>:
+                  </strong>
+                  <%= renderAuthors(model.get('authors')) %>
+                </small>
+              <% } %>
+            </div>
+          <% } %>
 
-        <% if (model.get('treaties')) { %>
-          <h2 class="visually-hidden">
-            <%= i18n.load('Treaties') %>
-          </h2>
-          <%= renderTreatyList(model.get('treaties')) %>
+          <% if (model.get('treaties')) { %>
+            <h2 class="visually-hidden">
+              <%= i18n.load('Treaties') %>
+            </h2>
+            <%= renderTreatyList(model.get('treaties')) %>
+          <% } %>
+        <% } else { %>
+          <h1 class="article__title">
+            <%= i18n.load('A problem occurred while fetching the article.') %>
+          </h1>
         <% } %>
       </div>
     </div>
@@ -84,7 +88,9 @@ export default BaseView.extend({
     options.api.findBackgroundBySlug(slug)
       .then(background => {
         this.model = new Background(background);
-        setPageTitle(this.model.get('headline'));
+        const headline = this.model.get('headline') || '';
+
+        setPageTitle(headline);
         this.render();
       });
 

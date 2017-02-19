@@ -15,6 +15,13 @@ export default Backbone.View.extend({
       this.render();
     });
 
+    this.listenTo(this.model, 'change:active', (model, value) => {
+      if (value === true) {
+        const title = this.model.get('name');
+        this.options.subnav.setTitle(title);
+      }
+    });
+
     if (this.model.getSlug() === appEntry) {
       this.model.set('active', true);
     }

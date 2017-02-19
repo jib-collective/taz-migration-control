@@ -18,9 +18,9 @@ export default BaseView.extend({
     const $icon = $eventTarget.children('.treaties__country-toggle-icon');
 
     if (this.isTreatyOpen($target)) {
-      this.closeTreaty($target, $icon);
+      return this.closeTreaty($target, $icon);
     } else {
-      this.openTreaty($target, $icon);
+      return this.openTreaty($target, $icon);
     }
   },
 
@@ -41,37 +41,37 @@ export default BaseView.extend({
   template: _.template(`
     <div class="app__content">
       <div class="article">
-        <% if (model.get('headline')) { %>
+        <% if (headline) { %>
           <h1 class="article__title">
-            <%= model.get('headline') %>
+            <%= headline %>
           </h1>
 
-          <% if (model.get('lead')) { %>
+          <% if (lead) { %>
             <p class="article__lead">
-              <%= model.get('lead') %>
+              <%= lead %>
             </p>
           <% } %>
 
-          <% if (model.get('corpus')) { %>
+          <% if (corpus) { %>
             <div class="article__corpus article__corpus--open">
-              <%= model.get('corpus') %>
+              <%= corpus %>
 
-              <% if (model.get('authors')) { %>
+              <% if (authors) { %>
                 <small class="article__authors-container">
                   <strong>
                     <%= i18n.load('Authors') %>:
                   </strong>
-                  <%= renderAuthors(model.get('authors')) %>
+                  <%= renderAuthors(authors) %>
                 </small>
               <% } %>
             </div>
           <% } %>
 
-          <% if (model.get('treaties')) { %>
+          <% if (treaties) { %>
             <h2 class="visually-hidden">
               <%= i18n.load('Treaties') %>
             </h2>
-            <%= renderTreatyList(model.get('treaties')) %>
+            <%= renderTreatyList(treaties) %>
           <% } %>
         <% } else { %>
           <h1 class="article__title">

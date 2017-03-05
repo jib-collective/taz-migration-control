@@ -50,7 +50,6 @@ export default Backbone.View.extend({
     attribution
     .setPrefix('')
     .addAttribution('<a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>')
-    .addAttribution('<a href="https://carto.com/attributions">CARTO</a>')
     .addAttribution(`<a href="/de/pages/quellen" data-module="page">${this.options.i18n.load('sources')}</a>`)
     .addTo(map);
 

@@ -17,6 +17,28 @@ export default MapContryBase.extend({
     },
   },
 
+  _getDataValueForYear(type, year) {
+    return this._getDataValueForYearOnIndex(type, 'value', year);
+  },
+
+  _getDataValueForYearOnIndex(type, index, year) {
+    const data = this.get('data');
+    const scoped = data[type] || undefined;
+    let result;
+
+    if (scoped === undefined || scoped.length === 0) {
+      return;
+    }
+
+    result = scoped.find(item => Object.keys(item)[0] == year);
+
+    if (result === undefined) {
+      return;
+    }
+
+    return result[year][index] || undefined;
+  },
+
   addLayer() {
     const countryCode = this.get('countryCode');
 
@@ -77,32 +99,53 @@ export default MapContryBase.extend({
     const scaling = type === 'unit' ? unitRangeValue : titleRangeValue;
     const range = this.getRange(scaling);
     const value = this._getDataValueForYear('singlePayments', year);
+
     return range(value);
   },
 
   getTooltipContent(year) {
-    const title = this._getDataValueForYear('singlePayments', year);
+    const data = this._getDataValueForYear('singlePayments', year);
 
-    if (!title) {
+    if (data === undefined) {
       return false;
     }
 
     const titleFontSize = this.getFontSize('title', year);
     const unitFontSize = this.getFontSize('unit', year);
-    const unitText = this.options.i18n.load('Mio');
+    const unit = this.options.i18n.load('Mio');
+    const value = this._getDataValueForYear('singlePayments', year);
 
-    const $title = $('<span/>')
-                    .addClass('leaflet-payment-label__value')
-                    .css('fontSize', `${titleFontSize}em`)
-                    .text(title);
-    const $unit = $('<span/>')
-                    .addClass('leaflet-payment-label__unit')
-                    .css('fontSize', `${unitFontSize}em`)
-                    .text(unitText);
+    return `
+      <span class="leaflet-payment-label__value"
+            style="font-size: ${titleFontSize}em;">
+        ${value}
 
-    $unit.appendTo($title);
+        <span class="leaflet-payment-label__unit"
+              style="font-size: ${unitFontSize}em;">
+          ${unit}
+        </span>
+      </span>
+    `;
+  },
 
-    return $title.get(0);
+  getPopupContent(year) {
+    const DATA_TYPE = 'singlePayments';
+
+    const title = this._getDataValueForYearOnIndex(DATA_TYPE, 'source', year);
+    const href = this._getDataValueForYearOnIndex(DATA_TYPE, 'link', year);
+    const value = this._getDataValueForYear(DATA_TYPE, year);
+    const label = this.options.i18n.load('Mio');
+
+    if (!title) {
+      return false;
+    }
+
+    return `
+      <a href="${href}"
+         class="leaflet-popup__title">${title}</a>
+      <span class="leaflet-popup__value">${value}</span>
+      <span class="leaflet-popup__label">${label}</span>
+    `;
   },
 
   /* update ODA layer */

@@ -26,10 +26,12 @@ export default Backbone.View.extend({
     return c3.generate(options);
   },
 
+  renderChart(data) {
+    return false;
+  },
+
   initialize(options) {
     this.options = options;
-
-    return this.fetchData()
-      .then(data => this.renderChart(data));
+    return this.fetchData().then(data => this.renderChart(data));
   },
 });

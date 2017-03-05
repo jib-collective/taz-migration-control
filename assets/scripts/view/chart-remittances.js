@@ -53,14 +53,20 @@ export default Chart.extend({
 
     data.forEach(country => {
       country.data.remittances.forEach(item => {
-        if (_.keys(item)[0] == YEAR) {
-          c3Options.data.columns[0].push(_.values(item)[0]);
+        const keys = _.keys(item);
+        const key = keys[0];
+
+        if (key == YEAR) {
+          c3Options.data.columns[0].push(item[key].value);
         }
       });
 
       country.data.oda.forEach(item => {
-        if (_.keys(item)[0] == YEAR) {
-          c3Options.data.columns[1].push(_.values(item)[0]);
+        const keys = _.keys(item);
+        const key = keys[0];
+
+        if (key == YEAR) {
+          c3Options.data.columns[1].push(item[key].value);
         }
       });
     });

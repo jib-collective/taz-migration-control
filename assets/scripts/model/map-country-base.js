@@ -29,23 +29,20 @@ export default Backbone.Model.extend({
   /* get dataset for a single year */
   _getDataValueForYear(type, year) {
     const data = this.get('data');
-    const scoped = data[type] || undefined;
+    const scoped = data[type] || [];
+    let result;
 
     if (scoped === undefined || scoped.length === 0) {
       return;
     }
 
-    const result = scoped.find(item => {
-      if (item) {
-        return Object.keys(item)[0] == year;
-      }
-    });
+    result = scoped.find(item => Object.keys(item)[0] == year);
 
     if (result === undefined) {
       return;
     }
 
-    return Object.values(result)[0];
+    return result[year].value || undefined;
   },
 
   getPopupContent() {

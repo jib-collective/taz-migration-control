@@ -82,7 +82,7 @@ export default class API {
           return emptyResponse();
         }
 
-        return this.findCountryById(id[0]);
+        return this.findCountryById(results[0].id);
       });
   }
 

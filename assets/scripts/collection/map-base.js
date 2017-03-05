@@ -75,8 +75,7 @@ export default Backbone.Collection.extend({
     }
 
     let values = this.models.map(country => {
-      const data = country.getData(type);
-      return data.map(item => _.values(item)[0]);
+      return country.getData(type).map(item => _.values(item)[0].value);
     });
 
     values = _.flatten(values);

@@ -67,9 +67,9 @@ export default Chart.extend({
     data.forEach(country => {
       country.data.migrationIntensity.forEach(item => {
         const keys = _.keys(item);
-        const values = _.values(item);
+        const key = keys[0];
 
-        c3Options.data.columns[0].push(values[0]);
+        c3Options.data.columns[0].push(item[key].value);
 
         if (windowWidth < 768) {
           const shortHand = ('' + keys[0]).slice(-2);
@@ -80,9 +80,10 @@ export default Chart.extend({
       });
 
       country.data.oda.forEach(item => {
-        const values = _.values(item);
+        const keys = _.keys(item);
+        const key = keys[0];
 
-        c3Options.data.columns[1].push(values[0]);
+        c3Options.data.columns[1].push(item[key].value);
       });
     });
 

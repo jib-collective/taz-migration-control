@@ -25,7 +25,7 @@ export default Backbone.View.extend({
         let charts = [];
 
         [
-          'eg',
+          'eq',
           'dz',
           'et',
           'bj',

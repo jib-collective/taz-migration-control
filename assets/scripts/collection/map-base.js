@@ -10,12 +10,11 @@ export default Backbone.Collection.extend({
     if (this.dataType) {
       this.on('sync', () => {
         this.models.forEach(model => {
-          const type = this.dataType;
-          const layerScale = this._getDataRange(type);
-          const year = this.getEndYear(type);
-
-          if (model.getData(type).length > 0) {
-            model.set({layerScale, year});
+          if (model.getData(this.dataType).length > 0) {
+            model.set({
+              layerScale: this._getDataRange(this.dataType),
+              year: this.getEndYear(this.dataType)
+            });
           }
 
           if (!model.options) {

@@ -12,6 +12,10 @@ export default Chart.extend({
       return;
     }
 
+    const PAYMENTS_LABEL = this.options.i18n.load('Payments from EU countries');
+    const INTENSITY_LABEL = this.options.i18n.load('Migrationintensity');
+    const UNIT_LABEL = this.options.i18n.load('Dollar per capita');
+
     const windowWidth = $(window).width();
     const c3Options = {
       axis: {
@@ -35,8 +39,8 @@ export default Chart.extend({
       data: {
         axes: {},
         columns: [
-          [this.options.i18n.load('Migrationintensity')],
-          [this.options.i18n.load('Payments from EU countries')],
+          [INTENSITY_LABEL],
+          [PAYMENTS_LABEL],
         ],
         types: {},
       },
@@ -48,11 +52,10 @@ export default Chart.extend({
       },
       tooltip: {
         format: {
-          value: function (value, ratio, id) {
-            if (id === this.options.i18n.load('Payments from EU countries')) {
+          value(value, ratio, id) {
+            if (id === PAYMENTS_LABEL) {
               const dollar = (Math.round(value * 100)/100).toFixed(2);
-              const label = this.options.i18n.load('Dollar per capita');
-              return  `${dollar} ${label}`;
+              return  `${dollar} ${UNIT_LABEL}`;
             }
 
             return value;
@@ -99,8 +102,8 @@ export default Chart.extend({
     const selection = d3.select(this.$el.eq(0).parent().get(0))
       .selectAll('span')
       .data([
-        this.options.i18n.load('Migrationintensity'),
-        this.options.i18n.load('Payments from EU countries')
+        INTENSITY_LABEL,
+        PAYMENTS_LABEL,
       ])
         .enter();
 

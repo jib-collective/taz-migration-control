@@ -15,6 +15,7 @@ export default Chart.extend({
       return;
     }
 
+    const UNIT_LABEL = this.options.i18n.load('Dollar per capita');
     const c3Options = {
       bindto: this.$el.get(0),
       data: {
@@ -45,7 +46,7 @@ export default Chart.extend({
         format: {
           value: function (value, ratio, id) {
             const dollar = (Math.round(value * 100)/100).toFixed(2);
-            return `${dollar} this.options.i18n.load('Dollar per capita')`;
+            return `${dollar} ${UNIT_LABEL}`;
           }
         }
       },

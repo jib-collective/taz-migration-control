@@ -139,8 +139,8 @@ export default {
     de: 'Zahlungen zur Verhinderung irregulärer Migration',
   },
 
-  migrationIntensity: {
-    de: 'Index Migrationsintensität',
+  asylumFigures: {
+    de: 'Migrationsintensität',
   },
 
   Authors: {

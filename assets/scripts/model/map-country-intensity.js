@@ -40,7 +40,7 @@ export default MapContryBase.extend({
   },
 
   getScale(year) {
-    const type = 'migrationIntensity';
+    const type = 'asylumFigures';
     const range = this.getRange();
     const value = this._getDataValueForYear(type, year);
 
@@ -75,7 +75,7 @@ export default MapContryBase.extend({
       return '';
     }
 
-    const type = 'migrationIntensity';
+    const type = 'asylumFigures';
     const title = this.get('name');
     const label = this.options.i18n.load('Index');
     const value = this._getDataValueForYear(type, year);

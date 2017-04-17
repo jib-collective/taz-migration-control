@@ -50,7 +50,7 @@ export default Backbone.View.extend({
 
     [
       'singlePayments',
-      'migrationIntensity',
+      'asylumFigures',
       'detentionCenter',
     ].forEach((key, index) => {
       let attrs;
@@ -63,7 +63,7 @@ export default Backbone.View.extend({
           };
           break;
 
-        case 'migrationIntensity':
+        case 'asylumFigures':
           attrs = {
             collection: new MigrationIntensityCollection([], collectionAttrs),
           };

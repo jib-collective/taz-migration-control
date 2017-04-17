@@ -5,7 +5,7 @@ export default BaseCollection.extend({
   model: Country,
 
   initialize(data, options) {
-    this.dataType = 'migrationIntensity';
+    this.dataType = 'asylumFigures';
     return BaseCollection.prototype.initialize.call(this, data, options);
   },
 

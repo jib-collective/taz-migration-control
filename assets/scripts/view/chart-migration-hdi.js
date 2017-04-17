@@ -68,26 +68,30 @@ export default Chart.extend({
     };
 
     data.forEach(country => {
-      country.data.migrationIntensity.forEach(item => {
-        const keys = _.keys(item);
-        const key = keys[0];
+      if (country.data.asylumFigures) {
+        country.data.asylumFigures.forEach(item => {
+          const keys = _.keys(item);
+          const key = keys[0];
 
-        c3Options.data.columns[0].push(item[key].value);
+          c3Options.data.columns[0].push(item[key].value);
 
-        if (windowWidth < 768) {
-          const shortHand = ('' + keys[0]).slice(-2);
-          c3Options.axis.x.categories.push(shortHand);
-        } else {
-          c3Options.axis.x.categories.push(keys[0]);
-        }
-      });
+          if (windowWidth < 768) {
+            const shortHand = ('' + keys[0]).slice(-2);
+            c3Options.axis.x.categories.push(shortHand);
+          } else {
+            c3Options.axis.x.categories.push(keys[0]);
+          }
+        });
+      }
 
-      country.data.oda.forEach(item => {
-        const keys = _.keys(item);
-        const key = keys[0];
+      if (country.data.oda) {
+        country.data.oda.forEach(item => {
+          const keys = _.keys(item);
+          const key = keys[0];
 
-        c3Options.data.columns[1].push(item[key].value);
-      });
+          c3Options.data.columns[1].push(item[key].value);
+        });
+      }
     });
 
     c3Options.data.axes[c3Options.data.columns[0][0]] = 'y';

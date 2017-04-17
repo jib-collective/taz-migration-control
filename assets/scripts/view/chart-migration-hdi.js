@@ -13,7 +13,7 @@ export default Chart.extend({
     }
 
     const PAYMENTS_LABEL = this.options.i18n.load('Payments from EU countries');
-    const INTENSITY_LABEL = this.options.i18n.load('Migrationintensity');
+    const INTENSITY_LABEL = this.options.i18n.load('asylumFigures');
     const UNIT_LABEL = this.options.i18n.load('Dollar per capita');
 
     const windowWidth = $(window).width();

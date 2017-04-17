@@ -77,7 +77,7 @@ export default MapContryBase.extend({
 
     const type = 'asylumFigures';
     const title = this.get('name');
-    const label = this.options.i18n.load('Index');
+    const label = this.options.i18n.load('Applications for Asylum');
     const value = this._getDataValueForYear(type, year);
 
     return `

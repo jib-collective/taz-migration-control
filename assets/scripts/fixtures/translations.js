@@ -91,10 +91,6 @@ export default {
     de: 'EU Geld',
   },
 
-  Migrationintensity: {
-    de: 'Migrationsintensität',
-  },
-
   'Read More': {
     de: 'Weiter lesen',
   },
@@ -140,7 +136,7 @@ export default {
   },
 
   asylumFigures: {
-    de: 'Migrationsintensität',
+    de: 'Asylanträge in der EU',
   },
 
   Authors: {
@@ -179,8 +175,8 @@ export default {
     de: 'Features',
   },
 
-  Index: {
-    de: 'Index',
+  'Applications for Asylum': {
+    de: 'Asylanträge',
   },
 
   Mio: {

@@ -1,26 +1,26 @@
 export default {
   refugeesInCountry: {
-    de: 'Anzahl internationaler Geflüchter im Land',
+    de: 'Anzahl internationaler Geflüchter im Land (2015)',
   },
 
   applicationsForAsylum: {
-    de: 'Asylanträge in der EU-28 gesamt',
+    de: 'Asylanträge in der EU-28 gesamt seit 2000',
   },
 
   refugeesOutsideCountry: {
-    de: 'Ins Ausland Geflüchtete aus diesem Land',
+    de: 'Ins Ausland Geflüchtete aus diesem Land (2015)',
   },
 
   refugeesInEU: {
-    de: 'In die EU geflüchtete aus diesem Land',
+    de: 'In die EU geflüchtete aus diesem Land (2015)',
   },
 
   idp: {
-    de: 'Binnenvertriebene',
+    de: 'Binnenvertriebene (2015)',
   },
 
   asylumApprovalRate: {
-    de: 'Anerkennungsquote in der EU-28 gesamt',
+    de: 'Anerkennungsquote in der EU-28 gesamt (Prozent, 2015)',
   },
 
   countriesRepatriationAgreement: {

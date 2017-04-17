@@ -20,11 +20,11 @@ export default MapContryBase.extend({
   },
 
   getPopupContent() {
+    const link = this.get('link');
     const title = this.get('name');
 
-    return `
-      <span class="leaflet-popup__title">${title}</span>
-    `;
+    return `<a href="${link}"
+               class="leaflet-popup__title">${title}</a>`;
   },
 
   updateLayer() {

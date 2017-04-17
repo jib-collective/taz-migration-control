@@ -74,7 +74,8 @@
   }
 
   &-popup__title {
-    color: $color-attention;
+    color: $color-attention !important;
+    text-decoration: none;
   }
 
   &-popup__value {

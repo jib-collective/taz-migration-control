@@ -182,8 +182,4 @@ export default {
   Mio: {
     de: 'Mio',
   },
-
-  informalTreatiesDescription: {
-    de: 'Informelle Rücknahmeabkommen',
-  },
 };

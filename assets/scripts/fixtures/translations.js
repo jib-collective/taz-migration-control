@@ -27,10 +27,6 @@ export default {
     de: 'Formale Rücknahmeabkommen',
   },
 
-  otherMigrationAgreements: {
-    de: 'Informelle Vereinbarungen mit Migrationsbezug',
-  },
-
   frontexCooperation: {
     de: 'Frontex-Kooperation',
   },
@@ -181,5 +177,9 @@ export default {
 
   Mio: {
     de: 'Mio',
+  },
+
+  informalTreatiesDescription: {
+    de: 'Informelle Vereinbarungen mit Migrationsbezug',
   },
 };

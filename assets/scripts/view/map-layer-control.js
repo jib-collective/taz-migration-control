@@ -32,8 +32,21 @@ export default Backbone.View.extend({
   },
 
   _setActiveAllLayer(name) {
+    // cleanup after a layer was added and make sure, only one is applied
+    const cleanupLayer = (index) => {
+      _.forEach(this.layer, (view, index) => {
+        if (index !== name) {
+          view.removeLayer();
+        }
+      });
+    };
+
     return _.forEach(this.layer, (view, index) => {
-      index === name ? view.addLayer() : view.removeLayer();
+      if (index === name) {
+        view.addLayer().then(() => cleanupLayer(index));
+      } else {
+        view.removeLayer();
+      }
     });
   },
 

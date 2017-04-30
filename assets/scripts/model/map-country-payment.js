@@ -131,14 +131,14 @@ export default MapContryBase.extend({
   getPopupContent(year) {
     const DATA_TYPE = 'singlePayments';
 
+    if (year === undefined) {
+      return '';
+    }
+
     const title = this._getDataValueForYearOnIndex(DATA_TYPE, 'source', year);
     const href = this._getDataValueForYearOnIndex(DATA_TYPE, 'link', year);
     const value = this._getDataValueForYear(DATA_TYPE, year);
     const label = this.options.i18n.load('Mio');
-
-    if (!title) {
-      return false;
-    }
 
     return `
       <a href="${href}"
@@ -158,10 +158,12 @@ export default MapContryBase.extend({
 
     const content = this.getTooltipContent(year);
     const radius = this.getRadius(year);
+    const popup = layer.getPopup();
 
     if (radius === 0 || content === false) {
       layer.setStyle({fillOpacity: 0});
       layer.closeTooltip();
+      layer.closePopup();
       return this;
     }
 
@@ -172,6 +174,14 @@ export default MapContryBase.extend({
 
     layer.setRadius(radius);
     layer.setTooltipContent(content);
+
+    if (layer) {
+      const popupContent = this.getPopupContent(year);
+
+      if (popup && popupContent !== false) {
+        layer.setPopupContent(popupContent);
+      }
+    }
 
     return this;
   },

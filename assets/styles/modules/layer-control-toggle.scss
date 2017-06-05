@@ -8,6 +8,7 @@
   color: $text-color-inverse;
   cursor: pointer;
   left: 50%;
+  outline: none;
   padding: 0 .6rem .2rem .6rem;
   position: relative;
   text-align: center;
@@ -26,6 +27,7 @@
 
   &__icon {
     height: .6rem;
+    pointer-events: none;
     width: .8rem;
 
     @include small {

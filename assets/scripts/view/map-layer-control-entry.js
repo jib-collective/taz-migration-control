@@ -25,12 +25,16 @@ export default Backbone.View.extend({
     return this.model.get('key') === 'detentionCenter';
   },
 
+  isTreaties() {
+    return this.model.get('key') === 'mapTreaties';
+  },
+
   isActive() {
     return this.model.get('active') === true;
   },
 
   addSlider() {
-    if (this.isDetentionCenter()) {
+    if (this.isDetentionCenter() || this.isTreaties()) {
       return;
     }
 

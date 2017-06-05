@@ -182,4 +182,8 @@ export default {
   informalTreatiesDescription: {
     de: 'Informelle Vereinbarungen mit Migrationsbezug',
   },
+
+  mapTreaties: {
+    de: 'Rücknahmeabkommen',
+  },
 };

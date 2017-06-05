@@ -5,6 +5,7 @@ import Backbone from 'backbone';
 import DetentionCollection from 'collection/map-detention';
 import MigrationIntensityCollection from 'collection/map-intensity';
 import PaymentCollection from 'collection/map-payment';
+import TreatiesCollection from 'collection/map-treaties';
 import LayerControlItem from 'view/map-layer-control-entry';
 
 const ITEM_OPEN_CLASS = 'layer-control__item--open';
@@ -65,6 +66,7 @@ export default Backbone.View.extend({
       'singlePayments',
       'asylumFigures',
       'detentionCenter',
+      'mapTreaties',
     ].forEach((key, index) => {
       let attrs;
       let collectionAttrs = _.pick(this.options, 'api', 'map', 'i18n');
@@ -86,6 +88,12 @@ export default Backbone.View.extend({
           attrs = {
             collection: new DetentionCollection([], collectionAttrs),
           };
+          break;
+
+        case 'mapTreaties':
+          attrs = {
+            collection: new TreatiesCollection([], collectionAttrs),
+          }
           break;
       }
 

@@ -23,7 +23,7 @@
   }
 
   &-marker-icon,
-  &-interactive {
+  &-interactive:not(&-interactive--no-transparency) {
     opacity: .8 !important;
   }
 

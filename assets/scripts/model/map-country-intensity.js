@@ -51,7 +51,6 @@ export default MapContryBase.extend({
     return range(value);
   },
 
-  /* set intensity for a single year */
   setLayerYear(year) {
     const layer = this.get('layer');
     let fillOpacity = this.getScale(year) || 0;

@@ -1,6 +1,9 @@
 import L from 'leaflet';
 import MapContryBase from 'model/map-country-base';
 
+const LEAFLET_NO_TRANSPARENCY = 'leaflet-interactive--no-transparency';
+const LEAFLET_HIDDEN = 'leaflet-interactive--hidden';
+
 export default MapContryBase.extend({
   defaults: {
     '_start-end-marker': [],
@@ -11,14 +14,14 @@ export default MapContryBase.extend({
     const partnerCoords = this.get('partnerCoords');
     const startEndMarker = this.get('_start-end-marker');
     const startEndMarkerOptions = {
-      className: 'leaflet-interactive--no-transparency',
+      className: LEAFLET_NO_TRANSPARENCY,
       color: '#ffffff',
       fillOpacity: 1,
       opacity: 1,
       radius: 50000,
     };
     const options = {
-      className: 'leaflet-interactive--no-transparency',
+      className: LEAFLET_NO_TRANSPARENCY,
       color: '#ffffff',
       fillOpacity: 1,
       opacity: 1,
@@ -80,7 +83,20 @@ export default MapContryBase.extend({
     return MapContryBase.prototype.removeLayer.call(this);
   },
 
-  updateLayer() {
+  setLayerYear(year) {
+    const layer = this.get('layer');
+    const date = this.get('date');
+    let isVisible = parseInt(date.year, 10) <= year;
+    let options = {
+      fillOpacity: isVisible ? 1 : 0,
+      opacity: isVisible ? 1 : 0,
+    };
+
+    if (layer) {
+      layer.setStyle(options);
+      this.getStartEndMarker().forEach(marker => marker.setStyle(options));
+    }
+
     return this;
   },
 });

@@ -148,7 +148,6 @@ export default MapContryBase.extend({
     `;
   },
 
-  /* update ODA layer */
   setLayerYear(year) {
     const layer = this.get('layer');
 

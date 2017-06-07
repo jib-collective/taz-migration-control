@@ -230,7 +230,7 @@ export default {
   },
 
   mapTreaties: {
-    de: 'Rücknahmeabkommen',
-    en: '[TODO]',
+    de: 'Migrations- und Rücknahmeabkommen',
+    en: 'Readmission and Migration-Related Agreements',
   },
 };

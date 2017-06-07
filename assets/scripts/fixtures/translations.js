@@ -160,8 +160,8 @@ export default {
   },
 
   singlePayments: {
-    de: 'Zahlungen zur Verhinderung irregulärer Migration',
-    en: 'Payments to prevent illegal migration',
+    de: 'Wer wird bezahlt, um die Flüchtlinge aufzuhalten?',
+    en: 'Who gets paid, to stop the worlds refugees?',
   },
 
   asylumFigures: {

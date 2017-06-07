@@ -5,14 +5,9 @@ const LEAFLET_NO_TRANSPARENCY = 'leaflet-interactive--no-transparency';
 const LEAFLET_HIDDEN = 'leaflet-interactive--hidden';
 
 export default MapContryBase.extend({
-  defaults: {
-    '_start-end-marker': [],
-  },
-
   addLayer() {
     const countryCoords = this.get('countryCoords');
     const partnerCoords = this.get('partnerCoords');
-    const startEndMarker = this.get('_start-end-marker');
     const startEndMarkerOptions = {
       className: LEAFLET_NO_TRANSPARENCY,
       color: '#ffffff',
@@ -37,20 +32,35 @@ export default MapContryBase.extend({
 
     const layer = L.polyline(fromTo, options);
 
-    // build start/ end marker
-    for(let i = 0; i < 2; ++i) {
-      const marker = L.circle(fromTo[i], startEndMarkerOptions);
-      marker.addTo(this.getMap());
-      startEndMarker.push(marker);
-    }
+    const setLayerActive = () => {
+      layer.setStyle(active);
+      this.getStartEndMarker().forEach(marker => marker.setStyle(active));
+    };
 
-    layer.on('mouseover popupopen', () => layer.setStyle(active));
-    layer.on('mouseout popupclose', event => {
+    const setLayerInActive = event => {
       if ((!layer.isPopupOpen() && event.type !== 'popupclose') ||
           event.type === 'popupclose') {
         layer.setStyle(options);
+        this.getStartEndMarker().forEach(marker => marker.setStyle(options));
       }
-    });
+    };
+
+    // build start/ end marker
+    this.set('_start-end-marker', fromTo.map(latLong => {
+      const marker = L.circle(latLong, startEndMarkerOptions);
+
+      marker.addTo(this.getMap());
+      marker.on({
+        'mouseover': setLayerActive,
+        'mouseout': setLayerInActive,
+        'click': () => layer.openPopup(),
+      });
+
+      return marker;
+    }));
+
+    layer.on('mouseover popupopen', setLayerActive);
+    layer.on('mouseout popupclose', setLayerInActive);
 
     this.set({layer});
 
@@ -74,7 +84,7 @@ export default MapContryBase.extend({
   },
 
   getStartEndMarker() {
-    return this.get('_start-end-marker');
+    return this.get('_start-end-marker') || [];
   },
 
   // Monkey patch, because of the marker removal
@@ -94,8 +104,13 @@ export default MapContryBase.extend({
 
     if (layer) {
       layer.setStyle(options);
-      this.getStartEndMarker().forEach(marker => marker.setStyle(options));
+
+      if (layer.isPopupOpen()) {
+        layer.closePopup();
+      }
     }
+
+    this.getStartEndMarker().forEach(marker => marker.setStyle(options));
 
     return this;
   },

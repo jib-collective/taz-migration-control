@@ -106,6 +106,14 @@ export default Backbone.View.extend({
   },
 
   buildInterface() {
+    Object.keys(this.views).forEach(index => {
+      const view = this.views[index];
+
+      if (view.remove) {
+        view.remove();
+      }
+    });
+
     ['navigation', 'map', 'header',].forEach(item => {
       this.views[`_${item}`].render().$el.prependTo(this.$el);
     });

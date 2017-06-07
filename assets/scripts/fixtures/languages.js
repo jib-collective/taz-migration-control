@@ -4,10 +4,6 @@ export default [
   },
 
   {
-    label: 'FR',
-  },
-
-  {
     label: 'EN',
   },
 ];

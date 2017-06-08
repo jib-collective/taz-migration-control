@@ -2,6 +2,7 @@ import $ from 'jquery';
 import _ from 'underscore';
 import d3 from 'd3';
 import {fetchGeoData} from 'lib/fetch-geojson';
+import { icon } from 'lib/icon';
 import L from 'leaflet';
 import limax from 'limax';
 import MapContryBase from 'model/map-country-base';
@@ -142,7 +143,12 @@ export default MapContryBase.extend({
 
     return `
       <a href="${href}"
-         class="leaflet-popup__title">${title}</a>
+         class="leaflet-popup__title"
+         target="_blank"
+         rel="noopener noreferrer">
+         ${icon('external-link', 'leaflet-popup__external-icon')}
+         ${title}
+      </a>
       <span class="leaflet-popup__value">${value}</span>
       <span class="leaflet-popup__label">${label}</span>
     `;

@@ -1,4 +1,5 @@
 import L from 'leaflet';
+import { icon } from 'lib/icon';
 import MapContryBase from 'model/map-country-base';
 
 const LEAFLET_NO_TRANSPARENCY = 'leaflet-interactive--no-transparency';
@@ -77,7 +78,12 @@ export default MapContryBase.extend({
 
     return `
       <a href="${link}"
-         class="leaflet-popup__title">${title}</a>
+         class="leaflet-popup__title"
+         target="_blank"
+         rel="noopener noreferrer">
+        ${icon('external-link', 'leaflet-popup__external-icon')}
+        ${title}
+      </a>
       <span class="leaflet-popup__value">&nbsp;</span>
       <span class="leaflet-popup__label">${date.day}.${date.month}.${date.year}</span>
     `;

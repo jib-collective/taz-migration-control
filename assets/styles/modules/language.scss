@@ -2,23 +2,32 @@
   line-height: 1;
 
   &__item {
-    $size: 2.2rem;
+    $size-small: 1.6rem;
+    $size-medium: 2.2rem;
+    $font-size-small: .6rem;
+    $font-size-medium: .8rem;
 
     background-color: $color-app-bright;
     color: $text-color-inverse;
-
+    cursor: pointer;
     border-radius: 50%;
     display: block;
     font-family: $font-family-sans-serif;
-    font-size: .8rem;
+    font-size: $font-size-small;
     font-weight: $weight-sans-serif-medium;
-    line-height: $size;
+    line-height: $size-small;
     position: relative;
     text-align: center;
     text-decoration: none;
     text-transform: uppercase;
     top: -.3rem;
-    width: $size;
+    width: $size-small;
+
+    @include small {
+      font-size: $font-size-medium;
+      line-height: $size-medium;
+      width: $size-medium;
+    }
 
     &:not(&--active):hover,
     &:not(&--active):focus {

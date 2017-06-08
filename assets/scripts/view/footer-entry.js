@@ -12,7 +12,7 @@ export default Backbone.View.extend({
 
   render() {
     this.$el.html(this.template({
-      this,
+      this: this,
       language: this.options.application.get('language'),
     }));
     return this;

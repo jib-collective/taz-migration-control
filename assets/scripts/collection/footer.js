@@ -9,12 +9,10 @@ export default Backbone.Collection.extend({
   initialize(data, options) {
     this.options = options;
 
-    if (this.slug) {
-      this.options.api.fetch(this.slug)
-        .then(data => {
-          _.forEach(data, item => this.add(item));
-          this.trigger('sync');
-        });
-    }
+    this.options.api.fetch(this.slug)
+      .then(data => {
+        _.forEach(data, item => this.models.push(new FooterEntry(item)));
+        this.trigger('sync');
+      });
   },
 });

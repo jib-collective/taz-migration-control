@@ -36,11 +36,6 @@ export default Backbone.View.extend({
     };
 
     this.views = {
-      _header: new HeaderView(this._globalCtx),
-      _navigation: new NavigationView(this._globalCtx),
-      _map: new MapView(this._globalCtx),
-      _footer: new Footer(this._globalCtx),
-
       index: ThesisView,
       background: BackgroundView,
       background_entry: BackgroundEntryView,
@@ -104,19 +99,18 @@ export default Backbone.View.extend({
   },
 
   buildInterface() {
-    Object.keys(this.views).forEach(index => {
-      const view = this.views[index];
+    this.views.__footer = new Footer(this._globalCtx);
 
-      if (view.remove) {
-        view.remove();
-      }
-    });
+    this.views.__footer.render().$el.appendTo(this.$el);
+
+    this.views._header = new HeaderView(this._globalCtx);
+    this.views._navigation = new NavigationView(this._globalCtx);
+    this.views._map = new MapView(this._globalCtx);
 
     ['navigation', 'map', 'header',].forEach(item => {
       this.views[`_${item}`].render().$el.prependTo(this.$el);
     });
 
-    this.views._footer.render().$el.appendTo(this.$el);
     return this;
   },
 
@@ -177,6 +171,13 @@ export default Backbone.View.extend({
 
     /* build interface */
     if (type === 'complete') {
+      /* destroy all UI views */
+      Object.values(this.views).forEach(view => {
+        if (view.remove) {
+          view.remove();
+        }
+      })
+
       this.$el.html(this.template());
       this.buildInterface();
       this.model.set({firstBuild: true});

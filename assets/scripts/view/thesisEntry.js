@@ -104,7 +104,7 @@ export default Backbone.View.extend({
 
   render() {
     this.$el.html(this.template({
-      this,
+      this: this,
       chartType: this.model.get('diagramType'),
       context: this.model.get('contextualisation'),
       count: this.model.get('count'),

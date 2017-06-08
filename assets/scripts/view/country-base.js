@@ -14,7 +14,7 @@ export default Backbone.View.extend({
   render() {
     if (this.template) {
       this.$el.html(this.template({
-        this,
+        this: this,
         i18n: this.options.i18n,
         renderCountryTreaties,
         renderAuthors,

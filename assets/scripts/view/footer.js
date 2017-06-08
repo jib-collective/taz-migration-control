@@ -16,7 +16,7 @@ export default Backbone.View.extend({
   initialize(options) {
     this.options = options;
     this.collection = new FooterCollection([], this.options);
-    this.listenTo(this.collection, 'sync', this.render);
+    this.listenTo(this.collection, 'sync', () => { this.render('partial'); });
     return this;
   },
 
@@ -31,12 +31,14 @@ export default Backbone.View.extend({
     return this;
   },
 
-  render() {
-    this.$el.html(this.template({
-      i18n: this.options.i18n.load,
-      icon,
-      language: this.options.application.get('language'),
-    }));
+  render(type = 'initial') {
+    if (type === 'initial') {
+      this.$el.html(this.template({
+        i18n: this.options.i18n.load,
+        icon,
+        language: this.options.application.get('language'),
+      }));
+    }
 
     this.collection.models.forEach(model => {
       const options = Object.assign(this.options, {

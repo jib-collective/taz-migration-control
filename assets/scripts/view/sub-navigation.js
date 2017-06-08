@@ -65,7 +65,7 @@ export default Backbone.View.extend({
 
   render() {
     this.$el.html(this.template({
-      this,
+      this: this,
       icon,
     }));
 

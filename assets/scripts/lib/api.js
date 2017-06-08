@@ -52,7 +52,8 @@ export default class API {
         this.store[url] = data;
         this.pending[url] = undefined;
         return data;
-      });
+      })
+      .catch(err => console.log('API: fetch', err));
   }
 
   findCountryById(id) {

@@ -190,8 +190,8 @@ export default {
   },
 
   'Dollar per capita': {
-    de: 'Dollar/ Kopf',
-    en: 'Dollar per capita',
+    de: 'USD/ Kopf',
+    en: 'USD per capita',
   },
 
   'Show map': {
@@ -216,7 +216,7 @@ export default {
 
   Mio: {
     de: 'Mio',
-    en: 'Millions',
+    en: 'million',
   },
 
   informalTreatiesDescription: {

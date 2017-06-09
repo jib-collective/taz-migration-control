@@ -10,6 +10,6 @@ export default BaseCollection.extend({
   },
 
   shouldAddItem(country) {
-    return country.data && country.data.singlePayments;
+    return country && country.data && country.data.singlePayments;
   },
 });

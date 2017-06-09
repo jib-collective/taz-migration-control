@@ -7,9 +7,17 @@ export default CountryBaseView.extend({
   initialize(options) {
     options.api.findItemByFirstPosition('countriesoverview', 'Country')
       .then(country => {
-        const slug = limax(country.name);
-        const lang = options.application.get('language');
-        options._router.navigate(`${lang}/countries/${slug}`, {trigger: true});
+        if (!country) {
+          return;
+        }
+
+        const name  = country.name;
+
+        if (name) {
+          const slug = limax(country.name);
+          const lang = options.application.get('language');
+          options._router.navigate(`${lang}/countries/${slug}`, {trigger: true});
+        }
       });
   },
 });

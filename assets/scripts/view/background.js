@@ -7,9 +7,17 @@ export default BaseView.extend({
   initialize(options) {
     options.api.findItemByFirstPosition('backgroundoverview', 'Background')
       .then(background => {
-        const slug = limax(background.name);
-        const lang = options.application.get('language');
-        options._router.navigate(`${lang}/background/${slug}`, {trigger: true});
+        if (!background) {
+          return;
+        }
+
+        const name = background.name;
+
+        if (name) {
+          const slug = limax(background.name);
+          const lang = options.application.get('language');
+          options._router.navigate(`${lang}/background/${slug}`, {trigger: true});
+        }
       });
   },
 });

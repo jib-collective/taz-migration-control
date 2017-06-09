@@ -10,6 +10,10 @@ export default BaseCollection.extend({
   },
 
   shouldAddItem(country) {
+    if (!country) {
+      return false;
+    }
+
     return !country.isDonorCountry;
   },
 });

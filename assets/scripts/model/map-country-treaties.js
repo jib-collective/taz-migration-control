@@ -12,16 +12,12 @@ export default MapContryBase.extend({
     const startEndMarkerOptions = {
       className: LEAFLET_NO_TRANSPARENCY,
       color: '#ffffff',
-      fillOpacity: 1,
-      opacity: 1,
-      radius: 50000,
+      radius: 38000,
     };
     const options = {
       className: LEAFLET_NO_TRANSPARENCY,
       color: '#ffffff',
-      fillOpacity: 1,
-      opacity: 1,
-      weight: 3,
+      weight: 1.5,
     };
     const active = Object.assign({}, options, {
       color: '#fffd38',
@@ -32,36 +28,68 @@ export default MapContryBase.extend({
     ];
 
     const layer = L.polyline(fromTo, options);
+    layer.view = this;
 
-    const setLayerActive = () => {
-      layer.setStyle(active);
-      this.getStartEndMarker().forEach(marker => marker.setStyle(active));
+    const setLayerActive = (options = {}) => {
+      options.layer.setStyle(active);
+      options.layer.bringToFront();
+
+      options.layer.view.getStartEndMarker().forEach(marker => {
+        marker.setStyle(active);
+        marker.bringToFront();
+      });
+
+      if (options.marker) {
+        const markerType = options.marker.type;
+        const markerLatLng = options.marker.getLatLng();
+
+        this.collection.models.forEach(model => {
+          const countryCoords = model.get('countryCoords');
+          const partnerCoords = model.get('partnerCoords');
+          const layer = model.get('layer');
+          const activateIfSimilar = (coords) => {
+            if (markerLatLng.lat === coords.lat && markerLatLng.lng === coords.lon) {
+              setLayerActive({ layer });
+            }
+          };
+
+          if (markerType === 'country') {
+            activateIfSimilar(countryCoords);
+          } else {
+            activateIfSimilar(partnerCoords);
+          }
+        });
+      }
     };
 
-    const setLayerInActive = event => {
-      if ((!layer.isPopupOpen() && event.type !== 'popupclose') ||
-          event.type === 'popupclose') {
-        layer.setStyle(options);
-        this.getStartEndMarker().forEach(marker => marker.setStyle(options));
+    const setLayerInActive = (args) => {
+      args.layer.setStyle(options);
+      args.layer.view.getStartEndMarker().forEach(marker => marker.setStyle(options));
+
+      if (args.marker) {
+        this.collection.models.forEach(model => {
+          const layer = model.get('layer');
+          setLayerInActive({ layer });
+        });
       }
     };
 
     // build start/ end marker
-    this.set('_start-end-marker', fromTo.map(latLong => {
+    this.set('_start-end-marker', fromTo.map((latLong, index) => {
       const marker = L.circle(latLong, startEndMarkerOptions);
+      marker.type = index === 0 ? 'country' : 'partner';
 
       marker.addTo(this.getMap());
       marker.on({
-        'mouseover': setLayerActive,
-        'mouseout': setLayerInActive,
-        'click': () => layer.openPopup(),
+        mouseover: () => { setLayerActive({ marker, layer }) },
+        mouseout: () => { setLayerInActive({ marker, layer }) },
       });
 
       return marker;
     }));
 
-    layer.on('mouseover popupopen', setLayerActive);
-    layer.on('mouseout popupclose', setLayerInActive);
+    layer.on('mouseover popupopen', () => setLayerActive({ layer }));
+    layer.on('mouseout popupclose', () => setLayerInActive({ layer }));
 
     this.set({layer});
 

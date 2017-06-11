@@ -196,7 +196,7 @@ export default {
 
   'Show map': {
     de: 'Karte<br/>öffnen',
-    en: 'Show map',
+    en: 'Show<br/> map',
   },
 
   Finding: {

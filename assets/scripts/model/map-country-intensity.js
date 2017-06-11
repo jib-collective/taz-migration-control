@@ -74,15 +74,24 @@ export default MapContryBase.extend({
       return '';
     }
 
+    const formatNumber = inp => inp.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.');
+
     const type = 'asylumFigures';
     const title = this.get('name');
     const label = this.options.i18n.load('Applications for Asylum');
     const value = this._getDataValueForYear(type, year);
+    let valueMarkup = '';
+
+    if (value) {
+      valueMarkup = `
+        <span class="leaflet-popup__value">${formatNumber(value)}</span>
+        <span class="leaflet-popup__label">${label}</span>
+      `;
+    }
 
     return `
       <span class="leaflet-popup__title">${title}</span>
-      <span class="leaflet-popup__value">${value}</span>
-      <span class="leaflet-popup__label">${label}</span>
+      ${valueMarkup}
     `;
   },
 });

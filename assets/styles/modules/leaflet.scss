@@ -81,6 +81,7 @@
     color: $color-attention !important;
     position: relative;
     text-decoration: none;
+    word-wrap: break-word;
 
     @at-root {
         a#{&} {

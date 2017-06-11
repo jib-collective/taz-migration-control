@@ -137,21 +137,26 @@ export default MapContryBase.extend({
     }
 
     const title = this._getDataValueForYearOnIndex(DATA_TYPE, 'source', year);
-    const href = this._getDataValueForYearOnIndex(DATA_TYPE, 'link', year);
+    let hrefs = this._getDataValueForYearOnIndex(DATA_TYPE, 'link', year);
     const value = this._getDataValueForYear(DATA_TYPE, year);
     const label = this.options.i18n.load('Mio');
-    let titleMarkup = `<span class="leaflet-popup__title">${title}</span>`;
+    let titleMarkup = title ? `<span class="leaflet-popup__title">${title}</span>` : '';
 
-    if (href) {
-      titleMarkup = `
-        <a href="${href}"
-           class="leaflet-popup__title"
-           target="_blank"
-           rel="noopener noreferrer">
-           ${icon('external-link', 'leaflet-popup__external-icon')}
-           ${title}
-        </a>
-      `;
+    if (title && hrefs) {
+      titleMarkup = '';
+      hrefs = hrefs.split(', ');
+
+      hrefs.forEach(href => {
+        titleMarkup +=`
+          <a href="${href}"
+             class="leaflet-popup__title"
+             target="_blank"
+             rel="noopener noreferrer">
+             ${icon('external-link', 'leaflet-popup__external-icon')}
+             ${title}
+          </a>
+        `;
+      });
     }
 
     return `

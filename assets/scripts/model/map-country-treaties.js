@@ -103,15 +103,24 @@ export default MapContryBase.extend({
     const title = `${name} <br/> ${country} – ${partner}`;
     const link = this.get('link');
     const date = this.get('date');
+    let titleMarkup = `
+      <span class="leaflet-popup__title">${title}</span>
+    `;
+
+    if (link) {
+      titleMarkup = `
+        <a href="${link}"
+           class="leaflet-popup__title"
+           target="_blank"
+           rel="noopener noreferrer">
+          ${icon('external-link', 'leaflet-popup__external-icon')}
+          ${title}
+        </a>
+      `;
+    }
 
     return `
-      <a href="${link}"
-         class="leaflet-popup__title"
-         target="_blank"
-         rel="noopener noreferrer">
-        ${icon('external-link', 'leaflet-popup__external-icon')}
-        ${title}
-      </a>
+      ${titleMarkup}
       <span class="leaflet-popup__value">&nbsp;</span>
       <span class="leaflet-popup__label">${date.day}.${date.month}.${date.year}</span>
     `;
